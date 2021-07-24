@@ -4,6 +4,7 @@
 //
 //  Created by 77。 on 2021/7/24.
 //  网络请求基类，基于 AFNetworking 封装使用
+//  https://github.com/yangKJ/KJNetworkPlugin
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
