@@ -1,0 +1,724 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2CCBEF532C3463530749FB47 /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */; };
+		688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A4B26AC401100C53AAD /* AppDelegate.m */; };
+		688E7A4F26AC401100C53AAD /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A4E26AC401100C53AAD /* SceneDelegate.m */; };
+		688E7A5226AC401100C53AAD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A5126AC401100C53AAD /* ViewController.m */; };
+		688E7A5526AC401100C53AAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688E7A5326AC401100C53AAD /* Main.storyboard */; };
+		688E7A5726AC401300C53AAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688E7A5626AC401300C53AAD /* Assets.xcassets */; };
+		688E7A5A26AC401300C53AAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688E7A5826AC401300C53AAD /* LaunchScreen.storyboard */; };
+		688E7A5D26AC401300C53AAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A5C26AC401300C53AAD /* main.m */; };
+		688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */; };
+		688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */; };
+		EB76A4BE8818E3E4411CAEAE /* Pods_KJNetworkPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */; };
+		F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		688E7A6326AC401300C53AAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 688E7A3F26AC401100C53AAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 688E7A4626AC401100C53AAD;
+			remoteInfo = KJNetworkPlugin;
+		};
+		688E7A6E26AC401300C53AAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 688E7A3F26AC401100C53AAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 688E7A4626AC401100C53AAD;
+			remoteInfo = KJNetworkPlugin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.debug.xcconfig"; sourceTree = "<group>"; };
+		39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.release.xcconfig"; sourceTree = "<group>"; };
+		509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; sourceTree = "<group>"; };
+		688E7A4726AC401100C53AAD /* KJNetworkPlugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KJNetworkPlugin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		688E7A4A26AC401100C53AAD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		688E7A4B26AC401100C53AAD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		688E7A4D26AC401100C53AAD /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		688E7A4E26AC401100C53AAD /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		688E7A5026AC401100C53AAD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		688E7A5126AC401100C53AAD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		688E7A5426AC401100C53AAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		688E7A5626AC401300C53AAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		688E7A5926AC401300C53AAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		688E7A5B26AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		688E7A5C26AC401300C53AAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginTests.m; sourceTree = "<group>"; };
+		688E7A6826AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginUITests.m; sourceTree = "<group>"; };
+		688E7A7326AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		688E7A4426AC401100C53AAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB76A4BE8818E3E4411CAEAE /* Pods_KJNetworkPlugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A5F26AC401300C53AAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A6A26AC401300C53AAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CCBEF532C3463530749FB47 /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		688E7A3E26AC401100C53AAD = {
+			isa = PBXGroup;
+			children = (
+				688E7A4926AC401100C53AAD /* KJNetworkPlugin */,
+				688E7A6526AC401300C53AAD /* KJNetworkPluginTests */,
+				688E7A7026AC401300C53AAD /* KJNetworkPluginUITests */,
+				688E7A4826AC401100C53AAD /* Products */,
+				FF98C96F2589634A5B26B153 /* Pods */,
+				CF7631757D9193AE5C513888 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		688E7A4826AC401100C53AAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				688E7A4726AC401100C53AAD /* KJNetworkPlugin.app */,
+				688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */,
+				688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		688E7A4926AC401100C53AAD /* KJNetworkPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				688E7A4A26AC401100C53AAD /* AppDelegate.h */,
+				688E7A4B26AC401100C53AAD /* AppDelegate.m */,
+				688E7A4D26AC401100C53AAD /* SceneDelegate.h */,
+				688E7A4E26AC401100C53AAD /* SceneDelegate.m */,
+				688E7A5026AC401100C53AAD /* ViewController.h */,
+				688E7A5126AC401100C53AAD /* ViewController.m */,
+				688E7A5326AC401100C53AAD /* Main.storyboard */,
+				688E7A5626AC401300C53AAD /* Assets.xcassets */,
+				688E7A5826AC401300C53AAD /* LaunchScreen.storyboard */,
+				688E7A5B26AC401300C53AAD /* Info.plist */,
+				688E7A5C26AC401300C53AAD /* main.m */,
+			);
+			path = KJNetworkPlugin;
+			sourceTree = "<group>";
+		};
+		688E7A6526AC401300C53AAD /* KJNetworkPluginTests */ = {
+			isa = PBXGroup;
+			children = (
+				688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */,
+				688E7A6826AC401300C53AAD /* Info.plist */,
+			);
+			path = KJNetworkPluginTests;
+			sourceTree = "<group>";
+		};
+		688E7A7026AC401300C53AAD /* KJNetworkPluginUITests */ = {
+			isa = PBXGroup;
+			children = (
+				688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */,
+				688E7A7326AC401300C53AAD /* Info.plist */,
+			);
+			path = KJNetworkPluginUITests;
+			sourceTree = "<group>";
+		};
+		CF7631757D9193AE5C513888 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */,
+				509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */,
+				8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF98C96F2589634A5B26B153 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */,
+				39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */,
+				C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */,
+				5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */,
+				C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */,
+				F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		688E7A4626AC401100C53AAD /* KJNetworkPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 688E7A7626AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPlugin" */;
+			buildPhases = (
+				2AEDDEC112D1628A76AA7637 /* [CP] Check Pods Manifest.lock */,
+				688E7A4326AC401100C53AAD /* Sources */,
+				688E7A4426AC401100C53AAD /* Frameworks */,
+				688E7A4526AC401100C53AAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KJNetworkPlugin;
+			productName = KJNetworkPlugin;
+			productReference = 688E7A4726AC401100C53AAD /* KJNetworkPlugin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		688E7A6126AC401300C53AAD /* KJNetworkPluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 688E7A7926AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginTests" */;
+			buildPhases = (
+				CA56DFED7A70C486395824EF /* [CP] Check Pods Manifest.lock */,
+				688E7A5E26AC401300C53AAD /* Sources */,
+				688E7A5F26AC401300C53AAD /* Frameworks */,
+				688E7A6026AC401300C53AAD /* Resources */,
+				F83A9871350BC38F8F85D214 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				688E7A6426AC401300C53AAD /* PBXTargetDependency */,
+			);
+			name = KJNetworkPluginTests;
+			productName = KJNetworkPluginTests;
+			productReference = 688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		688E7A6C26AC401300C53AAD /* KJNetworkPluginUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 688E7A7C26AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginUITests" */;
+			buildPhases = (
+				063DC38468A2849CC2D75C49 /* [CP] Check Pods Manifest.lock */,
+				688E7A6926AC401300C53AAD /* Sources */,
+				688E7A6A26AC401300C53AAD /* Frameworks */,
+				688E7A6B26AC401300C53AAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				688E7A6F26AC401300C53AAD /* PBXTargetDependency */,
+			);
+			name = KJNetworkPluginUITests;
+			productName = KJNetworkPluginUITests;
+			productReference = 688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		688E7A3F26AC401100C53AAD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					688E7A4626AC401100C53AAD = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					688E7A6126AC401300C53AAD = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 688E7A4626AC401100C53AAD;
+					};
+					688E7A6C26AC401300C53AAD = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 688E7A4626AC401100C53AAD;
+					};
+				};
+			};
+			buildConfigurationList = 688E7A4226AC401100C53AAD /* Build configuration list for PBXProject "KJNetworkPlugin" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 688E7A3E26AC401100C53AAD;
+			productRefGroup = 688E7A4826AC401100C53AAD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				688E7A4626AC401100C53AAD /* KJNetworkPlugin */,
+				688E7A6126AC401300C53AAD /* KJNetworkPluginTests */,
+				688E7A6C26AC401300C53AAD /* KJNetworkPluginUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		688E7A4526AC401100C53AAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				688E7A5A26AC401300C53AAD /* LaunchScreen.storyboard in Resources */,
+				688E7A5726AC401300C53AAD /* Assets.xcassets in Resources */,
+				688E7A5526AC401100C53AAD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A6026AC401300C53AAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A6B26AC401300C53AAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		063DC38468A2849CC2D75C49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KJNetworkPlugin-KJNetworkPluginUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2AEDDEC112D1628A76AA7637 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KJNetworkPlugin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA56DFED7A70C486395824EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KJNetworkPluginTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F83A9871350BC38F8F85D214 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		688E7A4326AC401100C53AAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				688E7A5226AC401100C53AAD /* ViewController.m in Sources */,
+				688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */,
+				688E7A5D26AC401300C53AAD /* main.m in Sources */,
+				688E7A4F26AC401100C53AAD /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A5E26AC401300C53AAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		688E7A6926AC401300C53AAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		688E7A6426AC401300C53AAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 688E7A4626AC401100C53AAD /* KJNetworkPlugin */;
+			targetProxy = 688E7A6326AC401300C53AAD /* PBXContainerItemProxy */;
+		};
+		688E7A6F26AC401300C53AAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 688E7A4626AC401100C53AAD /* KJNetworkPlugin */;
+			targetProxy = 688E7A6E26AC401300C53AAD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		688E7A5326AC401100C53AAD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				688E7A5426AC401100C53AAD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		688E7A5826AC401300C53AAD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				688E7A5926AC401300C53AAD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		688E7A7426AC401300C53AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		688E7A7526AC401300C53AAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		688E7A7726AC401300C53AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPlugin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPlugin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		688E7A7826AC401300C53AAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPlugin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPlugin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		688E7A7A26AC401300C53AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPluginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KJNetworkPlugin.app/KJNetworkPlugin";
+			};
+			name = Debug;
+		};
+		688E7A7B26AC401300C53AAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPluginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KJNetworkPlugin.app/KJNetworkPlugin";
+			};
+			name = Release;
+		};
+		688E7A7D26AC401300C53AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KJNetworkPlugin;
+			};
+			name = Debug;
+		};
+		688E7A7E26AC401300C53AAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KJNetworkPlugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		688E7A4226AC401100C53AAD /* Build configuration list for PBXProject "KJNetworkPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				688E7A7426AC401300C53AAD /* Debug */,
+				688E7A7526AC401300C53AAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		688E7A7626AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				688E7A7726AC401300C53AAD /* Debug */,
+				688E7A7826AC401300C53AAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		688E7A7926AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				688E7A7A26AC401300C53AAD /* Debug */,
+				688E7A7B26AC401300C53AAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		688E7A7C26AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				688E7A7D26AC401300C53AAD /* Debug */,
+				688E7A7E26AC401300C53AAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 688E7A3F26AC401100C53AAD /* Project object */;
+}
