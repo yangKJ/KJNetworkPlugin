@@ -20,6 +20,7 @@ target 'KJNetworkPlugin' do
   target 'KJNetworkPluginTests' do
     inherit! :search_paths
     # Pods for testing
+    main_pods
 
   end
 
