@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 小偷插件使用文档：https://juejin.cn/post/6988730050820456455/
+/// 小偷插件使用文档：https://github.com/yangKJ/KJNetworkPlugin/wiki/KJNetworkThiefPlugin
 @interface KJNetworkThiefPlugin : KJNetworkBasePlugin
 
 /// 失败之后是否再次网络请求，默认NO

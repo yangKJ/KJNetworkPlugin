@@ -175,11 +175,11 @@ static NSString *_baseURL;
         KJAppLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 REQUEST 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
                  \n请求方式 = %@\n请求URL = %@\n请求参数 = %@  \
                  \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
-                 [self kj_methodString:method], url, kHTTPParametersToString(parameters));
+                 [self kj_methodString:method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
     }
     return [self dataTaskWithHTTPMethod:method url:url parameters:parameters success:^(NSURLSessionDataTask * task, id responseObject) {
         if ([KJBaseNetworking openLog]) {
-            KJAppLog(@"🎷🎷🎷请求结果 = %@", kHTTPResponseObjectToString(responseObject));
+            KJAppLog(@"🎷🎷🎷请求结果 = %@", [KJBaseNetworking kHTTPResponseObjectToString:responseObject]);
         }
         [KJBaseNetworking.sessionTaskDatas removeObject:task];
         if (success) {
@@ -431,14 +431,14 @@ static NSString *_baseURL;
 }
 
 /// 请求参数转字符串
-NS_INLINE NSString * kHTTPParametersToString(NSDictionary * parameters){
++ (NSString *)kHTTPParametersToString:(NSDictionary *)parameters{
     if (parameters == nil || parameters.count == 0) return @"空";
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
     return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 /// 请求结果转换
-NS_INLINE id kHTTPResponseObjectToString(id responseObject){
++ (id)kHTTPResponseObjectToString:(id)responseObject{
     if (responseObject == nil) return @"";
     NSError * error = nil;
     if ([responseObject isKindOfClass:NSDictionary.class] || [responseObject isKindOfClass:NSArray.class]) {
