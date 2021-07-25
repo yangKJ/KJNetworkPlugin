@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, KJNetworkAnslysisResult) {
 /// 错误消息字段名，默认 [@"message",@"msg"] 这两种
 @property (nonatomic, strong) NSArray<NSString *> *errorMessage;
 /// 解析出来的结果类型，默认对象 KJNetworkAnslysisResultObject
+/// 实现过下面的map，也可不指定解析结果类型
 @property (nonatomic, assign) KJNetworkAnslysisResult resultType;
 
 /// 验证结果是否正确，默认解析code属性
