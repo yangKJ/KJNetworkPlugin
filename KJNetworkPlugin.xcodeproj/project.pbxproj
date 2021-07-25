@@ -15,6 +15,7 @@
 		6870CE0426AD521B00960EAE /* KJNetworkThiefPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CE0326AD521A00960EAE /* KJNetworkThiefPlugin.m */; };
 		6870CE0B26AD5B8000960EAE /* KJNetworkCertificatePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CE0A26AD5B8000960EAE /* KJNetworkCertificatePlugin.m */; };
 		6870CE1226AD672E00960EAE /* KJNetworkCachePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CE1126AD672E00960EAE /* KJNetworkCachePlugin.m */; };
+		6870CE3826AD6EB000960EAE /* KJNetworkAnslysisPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CE3726AD6EB000960EAE /* KJNetworkAnslysisPlugin.m */; };
 		6872D60C26AC66BE00A6FD3C /* KJBaseNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6872D60A26AC66BE00A6FD3C /* KJBaseNetworking.m */; };
 		6881435826AD463400601C9E /* KJNetworkPlugin.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 6881435726AD463400601C9E /* KJNetworkPlugin.podspec */; };
 		688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A4B26AC401100C53AAD /* AppDelegate.m */; };
@@ -69,6 +70,8 @@
 		6870CE0A26AD5B8000960EAE /* KJNetworkCertificatePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCertificatePlugin.m; sourceTree = "<group>"; };
 		6870CE1026AD672E00960EAE /* KJNetworkCachePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkCachePlugin.h; sourceTree = "<group>"; };
 		6870CE1126AD672E00960EAE /* KJNetworkCachePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCachePlugin.m; sourceTree = "<group>"; };
+		6870CE3626AD6EB000960EAE /* KJNetworkAnslysisPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkAnslysisPlugin.h; sourceTree = "<group>"; };
+		6870CE3726AD6EB000960EAE /* KJNetworkAnslysisPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkAnslysisPlugin.m; sourceTree = "<group>"; };
 		6872D60A26AC66BE00A6FD3C /* KJBaseNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJBaseNetworking.m; sourceTree = "<group>"; };
 		6872D60B26AC66BE00A6FD3C /* KJBaseNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJBaseNetworking.h; sourceTree = "<group>"; };
 		6881435726AD463400601C9E /* KJNetworkPlugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = KJNetworkPlugin.podspec; sourceTree = SOURCE_ROOT; };
@@ -127,6 +130,7 @@
 		6870CE0026AD521A00960EAE /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				6870CE3526AD6EB000960EAE /* Anslysis */,
 				6870CE0F26AD672E00960EAE /* Cache */,
 				6870CE0826AD5B8000960EAE /* Certificate */,
 				6870CE0126AD521A00960EAE /* Thief */,
@@ -159,6 +163,15 @@
 				6870CE1126AD672E00960EAE /* KJNetworkCachePlugin.m */,
 			);
 			path = Cache;
+			sourceTree = "<group>";
+		};
+		6870CE3526AD6EB000960EAE /* Anslysis */ = {
+			isa = PBXGroup;
+			children = (
+				6870CE3626AD6EB000960EAE /* KJNetworkAnslysisPlugin.h */,
+				6870CE3726AD6EB000960EAE /* KJNetworkAnslysisPlugin.m */,
+			);
+			path = Anslysis;
 			sourceTree = "<group>";
 		};
 		6872D60926AC66BE00A6FD3C /* Network */ = {
@@ -524,6 +537,7 @@
 				6870CDFB26AD51D200960EAE /* KJNetworkingResponse.m in Sources */,
 				688E7A5226AC401100C53AAD /* ViewController.m in Sources */,
 				6870CE0426AD521B00960EAE /* KJNetworkThiefPlugin.m in Sources */,
+				6870CE3826AD6EB000960EAE /* KJNetworkAnslysisPlugin.m in Sources */,
 				688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */,
 				6870CE0B26AD5B8000960EAE /* KJNetworkCertificatePlugin.m in Sources */,
 				688E7A5D26AC401300C53AAD /* main.m in Sources */,
