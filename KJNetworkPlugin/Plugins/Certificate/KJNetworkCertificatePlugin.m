@@ -24,7 +24,8 @@
     [super prepareWithRequest:request endRequest:endRequest];
     
     if (self.certificatePath == nil) {
-        * endRequest = YES;
+        NSExpression * expression = [NSExpression expressionWithFormat:@"Certificate Plugin `certificatePath` is nil."];
+        @throw expression;
     } else {
         [request setValue:self.certificatePath forKey:@"kj_certificatePatheosPrevent"];
         [request setValue:@(self.validatesDomainName) forKey:@"kj_validatesDomainNameeosPrevent"];
