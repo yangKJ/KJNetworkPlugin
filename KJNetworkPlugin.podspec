@@ -25,4 +25,10 @@ Pod::Spec.new do |s|
     cer.dependency 'KJNetworkPlugin/Network'
   end
 
+  s.subspec 'Cache' do |cache|
+    cache.source_files = "KJNetworkPlugin/Plugins/Cache/*.{h,m}"
+    cache.dependency 'KJNetworkPlugin/Network'
+    cache.dependency 'YYCache', "~> 1.0.4"
+  end
+  
 end

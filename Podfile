@@ -4,7 +4,7 @@
 def main_pods
   
   pod 'AFNetworking'
-#    pod 'YYCache'
+  pod 'YYCache'
 #    pod 'MBProgressHUD'
 #    pod 'MJExtension'
   
