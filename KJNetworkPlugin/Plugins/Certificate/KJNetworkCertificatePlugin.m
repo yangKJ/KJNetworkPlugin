@@ -6,6 +6,7 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJNetworkCertificatePlugin.h"
+#import "KJNetworkingRequest+KJCertificate.h"
 
 @implementation KJNetworkCertificatePlugin
 
@@ -27,8 +28,8 @@
         NSExpression * expression = [NSExpression expressionWithFormat:@"Certificate Plugin `certificatePath` is nil."];
         @throw expression;
     } else {
-        [request setValue:self.certificatePath forKey:@"kj_certificatePatheosPrevent"];
-        [request setValue:@(self.validatesDomainName) forKey:@"kj_validatesDomainNameeosPrevent"];
+        request.certificatePath = self.certificatePath;
+        request.validatesDomainName = self.validatesDomainName;
     }
     
     return self.response;

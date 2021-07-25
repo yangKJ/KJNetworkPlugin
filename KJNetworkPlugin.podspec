@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = "KJNetworkPlugin"
-  s.version  = "1.0.0"
+  s.version  = "1.0.1"
   s.summary  = "A Network Plugin With AFNetworking."
   s.homepage = "https://github.com/yangKJ/KJNetworkPlugin"
   s.license  = "MIT"
@@ -29,6 +29,12 @@ Pod::Spec.new do |s|
     cache.source_files = "KJNetworkPlugin/Plugins/Cache/*.{h,m}"
     cache.dependency 'KJNetworkPlugin/Network'
     cache.dependency 'YYCache', "~> 1.0.4"
+  end
+  
+  s.subspec 'Anslysis' do |ans|
+    ans.source_files = "KJNetworkPlugin/Plugins/Anslysis/*.{h,m}"
+    ans.dependency 'KJNetworkPlugin/Network'
+    ans.dependency 'MJExtension', "~> 3.3.0"
   end
   
 end

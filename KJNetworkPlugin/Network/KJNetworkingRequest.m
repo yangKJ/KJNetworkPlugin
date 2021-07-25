@@ -20,14 +20,6 @@
 /// 网络请求插件时机，配合小偷插件使用效果极佳
 @property (nonatomic, assign) KJNetworkingRequestOpportunity opportunity;
 
-//*********************** 自建证书插件专属 *******************
-/// 自建https证书路径，加点防止命名重复的标记
-@property (nonatomic, strong) NSString *kj_certificatePatheosPrevent;
-/// 是否验证域名，默认yes
-@property (nonatomic, assign) BOOL kj_validatesDomainNameeosPrevent;
-
-//*********************** 自建证书插件专属 *******************
-
 @end
 
 @implementation KJNetworkingRequest

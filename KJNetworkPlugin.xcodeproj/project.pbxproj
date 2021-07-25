@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2CCBEF532C3463530749FB47 /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */; };
+		681F85A726AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */; };
+		681F85B726ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */; };
 		6870CDE926AD50FE00960EAE /* KJNetworkingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CDE826AD50FE00960EAE /* KJNetworkingRequest.m */; };
 		6870CDEF26AD51A500960EAE /* KJNetworkBasePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CDEE26AD51A500960EAE /* KJNetworkBasePlugin.m */; };
 		6870CDF526AD51BE00960EAE /* KJNetworkPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CDF426AD51BE00960EAE /* KJNetworkPluginManager.m */; };
@@ -56,6 +58,9 @@
 		509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; sourceTree = "<group>"; };
+		681F85A526AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KJNetworkingRequest+KJCertificate.h"; sourceTree = "<group>"; };
+		681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "KJNetworkingRequest+KJCertificate.m"; sourceTree = "<group>"; };
+		681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCertificatePluginTests.m; sourceTree = "<group>"; };
 		6870CDE626AD50AB00960EAE /* KJNetworkingType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkingType.h; sourceTree = "<group>"; };
 		6870CDE726AD50FE00960EAE /* KJNetworkingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkingRequest.h; sourceTree = "<group>"; };
 		6870CDE826AD50FE00960EAE /* KJNetworkingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkingRequest.m; sourceTree = "<group>"; };
@@ -157,6 +162,8 @@
 			children = (
 				6870CE0926AD5B8000960EAE /* KJNetworkCertificatePlugin.h */,
 				6870CE0A26AD5B8000960EAE /* KJNetworkCertificatePlugin.m */,
+				681F85A526AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.h */,
+				681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */,
 			);
 			path = Certificate;
 			sourceTree = "<group>";
@@ -246,6 +253,7 @@
 		688E7A6526AC401300C53AAD /* KJNetworkPluginTests */ = {
 			isa = PBXGroup;
 			children = (
+				681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */,
 				6870CE5C26AD9C4900960EAE /* KJNetworkAnslysisPluginTests.m */,
 				688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */,
 				688E7A6826AC401300C53AAD /* Info.plist */,
@@ -541,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681F85A726AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m in Sources */,
 				6872D60C26AC66BE00A6FD3C /* KJBaseNetworking.m in Sources */,
 				6870CDFB26AD51D200960EAE /* KJNetworkingResponse.m in Sources */,
 				688E7A5226AC401100C53AAD /* ViewController.m in Sources */,
@@ -563,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6870CE5D26AD9C4900960EAE /* KJNetworkAnslysisPluginTests.m in Sources */,
+				681F85B726ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m in Sources */,
 				688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

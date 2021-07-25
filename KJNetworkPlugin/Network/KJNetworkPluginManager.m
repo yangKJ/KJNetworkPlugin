@@ -6,6 +6,9 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJNetworkPluginManager.h"
+#if __has_include("KJNetworkingRequest+KJCertificate.h")
+#import "KJNetworkingRequest+KJCertificate.h"
+#endif
 
 @implementation KJNetworkPluginManager
 
@@ -70,22 +73,8 @@
     }
     
     // 网络请求基类
-    KJBaseNetworking * baseNetworking = [KJBaseNetworking sharedDefault];
-    [baseNetworking setRequestSerializer:request.requestSerializer];
-    [baseNetworking setResponseSerializer:request.responseSerializer];
-    [baseNetworking setTimeoutInterval:request.timeoutInterval];
-    for (NSString * key in request.header) {
-        [baseNetworking setValue:request.header[key] forHTTPHeaderField:key];
-    }
-    if (request.useSemaphore) {
-        // 解决信号量卡顿主线程问题，开启一条子线程
-        baseNetworking.sessionManager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    }
-    NSString * certificatePath = [request valueForKey:@"kj_certificatePatheosPrevent"];
-    if (certificatePath && certificatePath.length) {
-        BOOL validatesDomainName = [[request valueForKey:@"kj_validatesDomainNameeosPrevent"] boolValue];
-        [baseNetworking setSecurityPolicyWithCerPath:certificatePath validatesDomainName:validatesDomainName];
-    }
+    KJBaseNetworking * baseNetworking = [self createBaseNetworkingWithRequest:request];
+    
     // 网络请求
     NSURLSessionTask * sessionTask =
     [baseNetworking HTTPWithMethod:request.method url:request.URLString parameters:request.secretParams success:^(NSURLSessionDataTask * task, id responseObject) {
@@ -132,6 +121,29 @@
         @synchronized (KJBaseNetworking.sessionTaskDatas) {
             [KJBaseNetworking.sessionTaskDatas removeObject:sessionTask];
         }
+    }
+}
+
++ (KJBaseNetworking *)createBaseNetworkingWithRequest:(__kindof KJNetworkingRequest *)request{
+    @synchronized (self) {
+        KJBaseNetworking * baseNetworking = [KJBaseNetworking sharedDefault];
+        [baseNetworking setRequestSerializer:request.requestSerializer];
+        [baseNetworking setResponseSerializer:request.responseSerializer];
+        [baseNetworking setTimeoutInterval:request.timeoutInterval];
+        for (NSString * key in request.header) {
+            [baseNetworking setValue:request.header[key] forHTTPHeaderField:key];
+        }
+        if (request.useSemaphore) {
+            // 解决信号量卡顿主线程问题，开启一条子线程
+            baseNetworking.sessionManager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        }
+#if __has_include("KJNetworkingRequest+KJCertificate.h")
+        if (request.certificatePath && request.certificatePath.length) {
+            [baseNetworking setSecurityPolicyWithCerPath:request.certificatePath
+                                     validatesDomainName:request.validatesDomainName];
+        }        
+#endif
+        return baseNetworking;
     }
 }
 
