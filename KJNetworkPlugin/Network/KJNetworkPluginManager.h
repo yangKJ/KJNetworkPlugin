@@ -10,11 +10,14 @@
 #import "KJNetworkBasePlugin.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 成功回调
-typedef void(^_Nullable KJNetworkPluginSuccess)(KJNetworkingRequest * request, id responseObject);
-/// 失败回调
-typedef void(^_Nullable KJNetworkPluginFailure)(KJNetworkingRequest * request, NSError * error);
+
 @interface KJNetworkPluginManager : KJBaseNetworking
+
+/// 备注提示：关于插件版网络使用技巧
+/// 插件的添加顺序需注意使用，因为插件在调用之时前面插件数据会影响后面插件数据
+/// 成功回调的数据 `responseObject` 即为最后一个插件的处理数据
+/// 偷偷告诉你隐藏用法，这里提供 KJNetworkThiefPlugin 插件，可以从这当中取到原始数据
+/// 具体怎么使用，请查看文档：https://juejin.cn/post/6988730050820456455/
 
 /// 插件版网络请求
 /// @param request 请求体

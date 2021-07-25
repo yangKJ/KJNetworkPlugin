@@ -7,59 +7,10 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <AFNetworking/AFNetworking.h>
+#import "KJNetworkingType.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class AFHTTPSessionManager;
-/// 请求方式
-typedef NS_ENUM(NSUInteger, KJNetworkRequestMethod){
-    /**GET请求方式*/
-    KJNetworkRequestMethodGET = 0,
-    /**POST请求方式*/
-    KJNetworkRequestMethodPOST,
-    /**HEAD请求方式*/
-    KJNetworkRequestMethodHEAD,
-    /**PUT请求方式*/
-    KJNetworkRequestMethodPUT,
-    /**PATCH请求方式*/
-    KJNetworkRequestMethodPATCH,
-    /**DELETE请求方式*/
-    KJNetworkRequestMethodDELETE
-};
-
-typedef NS_ENUM(NSUInteger, KJNetworkStatusType){
-    /**未知网络*/
-    KJNetworkStatusUnknown,
-    /**无网路*/
-    KJNetworkStatusNotReachable,
-    /**手机网络*/
-    KJNetworkStatusReachablePhone,
-    /**WiFi网络*/
-    KJNetworkStatusReachableWiFi
-};
-
-typedef NS_ENUM(NSUInteger, KJRequestSerializer){
-    /**设置请求数据为JSON格式*/
-    KJRequestSerializerJSON,
-    /**设置请求数据为二进制格式*/
-    KJRequestSerializerHTTP
-};
-
-typedef NS_ENUM(NSUInteger, KJResponseSerializer){
-    /**设置响应数据为JSON格式*/
-    KJResponseSerializerJSON,
-    /**设置响应数据为二进制格式*/
-    KJResponseSerializerHTTP
-};
-
-/// 成功回调
-typedef void(^_Nullable KJNetworkSuccess)(NSURLSessionDataTask * _Nullable task, id responseObject);
-/// 失败回调
-typedef void(^_Nullable KJNetworkFailure)(NSURLSessionDataTask * _Nullable task, NSError * error);
-/// 上传或者下载的进度
-typedef void(^_Nullable KJNetworkProgress)(NSProgress * progress);
 
 @interface KJBaseSuperNetworking : NSObject
 
@@ -144,12 +95,12 @@ typedef void(^_Nullable KJNetworkProgress)(NSProgress * progress);
 /// @param progress 上传进度
 /// @param success 成功回调
 /// @param failure 失败回调
-- (void)postMultipartFormDataWithURL:(NSString *)url
-                              params:(NSDictionary * _Nullable)params
-           constructingBodyWithBlock:(void(^_Nullable)(id<AFMultipartFormData> formData))block
-                            progress:(KJNetworkProgress)progress
-                             success:(KJNetworkSuccess)success
-                             failure:(KJNetworkFailure)failure;
+- (NSURLSessionTask *)postMultipartFormDataWithURL:(NSString *)url
+                                            params:(NSDictionary * _Nullable)params
+                         constructingBodyWithBlock:(KJNetworkConstructingBody)block
+                                          progress:(KJNetworkProgress)progress
+                                           success:(KJNetworkSuccess)success
+                                           failure:(KJNetworkFailure)failure;
 /// 上传文件
 /// @param url 请求地址
 /// @param parameters 请求参数
@@ -203,7 +154,7 @@ typedef void(^_Nullable KJNetworkProgress)(NSProgress * progress);
 /// @param success 成功回调
 /// @param failure 失败回调
 - (NSURLSessionTask *)downloadWithURL:(NSString *)url
-                          destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                          destination:(KJNetworkDestination)destination
                              progress:(KJNetworkProgress)progress
                               success:(KJNetworkSuccess)success
                               failure:(KJNetworkFailure)failure;

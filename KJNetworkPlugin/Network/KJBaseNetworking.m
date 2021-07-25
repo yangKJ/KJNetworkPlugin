@@ -6,7 +6,7 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJBaseNetworking.h"
-#import "AFNetworkActivityIndicatorManager.h"
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 #ifdef DEBUG
 #define KJAppLog(s, ... ) NSLog( @"[%@ in line %d] ===============>\n%@", \
@@ -224,12 +224,12 @@ static NSString *_baseURL;
 #pragma mark - 上传下载
 
 /// 上传资源
-- (void)postMultipartFormDataWithURL:(NSString *)url
-                              params:(NSDictionary * _Nullable)params
-           constructingBodyWithBlock:(void(^_Nullable)(id<AFMultipartFormData> formData))block
-                            progress:(KJNetworkProgress)progress
-                             success:(KJNetworkSuccess)success
-                             failure:(KJNetworkFailure)failure{
+- (NSURLSessionTask *)postMultipartFormDataWithURL:(NSString *)url
+                                            params:(NSDictionary * _Nullable)params
+                         constructingBodyWithBlock:(KJNetworkConstructingBody)block
+                                          progress:(KJNetworkProgress)progress
+                                           success:(KJNetworkSuccess)success
+                                           failure:(KJNetworkFailure)failure{
     NSURLSessionTask * sessionTask =
     [self.sessionManager POST:url parameters:params headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         block ? block(formData) : nil;
@@ -247,6 +247,7 @@ static NSString *_baseURL;
     if (sessionTask) {
         [KJBaseNetworking.sessionTaskDatas addObject:sessionTask];
     }
+    return sessionTask;
 }
 
 #pragma mark - 上传文件
@@ -292,10 +293,9 @@ static NSString *_baseURL;
         //压缩-添加-上传图片
         [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
             NSData * imageData = UIImageJPEGRepresentation(image, 0.5);
-            [formData appendPartWithFileData:imageData
-                                        name:name
-                                    fileName:[NSString stringWithFormat:@"%@%lu.%@",fileName, (unsigned long)idx, mimeType ?: @"jpeg"]
-                                    mimeType:[NSString stringWithFormat:@"image/%@",mimeType ?: @"jpeg"]];
+            NSString * tempFileName = [NSString stringWithFormat:@"%@%lu.%@",fileName, (unsigned long)idx, mimeType ?: @"jpeg"];
+            NSString * temMimeType = [NSString stringWithFormat:@"image/%@",mimeType ?: @"jpeg"];
+            [formData appendPartWithFileData:imageData name:name fileName:tempFileName mimeType:temMimeType];
         }];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -377,7 +377,7 @@ static NSString *_baseURL;
 }
 
 - (NSURLSessionTask *)downloadWithURL:(NSString *)url
-                          destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                          destination:(KJNetworkDestination)destination
                              progress:(KJNetworkProgress)progress
                               success:(KJNetworkSuccess)success
                               failure:(KJNetworkFailure)failure{

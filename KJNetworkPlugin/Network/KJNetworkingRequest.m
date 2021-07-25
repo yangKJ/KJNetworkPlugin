@@ -6,6 +6,7 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJNetworkingRequest.h"
+#import "KJBaseNetworking.h"
 
 @interface KJNetworkingRequest ()
 
@@ -16,6 +17,8 @@
 @property (nonatomic, assign) BOOL useSemaphore;
 /// 请求体标识符号，内部批量网络请求使用字段
 @property (nonatomic, strong) NSString *requestIdentifier;
+/// 网络请求插件时机，配合小偷插件使用效果极佳
+@property (nonatomic, assign) KJNetworkingRequestOpportunity opportunity;
 
 @end
 

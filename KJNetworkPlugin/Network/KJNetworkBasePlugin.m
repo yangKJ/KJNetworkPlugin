@@ -23,6 +23,7 @@
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
     self.request = request;
     self.response.opportunity = KJNetworkingRequestOpportunityPrepare;
+    [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
 
@@ -33,6 +34,7 @@
 - (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
     self.request = request;
     self.response.opportunity = KJNetworkingRequestOpportunityWillSend;
+    [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
 
@@ -43,6 +45,7 @@
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     self.request = request;
     self.response.opportunity = KJNetworkingRequestOpportunitySuccess;
+    [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
 
@@ -53,6 +56,7 @@
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     self.request = request;
     self.response.opportunity = KJNetworkingRequestOpportunityFailure;
+    [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
 
@@ -63,6 +67,7 @@
 - (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error{
     self.request = request;
     self.response.opportunity = KJNetworkingRequestOpportunityProcess;
+    [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
 

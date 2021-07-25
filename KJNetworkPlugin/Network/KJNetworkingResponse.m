@@ -24,6 +24,8 @@
 /// 失败
 @property (nonatomic, strong) NSError *error;
 
+
+//*************** 名字别改，内部机密数据，仅供内部使用 ***************
 /// 临时数据，内部最终返回时刻处理插件使用
 @property (nonatomic, strong) id tempResponse;
 

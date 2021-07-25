@@ -7,18 +7,10 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "KJBaseNetworking.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 插件请求时机
-typedef NS_ENUM(NSUInteger, KJNetworkingRequestOpportunity) {
-    KJNetworkingRequestOpportunityPrepare, /// 开始准备网络请求
-    KJNetworkingRequestOpportunityWillSend,/// 网络请求开始时刻请求
-    KJNetworkingRequestOpportunitySuccess, /// 成功
-    KJNetworkingRequestOpportunityFailure, /// 失败
-    KJNetworkingRequestOpportunityProcess  /// 最终处理时刻
-};
+
 @interface KJNetworkingResponse : NSObject
 
 /// 网络请求插件时机，
@@ -38,9 +30,6 @@ typedef NS_ENUM(NSUInteger, KJNetworkingRequestOpportunity) {
 @property (nonatomic, strong, readonly) NSURLSessionDataTask *task;
 /// 失败
 @property (nonatomic, strong, readonly) NSError *error;
-
-/// 临时数据，内部最终返回时刻处理插件使用
-@property (nonatomic, strong, readonly) id tempResponse;
 
 @end
 

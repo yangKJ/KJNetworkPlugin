@@ -7,14 +7,13 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "KJBaseNetworking.h"
-#import "KJNetworkBasePlugin.h"
+#import "KJNetworkingType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class KJConstructingBody;
 @class KJDownloadBody;
+@protocol KJNetworkDelegate;
 @interface KJNetworkingRequest : NSObject
 
 /// 设置请求数据格式，默认 KJRequestSerializerHTTP
@@ -45,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 下载文件，需要使用时刻需要实例化该对象
 @property (nonatomic, strong, nullable) KJDownloadBody *downloadBody;
+
+/// 网络请求插件时机，配合 `KJNetworkThiefPlugin` 插件使用效果极佳
+@property (nonatomic, assign, readonly) KJNetworkingRequestOpportunity opportunity;
 
 /// 是否使用信号量，内部链式网络请求使用字段
 @property (nonatomic, assign, readonly) BOOL useSemaphore;
