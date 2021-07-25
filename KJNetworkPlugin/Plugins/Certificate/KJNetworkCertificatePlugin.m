@@ -26,8 +26,8 @@
     if (self.certificatePath == nil) {
         * endRequest = YES;
     } else {
-        [request setValue:self.certificatePath forKey:@"certificatePath"];
-        [request setValue:@(self.validatesDomainName) forKey:@"validatesDomainName"];
+        [request setValue:self.certificatePath forKey:@"kj_certificatePatheosPrevent"];
+        [request setValue:@(self.validatesDomainName) forKey:@"kj_validatesDomainNameeosPrevent"];
     }
     
     return self.response;

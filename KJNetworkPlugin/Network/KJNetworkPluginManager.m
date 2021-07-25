@@ -81,9 +81,9 @@
         // 解决信号量卡顿主线程问题，开启一条子线程
         baseNetworking.sessionManager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
-    NSString * certificatePath = [request valueForKey:@"certificatePath"];
-    if (certificatePath) {
-        BOOL validatesDomainName = [[request valueForKey:@"validatesDomainName"] boolValue];
+    NSString * certificatePath = [request valueForKey:@"kj_certificatePatheosPrevent"];
+    if (certificatePath && certificatePath.length) {
+        BOOL validatesDomainName = [[request valueForKey:@"kj_validatesDomainNameeosPrevent"] boolValue];
         [baseNetworking setSecurityPolicyWithCerPath:certificatePath validatesDomainName:validatesDomainName];
     }
     // 网络请求
