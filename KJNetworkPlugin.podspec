@@ -19,5 +19,10 @@ Pod::Spec.new do |s|
     thief.source_files = "KJNetworkPlugin/Plugins/Thief/*.{h,m}"
     thief.dependency 'KJNetworkPlugin/Network'
   end
+  
+  s.subspec 'Certificate' do |cer|
+    cer.source_files = "KJNetworkPlugin/Plugins/Certificate/*.{h,m}"
+    cer.dependency 'KJNetworkPlugin/Network'
+  end
 
 end
