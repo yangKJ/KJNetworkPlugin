@@ -22,6 +22,7 @@
 		688E7A5D26AC401300C53AAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A5C26AC401300C53AAD /* main.m */; };
 		688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */; };
 		688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */; };
+		68D3162826AD335500771CB7 /* KJNetworkThiefPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D3162726AD335500771CB7 /* KJNetworkThiefPlugin.m */; };
 		EB76A4BE8818E3E4411CAEAE /* Pods_KJNetworkPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */; };
 		F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,8 @@
 		688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginUITests.m; sourceTree = "<group>"; };
 		688E7A7326AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68D3160726AD164100771CB7 /* KJNetworkingType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkingType.h; sourceTree = "<group>"; };
+		68D3162626AD335500771CB7 /* KJNetworkThiefPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkThiefPlugin.h; sourceTree = "<group>"; };
+		68D3162726AD335500771CB7 /* KJNetworkThiefPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkThiefPlugin.m; sourceTree = "<group>"; };
 		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		688E7A4926AC401100C53AAD /* KJNetworkPlugin */ = {
 			isa = PBXGroup;
 			children = (
+				68D3162426AD334A00771CB7 /* Plugins */,
 				6872D60926AC66BE00A6FD3C /* Network */,
 				688E7A4A26AC401100C53AAD /* AppDelegate.h */,
 				688E7A4B26AC401100C53AAD /* AppDelegate.m */,
@@ -189,6 +193,23 @@
 				688E7A7326AC401300C53AAD /* Info.plist */,
 			);
 			path = KJNetworkPluginUITests;
+			sourceTree = "<group>";
+		};
+		68D3162426AD334A00771CB7 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				68D3162526AD335500771CB7 /* Thief */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		68D3162526AD335500771CB7 /* Thief */ = {
+			isa = PBXGroup;
+			children = (
+				68D3162626AD335500771CB7 /* KJNetworkThiefPlugin.h */,
+				68D3162726AD335500771CB7 /* KJNetworkThiefPlugin.m */,
+			);
+			path = Thief;
 			sourceTree = "<group>";
 		};
 		CF7631757D9193AE5C513888 /* Frameworks */ = {
@@ -454,6 +475,7 @@
 				6872D61C26AC686B00A6FD3C /* KJNetworkingResponse.m in Sources */,
 				6872D64326AC6D1400A6FD3C /* KJNetworkPluginManager.m in Sources */,
 				6872D60C26AC66BE00A6FD3C /* KJBaseNetworking.m in Sources */,
+				68D3162826AD335500771CB7 /* KJNetworkThiefPlugin.m in Sources */,
 				688E7A5226AC401100C53AAD /* ViewController.m in Sources */,
 				688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */,
 				688E7A5D26AC401300C53AAD /* main.m in Sources */,
