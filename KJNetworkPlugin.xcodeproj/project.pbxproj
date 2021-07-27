@@ -34,6 +34,7 @@
 		688E7A5D26AC401300C53AAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A5C26AC401300C53AAD /* main.m */; };
 		688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */; };
 		688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */; };
+		68E9CE9426B03CD50087228F /* KJNetworkLoadingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */; };
 		EB76A4BE8818E3E4411CAEAE /* Pods_KJNetworkPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */; };
 		F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,8 @@
 		688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginUITests.m; sourceTree = "<group>"; };
 		688E7A7326AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68E9CE9226B03CD50087228F /* KJNetworkLoadingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkLoadingPlugin.h; sourceTree = "<group>"; };
+		68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkLoadingPlugin.m; sourceTree = "<group>"; };
 		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		6870CE0026AD521A00960EAE /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				68E9CE9126B03CAA0087228F /* Loading */,
 				6870CE3526AD6EB000960EAE /* Anslysis */,
 				6870CE0F26AD672E00960EAE /* Cache */,
 				6870CE0826AD5B8000960EAE /* Certificate */,
@@ -299,6 +303,15 @@
 				688E7A7326AC401300C53AAD /* Info.plist */,
 			);
 			path = KJNetworkPluginUITests;
+			sourceTree = "<group>";
+		};
+		68E9CE9126B03CAA0087228F /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				68E9CE9226B03CD50087228F /* KJNetworkLoadingPlugin.h */,
+				68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */,
+			);
+			path = Loading;
 			sourceTree = "<group>";
 		};
 		CF7631757D9193AE5C513888 /* Frameworks */ = {
@@ -587,6 +600,7 @@
 				6870CE0426AD521B00960EAE /* KJNetworkThiefPlugin.m in Sources */,
 				6839509C26AF0E160037791A /* KJNetworkChainManager.m in Sources */,
 				6870CE3826AD6EB000960EAE /* KJNetworkAnslysisPlugin.m in Sources */,
+				68E9CE9426B03CD50087228F /* KJNetworkLoadingPlugin.m in Sources */,
 				688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */,
 				6870CE0B26AD5B8000960EAE /* KJNetworkCertificatePlugin.m in Sources */,
 				688E7A5D26AC401300C53AAD /* main.m in Sources */,

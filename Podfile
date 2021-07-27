@@ -6,7 +6,7 @@ def main_pods
   pod 'AFNetworking'
   pod 'YYCache'
   pod 'MJExtension'
-#    pod 'MBProgressHUD'
+  pod 'MBProgressHUD'
   
 end
 
