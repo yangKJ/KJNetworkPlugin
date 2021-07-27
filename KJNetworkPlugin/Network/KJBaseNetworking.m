@@ -459,14 +459,30 @@ static NSString *_baseURL;
 
 #pragma mark - 重置AFHTTPSessionManager相关属性
 
-- (void)setRequestSerializer:(KJRequestSerializer)requestSerializer{
-    self.sessionManager.requestSerializer = requestSerializer == KJRequestSerializerHTTP ?
-    [AFHTTPRequestSerializer serializer] : [AFJSONRequestSerializer serializer];
+- (void)setRequestSerializer:(KJSerializer)requestSerializer{
+    switch (requestSerializer) {
+        case KJSerializerHTTP:
+            self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            break;
+        case KJSerializerJSON:
+            self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+            break;
+        default:
+            break;
+    }
 }
 
-- (void)setResponseSerializer:(KJResponseSerializer)responseSerializer{
-    self.sessionManager.responseSerializer = responseSerializer == KJResponseSerializerHTTP ?
-    [AFHTTPResponseSerializer serializer] : [AFJSONResponseSerializer serializer];
+- (void)setResponseSerializer:(KJSerializer)responseSerializer{
+    switch (responseSerializer) {
+        case KJSerializerHTTP:
+            self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            break;
+        case KJSerializerJSON:
+            self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval{

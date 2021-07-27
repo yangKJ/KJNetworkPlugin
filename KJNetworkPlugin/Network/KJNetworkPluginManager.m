@@ -133,7 +133,7 @@
         for (NSString * key in request.header) {
             [baseNetworking setValue:request.header[key] forHTTPHeaderField:key];
         }
-        if (request.useSemaphore) {
+        if ([[request valueForKey:@"useSemaphore"] boolValue]) {
             // 解决信号量卡顿主线程问题，开启一条子线程
             baseNetworking.sessionManager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         }

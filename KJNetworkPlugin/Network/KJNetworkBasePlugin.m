@@ -22,7 +22,7 @@
 /// @return 返回缓存数据，successResponse 不为空表示存在缓存数据
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
     self.request = request;
-    self.response.opportunity = KJNetworkingRequestOpportunityPrepare;
+    self.response.opportunity = KJRequestOpportunityPrepare;
     [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
@@ -33,7 +33,7 @@
 /// @return 返回网络请求开始时刻插件处理后的数据
 - (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
     self.request = request;
-    self.response.opportunity = KJNetworkingRequestOpportunityWillSend;
+    self.response.opportunity = KJRequestOpportunityWillSend;
     [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
@@ -44,7 +44,7 @@
 /// @return 返回成功插件处理后的数据
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     self.request = request;
-    self.response.opportunity = KJNetworkingRequestOpportunitySuccess;
+    self.response.opportunity = KJRequestOpportunitySuccess;
     [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
@@ -55,7 +55,7 @@
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     self.request = request;
-    self.response.opportunity = KJNetworkingRequestOpportunityFailure;
+    self.response.opportunity = KJRequestOpportunityFailure;
     [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }
@@ -66,7 +66,7 @@
 /// @return 返回最终加工之后的数据
 - (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error{
     self.request = request;
-    self.response.opportunity = KJNetworkingRequestOpportunityProcess;
+    self.response.opportunity = KJRequestOpportunityProcess;
     [self.request setValue:@(self.response.opportunity) forKey:@"opportunity"];
     return self.response;
 }

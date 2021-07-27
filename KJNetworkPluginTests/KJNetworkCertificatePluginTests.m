@@ -44,7 +44,7 @@
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.douban.com";
     request.path = @"/j/app/radio/channels";
-    request.responseSerializer = KJResponseSerializerJSON;
+    request.responseSerializer = KJSerializerJSON;
     
     KJNetworkCertificatePlugin * plugin = [[KJNetworkCertificatePlugin alloc] init];
     plugin.certificatePath = @"/test/path";

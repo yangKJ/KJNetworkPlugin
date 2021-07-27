@@ -22,7 +22,7 @@
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.douban.com";
-    request.responseSerializer = KJResponseSerializerJSON;
+    request.responseSerializer = KJSerializerJSON;
     
     KJNetworkLoadingPlugin * plugin = [[KJNetworkLoadingPlugin alloc] init];
     plugin.displayLoading = YES;

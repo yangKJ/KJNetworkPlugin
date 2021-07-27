@@ -18,7 +18,7 @@
 /// 请求体标识符号，内部批量网络请求使用字段
 @property (nonatomic, strong) NSString *requestIdentifier;
 /// 网络请求插件时机，配合小偷插件使用效果极佳
-@property (nonatomic, assign) KJNetworkingRequestOpportunity opportunity;
+@property (nonatomic, assign) KJRequestOpportunity opportunity;
 
 @end
 
@@ -27,8 +27,8 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.ip = [KJBaseNetworking baseURL];
-        self.requestSerializer = KJRequestSerializerHTTP;
-        self.responseSerializer = KJResponseSerializerHTTP;
+        self.requestSerializer = KJSerializerHTTP;
+        self.responseSerializer = KJSerializerHTTP;
         self.timeoutInterval = 30.f;
         self.method = KJNetworkRequestMethodPOST;
     }

@@ -42,29 +42,19 @@ typedef NS_ENUM(NSUInteger, KJNetworkStatusType){
     KJNetworkStatusReachableWiFi
 };
 
-/// 请求格式
-typedef NS_ENUM(NSUInteger, KJRequestSerializer){
-    /**设置请求数据为JSON格式*/
-    KJRequestSerializerJSON,
-    /**设置请求数据为二进制格式*/
-    KJRequestSerializerHTTP
-};
-
-/// 返回数据格式
-typedef NS_ENUM(NSUInteger, KJResponseSerializer){
-    /**设置响应数据为JSON格式*/
-    KJResponseSerializerJSON,
-    /**设置响应数据为二进制格式*/
-    KJResponseSerializerHTTP
+/// 请求格式 和 返回数据响应格式
+typedef NS_ENUM(NSUInteger, KJSerializer){
+    KJSerializerHTTP = 0, /// 二进制文件，NSData
+    KJSerializerJSON = 1, /// JSON
 };
 
 /// 插件请求时机
-typedef NS_ENUM(NSUInteger, KJNetworkingRequestOpportunity) {
-    KJNetworkingRequestOpportunityPrepare, /// 开始准备网络请求
-    KJNetworkingRequestOpportunityWillSend,/// 网络请求开始时刻请求
-    KJNetworkingRequestOpportunitySuccess, /// 成功
-    KJNetworkingRequestOpportunityFailure, /// 失败
-    KJNetworkingRequestOpportunityProcess  /// 最终处理时刻
+typedef NS_ENUM(NSUInteger, KJRequestOpportunity) {
+    KJRequestOpportunityPrepare, /// 开始准备网络请求
+    KJRequestOpportunityWillSend,/// 网络请求开始时刻请求
+    KJRequestOpportunitySuccess, /// 成功
+    KJRequestOpportunityFailure, /// 失败
+    KJRequestOpportunityProcess  /// 最终处理时刻
 };
 
 @protocol AFMultipartFormData;

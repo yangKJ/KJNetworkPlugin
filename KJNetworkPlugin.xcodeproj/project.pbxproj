@@ -45,13 +45,6 @@
 			remoteGlobalIDString = 688E7A4626AC401100C53AAD;
 			remoteInfo = KJNetworkPlugin;
 		};
-		688E7A6E26AC401300C53AAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 688E7A3F26AC401100C53AAD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 688E7A4626AC401100C53AAD;
-			remoteInfo = KJNetworkPlugin;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -106,7 +99,6 @@
 		688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginTests.m; sourceTree = "<group>"; };
 		688E7A6826AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E9CE9226B03CD50087228F /* KJNetworkLoadingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkLoadingPlugin.h; sourceTree = "<group>"; };
 		68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkLoadingPlugin.m; sourceTree = "<group>"; };
 		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,13 +120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		688E7A6A26AC401300C53AAD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +231,6 @@
 			children = (
 				688E7A4726AC401100C53AAD /* KJNetworkPlugin.app */,
 				688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */,
-				688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,24 +342,6 @@
 			productReference = 688E7A6226AC401300C53AAD /* KJNetworkPluginTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		688E7A6C26AC401300C53AAD /* KJNetworkPluginUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 688E7A7C26AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginUITests" */;
-			buildPhases = (
-				688E7A6926AC401300C53AAD /* Sources */,
-				688E7A6A26AC401300C53AAD /* Frameworks */,
-				688E7A6B26AC401300C53AAD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				688E7A6F26AC401300C53AAD /* PBXTargetDependency */,
-			);
-			name = KJNetworkPluginUITests;
-			productName = KJNetworkPluginUITests;
-			productReference = 688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -388,10 +354,6 @@
 						CreatedOnToolsVersion = 12.4;
 					};
 					688E7A6126AC401300C53AAD = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 688E7A4626AC401100C53AAD;
-					};
-					688E7A6C26AC401300C53AAD = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 688E7A4626AC401100C53AAD;
 					};
@@ -412,7 +374,6 @@
 			targets = (
 				688E7A4626AC401100C53AAD /* KJNetworkPlugin */,
 				688E7A6126AC401300C53AAD /* KJNetworkPluginTests */,
-				688E7A6C26AC401300C53AAD /* KJNetworkPluginUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -430,13 +391,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		688E7A6026AC401300C53AAD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		688E7A6B26AC401300C53AAD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -563,13 +517,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		688E7A6926AC401300C53AAD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -577,11 +524,6 @@
 			isa = PBXTargetDependency;
 			target = 688E7A4626AC401100C53AAD /* KJNetworkPlugin */;
 			targetProxy = 688E7A6326AC401300C53AAD /* PBXContainerItemProxy */;
-		};
-		688E7A6F26AC401300C53AAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 688E7A4626AC401100C53AAD /* KJNetworkPlugin */;
-			targetProxy = 688E7A6E26AC401300C53AAD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -805,40 +747,6 @@
 			};
 			name = Release;
 		};
-		688E7A7D26AC401300C53AAD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = KJNetworkPlugin;
-			};
-			name = Debug;
-		};
-		688E7A7E26AC401300C53AAD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ykj.KJNetworkPluginUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = KJNetworkPlugin;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -865,15 +773,6 @@
 			buildConfigurations = (
 				688E7A7A26AC401300C53AAD /* Debug */,
 				688E7A7B26AC401300C53AAD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		688E7A7C26AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				688E7A7D26AC401300C53AAD /* Debug */,
-				688E7A7E26AC401300C53AAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

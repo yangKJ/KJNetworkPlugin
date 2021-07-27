@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol KJNetworkDelegate;
 @interface KJNetworkingRequest : NSObject
 
-/// 设置请求数据格式，默认 KJRequestSerializerHTTP
-@property (nonatomic, assign) KJRequestSerializer requestSerializer;
-/// 设置响应数据格式，默认 KJResponseSerializerHTTP
-@property (nonatomic, assign) KJResponseSerializer responseSerializer;
+/// 设置请求数据格式，默认 KJSerializerHTTP
+@property (nonatomic, assign) KJSerializer requestSerializer;
+/// 设置响应数据格式，默认 KJSerializerHTTP
+@property (nonatomic, assign) KJSerializer responseSerializer;
 /// 设置超时时间，默认30秒
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 /// 默认请求头
@@ -39,19 +39,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网址请求地址
 @property (nonatomic, strong, readonly) NSString *URLString;
 
+/// 网络请求插件时机，配合 `KJNetworkThiefPlugin` 插件使用效果极佳
+@property (nonatomic, assign, readonly) KJRequestOpportunity opportunity;
+
+/// 请求体标识符号，唯一标识
+@property (nonatomic, strong, readonly) NSString *requestIdentifier;
+
 /// 上传资源文件，需要使用时刻需要实例化该对象
 @property (nonatomic, strong, nullable) KJConstructingBody *constructingBody;
 
 /// 下载文件，需要使用时刻需要实例化该对象
 @property (nonatomic, strong, nullable) KJDownloadBody *downloadBody;
-
-/// 网络请求插件时机，配合 `KJNetworkThiefPlugin` 插件使用效果极佳
-@property (nonatomic, assign, readonly) KJNetworkingRequestOpportunity opportunity;
-
-/// 是否使用信号量，内部链式网络请求使用字段
-@property (nonatomic, assign, readonly) BOOL useSemaphore;
-/// 请求体标识符号，内部批量网络请求使用字段
-@property (nonatomic, strong, readonly) NSString *requestIdentifier;
 
 @end
 

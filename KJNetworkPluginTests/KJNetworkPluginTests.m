@@ -43,7 +43,7 @@
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.douban.com";
     request.path = @"/j/app/radio/channels";
-    request.responseSerializer = KJResponseSerializerJSON;
+    request.responseSerializer = KJSerializerJSON;
     
     KJNetworkThiefPlugin * plugin = [[KJNetworkThiefPlugin alloc] init];
     plugin.kGetResponse = ^(KJNetworkingResponse * _Nonnull response) {
@@ -70,7 +70,7 @@
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.xxx.com";
     request.path = @"/j/app/radio/channels";
-    request.responseSerializer = KJResponseSerializerJSON;
+    request.responseSerializer = KJSerializerJSON;
     
     KJNetworkThiefPlugin * plugin = [[KJNetworkThiefPlugin alloc] init];
     plugin.againRequest = YES;

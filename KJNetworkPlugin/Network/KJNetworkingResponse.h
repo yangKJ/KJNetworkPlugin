@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KJNetworkingResponse : NSObject
 
 /// 网络请求插件时机，
-@property (nonatomic, assign) KJNetworkingRequestOpportunity opportunity;
+@property (nonatomic, assign) KJRequestOpportunity opportunity;
 
 /// 原始网络成功返回数据，未经过任何处理
 @property (nonatomic, strong, readonly) id responseObject;

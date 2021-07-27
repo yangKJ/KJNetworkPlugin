@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = "KJNetworkPlugin"
-  s.version  = "1.0.1"
+  s.version  = "1.0.2"
   s.summary  = "A Network Plugin With AFNetworking."
   s.homepage = "https://github.com/yangKJ/KJNetworkPlugin"
   s.license  = "MIT"
@@ -35,6 +35,22 @@ Pod::Spec.new do |s|
     ans.source_files = "KJNetworkPlugin/Plugins/Anslysis/*.{h,m}"
     ans.dependency 'KJNetworkPlugin/Network'
     ans.dependency 'MJExtension', "~> 3.3.0"
+  end
+  
+  s.subspec 'Loading' do |loa|
+    loa.source_files = "KJNetworkPlugin/Plugins/Loading/*.{h,m}"
+    loa.dependency 'KJNetworkPlugin/Network'
+    loa.dependency 'MBProgressHUD', "~> 1.2.0"
+  end
+  
+  s.subspec 'Batch' do |bat|
+    bat.source_files = "KJNetworkPlugin/Batch/*.{h,m}"
+    bat.dependency 'KJNetworkPlugin/Network'
+  end
+  
+  s.subspec 'Chain' do |cha|
+    cha.source_files = "KJNetworkPlugin/Chain/*.{h,m}"
+    cha.dependency 'KJNetworkPlugin/Network'
   end
   
 end

@@ -45,7 +45,7 @@
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.douban.com";
     request.path = @"/j/app/radio/channels";
-    request.responseSerializer = KJResponseSerializerJSON;
+    request.responseSerializer = KJSerializerJSON;
     
     KJNetworkAnslysisPlugin * plugin = [[KJNetworkAnslysisPlugin alloc] init];
     plugin.clazz = [[KJAnslysisModel alloc] init];

@@ -16,7 +16,7 @@ typedef void(^_Nullable KJNetworkChainSuccess)(NSArray<id> * responseArray);
 /// 链式网络失败回调
 typedef void(^_Nullable KJNetworkChainFailure)(NSError * error);
 /// 链式网络处理下一个请求体
-typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChain)(id responseObject);
+typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChainRequest)(id responseObject);
 @interface KJNetworkChainManager : NSObject
 
 /// 链式网络请求
@@ -27,7 +27,7 @@ typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChain)(
 + (void)HTTPChainRequest:(__kindof KJNetworkingRequest *)request
                  success:(KJNetworkChainSuccess)success
                  failure:(KJNetworkChainFailure)failure
-                   chain:(KJNetworkNextChain)chain,...;
+                   chain:(KJNetworkNextChainRequest)chain,...;
 
 
 //******************************** 链式网络请求 ********************************
@@ -38,7 +38,7 @@ typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChain)(
 /// @return 返回自身对象
 + (instancetype)HTTPChainRequest:(__kindof KJNetworkingRequest *)request failure:(KJNetworkChainFailure)failure;
 /// 请求体传递载体，回调返回上一个网络请求结果
-@property (nonatomic, copy, readonly) KJNetworkChainManager * (^chain)(KJNetworkNextChain);
+@property (nonatomic, copy, readonly) KJNetworkChainManager * (^chain)(KJNetworkNextChainRequest);
 /// 最后链数据回调，回调最后一个网络请求结果
 @property (nonatomic, copy, readonly) void(^lastChain)(void(^)(id responseObject));
 

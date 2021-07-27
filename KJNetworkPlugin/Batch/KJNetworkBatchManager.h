@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 批量重连回调
 typedef BOOL(^_Nullable KJNetworkBatchReconnect)(NSArray<KJNetworkingRequest *> * reconnectArray);
 /// 批量结果回调
-typedef void(^_Nullable KJNetworkComplete)(NSArray<KJBatchResponse *> * result);
+typedef void(^_Nullable KJNetworkBatchComplete)(NSArray<KJBatchResponse *> * result);
 @interface KJNetworkBatchManager : NSObject
 
 /// 批量网络请求
@@ -23,7 +23,7 @@ typedef void(^_Nullable KJNetworkComplete)(NSArray<KJBatchResponse *> * result);
 /// @param complete 最终结果回调，返回成功和失败数据数组
 + (void)HTTPBatchRequestConfiguration:(KJBatchConfiguration *)configuration
                             reconnect:(KJNetworkBatchReconnect)reconnect
-                             complete:(KJNetworkComplete)complete;
+                             complete:(KJNetworkBatchComplete)complete;
 
 @end
 

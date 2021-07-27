@@ -52,7 +52,7 @@
 /// 批量网络请求
 + (void)HTTPBatchRequestConfiguration:(KJBatchConfiguration *)configuration
                             reconnect:(KJNetworkBatchReconnect)reconnect
-                             complete:(KJNetworkComplete)complete{
+                             complete:(KJNetworkBatchComplete)complete{
     @synchronized (self) {
         KJNetworkBatchManager * manager = [[KJNetworkBatchManager alloc] init];
         manager.configuration = configuration;
@@ -62,7 +62,7 @@
 
 - (void)createHTTPBatchConfiguration:(KJBatchConfiguration *)configuration
                            reconnect:(KJNetworkBatchReconnect)reconnect
-                            complete:(KJNetworkComplete)complete{
+                            complete:(KJNetworkBatchComplete)complete{
     NSInteger index = 520;
     for (KJNetworkingRequest * request in configuration.requestArray) {
         [request setValue:[NSString stringWithFormat:@"%ld", index] forKey:@"requestIdentifier"];

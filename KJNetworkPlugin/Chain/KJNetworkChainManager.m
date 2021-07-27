@@ -23,7 +23,7 @@
 + (void)HTTPChainRequest:(__kindof KJNetworkingRequest *)request
                  success:(KJNetworkChainSuccess)success
                  failure:(KJNetworkChainFailure)failure
-                   chain:(KJNetworkNextChain)chain,...{
+                   chain:(KJNetworkNextChainRequest)chain,...{
     // 获取
     __block NSMutableArray * chainTemps = [NSMutableArray arrayWithObject:chain];
     va_list args;
@@ -86,8 +86,8 @@
     }
 }
 
-- (KJNetworkChainManager * (^)(KJNetworkNextChain))chain {
-    return ^(KJNetworkNextChain tempChain){
+- (KJNetworkChainManager * (^)(KJNetworkNextChainRequest))chain {
+    return ^(KJNetworkNextChainRequest tempChain){
         if (tempChain) {
             self.request = tempChain(self.lastResponseObject);
             self.lastResponseObject = [self syncResponseWithRequest:self.request];

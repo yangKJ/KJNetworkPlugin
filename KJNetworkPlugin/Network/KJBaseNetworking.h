@@ -167,11 +167,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置网络请求参数的格式，默认为JSON格式
 /// @param requestSerializer 参数格式
-- (void)setRequestSerializer:(KJRequestSerializer)requestSerializer;
+- (void)setRequestSerializer:(KJSerializer)requestSerializer;
 
 /// 设置服务器响应数据格式，默认为JSON格式
 /// @param responseSerializer 服务器数据格式
-- (void)setResponseSerializer:(KJResponseSerializer)responseSerializer;
+- (void)setResponseSerializer:(KJSerializer)responseSerializer;
 
 /// 设置请求超时时间，默认30秒
 /// @param timeoutInterval 超时时间
