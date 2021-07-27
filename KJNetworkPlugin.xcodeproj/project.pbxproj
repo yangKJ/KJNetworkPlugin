@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2CCBEF532C3463530749FB47 /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */; };
 		681F85A726AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */; };
 		681F85B726ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */; };
 		6839508326AF05E40037791A /* KJNetworkBatchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839508226AF05E40037791A /* KJNetworkBatchManager.m */; };
@@ -33,7 +32,6 @@
 		688E7A5A26AC401300C53AAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688E7A5826AC401300C53AAD /* LaunchScreen.storyboard */; };
 		688E7A5D26AC401300C53AAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A5C26AC401300C53AAD /* main.m */; };
 		688E7A6726AC401300C53AAD /* KJNetworkPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */; };
-		688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */; };
 		68E9CE9426B03CD50087228F /* KJNetworkLoadingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */; };
 		EB76A4BE8818E3E4411CAEAE /* Pods_KJNetworkPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */; };
 		F5FB64F839F90E412BAC5F84 /* Pods_KJNetworkPluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */; };
@@ -59,9 +57,7 @@
 /* Begin PBXFileReference section */
 		2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.release.xcconfig"; sourceTree = "<group>"; };
-		509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig"; sourceTree = "<group>"; };
 		681F85A526AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KJNetworkingRequest+KJCertificate.h"; sourceTree = "<group>"; };
 		681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "KJNetworkingRequest+KJCertificate.m"; sourceTree = "<group>"; };
 		681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCertificatePluginTests.m; sourceTree = "<group>"; };
@@ -111,12 +107,9 @@
 		688E7A6626AC401300C53AAD /* KJNetworkPluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginTests.m; sourceTree = "<group>"; };
 		688E7A6826AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		688E7A6D26AC401300C53AAD /* KJNetworkPluginUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KJNetworkPluginUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkPluginUITests.m; sourceTree = "<group>"; };
-		688E7A7326AC401300C53AAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68E9CE9226B03CD50087228F /* KJNetworkLoadingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkLoadingPlugin.h; sourceTree = "<group>"; };
 		68E9CE9326B03CD50087228F /* KJNetworkLoadingPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkLoadingPlugin.m; sourceTree = "<group>"; };
 		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,7 +135,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CCBEF532C3463530749FB47 /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +235,6 @@
 			children = (
 				688E7A4926AC401100C53AAD /* KJNetworkPlugin */,
 				688E7A6526AC401300C53AAD /* KJNetworkPluginTests */,
-				688E7A7026AC401300C53AAD /* KJNetworkPluginUITests */,
 				688E7A4826AC401100C53AAD /* Products */,
 				FF98C96F2589634A5B26B153 /* Pods */,
 				CF7631757D9193AE5C513888 /* Frameworks */,
@@ -296,15 +287,6 @@
 			path = KJNetworkPluginTests;
 			sourceTree = "<group>";
 		};
-		688E7A7026AC401300C53AAD /* KJNetworkPluginUITests */ = {
-			isa = PBXGroup;
-			children = (
-				688E7A7126AC401300C53AAD /* KJNetworkPluginUITests.m */,
-				688E7A7326AC401300C53AAD /* Info.plist */,
-			);
-			path = KJNetworkPluginUITests;
-			sourceTree = "<group>";
-		};
 		68E9CE9126B03CAA0087228F /* Loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */,
-				509F26718D3867C32444288B /* Pods_KJNetworkPlugin_KJNetworkPluginUITests.framework */,
 				8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */,
 			);
 			name = Frameworks;
@@ -329,8 +310,6 @@
 			children = (
 				2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */,
 				39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */,
-				C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */,
-				5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */,
 				C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */,
 				F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */,
 			);
@@ -383,11 +362,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 688E7A7C26AC401300C53AAD /* Build configuration list for PBXNativeTarget "KJNetworkPluginUITests" */;
 			buildPhases = (
-				063DC38468A2849CC2D75C49 /* [CP] Check Pods Manifest.lock */,
 				688E7A6926AC401300C53AAD /* Sources */,
 				688E7A6A26AC401300C53AAD /* Frameworks */,
 				688E7A6B26AC401300C53AAD /* Resources */,
-				F51E3B8753F232F17CE35677 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -486,28 +463,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		063DC38468A2849CC2D75C49 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KJNetworkPlugin-KJNetworkPluginUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2AEDDEC112D1628A76AA7637 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -569,23 +524,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F51E3B8753F232F17CE35677 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KJNetworkPlugin-KJNetworkPluginUITests/Pods-KJNetworkPlugin-KJNetworkPluginUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -629,7 +567,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				688E7A7226AC401300C53AAD /* KJNetworkPluginUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,7 +807,6 @@
 		};
 		688E7A7D26AC401300C53AAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C08CD33B97AE2E5CB2FCC639 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;
@@ -888,7 +824,6 @@
 		};
 		688E7A7E26AC401300C53AAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D26AEA7E5CECB359E24EAD4 /* Pods-KJNetworkPlugin-KJNetworkPluginUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = KJNetworkPluginUITests/Info.plist;

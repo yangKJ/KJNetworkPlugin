@@ -24,8 +24,4 @@ target 'KJNetworkPlugin' do
 
   end
 
-  target 'KJNetworkPluginUITests' do
-    # Pods for testing
-  end
-
 end
