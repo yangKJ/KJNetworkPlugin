@@ -1,5 +1,10 @@
 # KJNetworkPluginManager
 
+![License MIT](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)
+![Pod version](https://img.shields.io/cocoapods/v/KJNetworkPlugin.svg?style=flat)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform info](https://img.shields.io/cocoapods/p/KJNetworkPlugin.svg?style=flat)](http://cocoadocs.org/docsets/KJNetworkPlugin)
+
 - 熟悉swift的朋友应该都知道一款优秀的三方库[Moya](https://github.com/Moya/Moya)，插件版网络请求是真香，于是乎借鉴思路制作一款纯oc版本的插件网络请求库
 - 熟悉oc的朋友又应该都知道一款优秀的三方库[YTKNetwork](https://github.com/yuantiku/YTKNetwork)，基于对象的协议版网络请求，然后他的批量网络请求和链式网络请求也超级香
 - 结合一下两者优点，制作一款`批量`和`链式`插件版网络请求库
@@ -20,10 +25,10 @@
 - 支持链式网络请求
 
 ### 使用教程
-- **[基本使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
-- **[插件使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
-- **[批量网络使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%89%B9%E9%87%8F%E7%BD%91%E7%BB%9C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
-- **[链式网络使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E9%93%BE%E5%BC%8F%E7%BD%91%E7%BB%9C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
+- [**基本使用教程**](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)
+- [**插件使用教程**](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)
+- [**批量网络使用教程**](Docs/BATCH.md)
+- [**链式网络使用教程**](Docs/CHAIN.md)
 
 ### 模块组成
 **KJNetworkPlugin**是一款基于面向协议的网络抽象层的插件版网络请求库，基于[AFNetworking](https://github.com/AFNetworking/AFNetworking)的基础上再次封装使用。简单讲应该分为这么几大板块：
@@ -75,13 +80,13 @@
 - (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest;
 
 /// 成功接收数据
-/// @param request  接收成功数据
+/// @param request 请求相关数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回成功插件处理后的数据
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest;
 
 /// 失败处理
-/// @param request  失败的网络活动
+/// @param request 请求相关数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest;
@@ -111,21 +116,21 @@
 
 **目前已有5款插件供使用：**
 
-- **KJNetworkLoadingPlugin**：基于MBProgressHUD封装的加载框和错误提示框插件
+- [**KJNetworkLoadingPlugin**](Docs/LOADING.md)：基于MBProgressHUD封装的加载框和错误提示框插件
 
-- **KJNetworkAnslysisPlugin**：基于MJExtension封装的解析数据插件
+- [**KJNetworkAnslysisPlugin**](Docs/ANSLYSIS.md)：基于MJExtension封装的解析数据插件
 
-- **KJNetworkCachePlugin**：基于YYCache封装的网络缓存插件
+- [**KJNetworkCachePlugin**](Docs/CACHE.md)：基于YYCache封装的网络缓存插件
 
-- **KJNetworkCertificatePlugin**：配置自建证书插件
+- [**KJNetworkCertificatePlugin**](Docs/CERTIFICATE.md)：配置自建证书插件
 
-- **KJNetworkThiefPlugin**：修改`KJNetworkingRequest`和获取 `KJNetworkingResponse`插件
+- [**KJNetworkThiefPlugin**](Docs/THIEF.md)：修改`KJNetworkingRequest`和获取 `KJNetworkingResponse`插件
 
 ### Chain链式插件网络
-- **[链式网络使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E9%93%BE%E5%BC%8F%E7%BD%91%E7%BB%9C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
+- [**链式网络使用教程**](Docs/CHAIN.md)
 
 ### Batch批量插件网络
-- **[批量网络使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%89%B9%E9%87%8F%E7%BD%91%E7%BB%9C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
+- [**批量网络使用教程**](Docs/BATCH.md)
 
 ### 关于作者
 - 🎷**邮箱地址：[ykj310@126.com](ykj310@126.com) 🎷**

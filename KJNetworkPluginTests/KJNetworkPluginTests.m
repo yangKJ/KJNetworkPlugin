@@ -75,7 +75,7 @@
     KJNetworkThiefPlugin * plugin = [[KJNetworkThiefPlugin alloc] init];
     plugin.againRequest = YES;
     plugin.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
-        if (request.opportunity == KJNetworkingRequestOpportunityFailure) {
+        if (request.opportunity == KJRequestOpportunityFailure) {
             request.ip = @"https://www.douban.com";
         }
     };
