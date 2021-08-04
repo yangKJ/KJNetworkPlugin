@@ -7,6 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import "KJNetworkBatchManager.h"
+#import "KJBaseNetworking.h"
 
 @interface KJNetworkBatchTests : XCTestCase
 
@@ -15,7 +16,7 @@
 @implementation KJNetworkBatchTests
 
 - (void)setUp {
-    
+    KJBaseNetworking.baseURL = @"https://www.httpbin.org";
 }
 
 - (void)tearDown {
@@ -32,17 +33,38 @@
     XCTestExpectation * expectation = [self expectationWithDescription:@"test batch."];
     
     NSMutableArray * array = [NSMutableArray array];
-    for (NSInteger i = 0; i < 10; i++) {
+    {
         KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
         request.method = KJNetworkRequestMethodGET;
-        request.ip = @"https://www.douban.com";
-        request.path = @"/j/app/radio/channels";
+        request.path = @"/headers";
+        request.responseSerializer = KJSerializerJSON;
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/ip";
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/user-agent";
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/bearer";
+        request.responseSerializer = KJSerializerJSON;
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/cache";
         request.responseSerializer = KJSerializerJSON;
         [array addObject:request];
     }
     
     KJBatchConfiguration * configuration = [KJBatchConfiguration sharedBatch];
-    configuration.maxQueue = 5;
+    configuration.maxQueue = 3;
     configuration.requestArray = array.mutableCopy;
     
     [KJNetworkBatchManager HTTPBatchRequestConfiguration:configuration reconnect:^BOOL(NSArray<KJNetworkingRequest *> * _Nonnull reconnectArray) {

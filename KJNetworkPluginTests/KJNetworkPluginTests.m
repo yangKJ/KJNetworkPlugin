@@ -7,7 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import "KJNetworkPluginManager.h"
-#import "KJNetworkThiefPlugin.h"
+#import <MJExtension/MJExtension.h>
 
 @interface KJNetworkPluginTests : XCTestCase
 
@@ -16,7 +16,12 @@
 @implementation KJNetworkPluginTests
 
 - (void)setUp {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    KJBaseNetworking.openLog = NO;
+    KJBaseNetworking.baseURL = @"https://www.httpbin.org";
+    KJBaseNetworking.baseParameters = @{
+        @"param1":@"value1",
+        @"param2":@"value2"
+    };
 }
 
 - (void)tearDown {
@@ -35,60 +40,55 @@
     }];
 }
 
-- (void)testThiefPlugin{
-    
-    XCTestExpectation * expectation = [self expectationWithDescription:@"test thief plugin."];
-    
-    KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
-    request.method = KJNetworkRequestMethodGET;
-    request.ip = @"https://www.douban.com";
-    request.path = @"/j/app/radio/channels";
-    request.responseSerializer = KJSerializerJSON;
-    
-    KJNetworkThiefPlugin * plugin = [[KJNetworkThiefPlugin alloc] init];
-    plugin.kGetResponse = ^(KJNetworkingResponse * _Nonnull response) {
-        // 这里可以拿到网络请求返回的原始数据
-        NSLog(@"🎷🎷🎷原汁原味的数据 = %@", response.responseObject);
-    };
-    request.plugins = @[plugin];
-    
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
-        [expectation fulfill];
-    } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
-        XCTFail(@"%@", error.localizedDescription);
-    }];
-
-    [self waitForExpectationsWithTimeout:30 handler:nil];
-}
-
-// 测试修改域名
-- (void)testChangeIp{
-    
-    XCTestExpectation * expectation = [self expectationWithDescription:@"test change ip."];
+- (void)testGet{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Post request"];
     
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
-    request.ip = @"https://www.xxx.com";
-    request.path = @"/j/app/radio/channels";
+    request.path = @"/ip";
     request.responseSerializer = KJSerializerJSON;
     
-    KJNetworkThiefPlugin * plugin = [[KJNetworkThiefPlugin alloc] init];
-    plugin.againRequest = YES;
-    plugin.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
-        if (request.opportunity == KJRequestOpportunityFailure) {
-            request.ip = @"https://www.douban.com";
-        }
-    };
-    request.plugins = @[plugin];
-    
     [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+        XCTAssertNotNil(responseObject, @"data should not be nil");
+        
+        NSString *origin = responseObject[@"origin"];
+        XCTAssertNotNil(origin);
+        
         [expectation fulfill];
     } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
-        XCTFail(@"%@", error.localizedDescription);
+        XCTAssertNil(error, @"error should be nil");
+        [expectation fulfill];
     }];
+    [self waitForExpectations:@[expectation] timeout:30];
 
-    [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
+- (void)testPost{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Post request"];
+    
+    KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+    request.method = KJNetworkRequestMethodPOST;
+    request.path = @"/post";
+    request.params = @{@"param1":@"value1"};
+    
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+        XCTAssertNotNil(responseObject, @"data should not be nil");
+        
+        NSDictionary *dic = [responseObject mj_JSONObject];
+        XCTAssertNotNil(dic, @"data should parse to dictionary success");
+        
+        NSDictionary *args = dic[@"form"];
+        XCTAssertNotNil(args);
+        
+        NSString *value1 = args[@"param1"];
+        XCTAssertEqualObjects(value1, @"value1");
+        
+        [expectation fulfill];
+    } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
+        XCTAssertNil(error, @"error should be nil");
+        [expectation fulfill];
+    }];
+    [self waitForExpectations:@[expectation] timeout:30];
+}
 
 @end

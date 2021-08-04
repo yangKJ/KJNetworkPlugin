@@ -56,7 +56,7 @@
         XCTFail(@"%@", error.localizedDescription);
     }];
 
-    [self waitForExpectationsWithTimeout:30 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
     
 }
 

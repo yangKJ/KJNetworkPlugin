@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *seq_id;
 @property (nonatomic, strong) NSString *name;
 
+- (instancetype)initWithResponseObject:(id)responseObject;
+
 @end
 
 NS_ASSUME_NONNULL_END

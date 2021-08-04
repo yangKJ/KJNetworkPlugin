@@ -6,7 +6,15 @@
 //
 
 #import "KJAnslysisModel.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation KJAnslysisModel
+
+- (instancetype)initWithResponseObject:(id)responseObject{
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
 
 @end
