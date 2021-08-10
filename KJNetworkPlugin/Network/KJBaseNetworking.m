@@ -460,6 +460,10 @@ static NSString *_baseURL;
 #pragma mark - 重置AFHTTPSessionManager相关属性
 
 - (void)setRequestSerializer:(KJSerializer)requestSerializer{
+    /// 保存已设置数据
+    NSDictionary * headInfo = self.sessionManager.requestSerializer.HTTPRequestHeaders;
+    NSTimeInterval timeoutInterval = self.sessionManager.requestSerializer.timeoutInterval;
+    
     switch (requestSerializer) {
         case KJSerializerHTTP:
             self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -469,6 +473,12 @@ static NSString *_baseURL;
             break;
         default:
             break;
+    }
+    
+    /// 重新设置数据
+    self.sessionManager.requestSerializer.timeoutInterval = timeoutInterval;
+    for (NSString * key in headInfo) {
+        [self.sessionManager.requestSerializer setValue:headInfo[key] forHTTPHeaderField:key];
     }
 }
 
@@ -542,7 +552,7 @@ static NSString *_baseURL;
 
 #pragma mark - 控制台中文打印
 
-#if defined(DEBUG) && DEBUG // 调试模式打印
+#ifdef DEBUG // 调试模式打印
 @implementation NSArray (KJChinaLog)
 
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level{
