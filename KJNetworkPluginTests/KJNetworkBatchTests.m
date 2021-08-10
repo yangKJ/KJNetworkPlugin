@@ -16,7 +16,7 @@
 @implementation KJNetworkBatchTests
 
 - (void)setUp {
-    KJBaseNetworking.baseURL = @"https://www.httpbin.org";
+    
 }
 
 - (void)tearDown {

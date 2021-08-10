@@ -19,6 +19,7 @@
     // Override point for customization after application launch.
     
     KJBaseNetworking.openLog = NO;
+    KJBaseNetworking.baseURL = @"https://www.httpbin.org";
     
     return YES;
 }
