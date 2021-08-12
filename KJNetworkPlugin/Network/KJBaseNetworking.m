@@ -460,6 +460,15 @@ static NSString *_baseURL;
 #pragma mark - 重置AFHTTPSessionManager相关属性
 
 - (void)setRequestSerializer:(KJSerializer)requestSerializer{
+    if (requestSerializer == KJSerializerHTTP &&
+        [self.sessionManager.requestSerializer isKindOfClass:[AFHTTPRequestSerializer class]]) {
+        return;
+    }
+    if (requestSerializer == KJSerializerJSON &&
+        [self.sessionManager.requestSerializer isKindOfClass:[AFJSONRequestSerializer class]]) {
+        return;
+    }
+    
     /// 保存已设置数据
     NSDictionary * headInfo = self.sessionManager.requestSerializer.HTTPRequestHeaders;
     NSTimeInterval timeoutInterval = self.sessionManager.requestSerializer.timeoutInterval;
@@ -483,6 +492,15 @@ static NSString *_baseURL;
 }
 
 - (void)setResponseSerializer:(KJSerializer)responseSerializer{
+    if (responseSerializer == KJSerializerHTTP &&
+        [self.sessionManager.responseSerializer isKindOfClass:[AFHTTPResponseSerializer class]]) {
+        return;
+    }
+    if (responseSerializer == KJSerializerJSON &&
+        [self.sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
+        return;
+    }
+    
     switch (responseSerializer) {
         case KJSerializerHTTP:
             self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -527,8 +545,8 @@ static NSString *_baseURL;
         // 设置允许同时最大并发数量，过大容易出问题
         _sessionManager.operationQueue.maxConcurrentOperationCount = 5;
         // 设置请求参数接收类型
-        _sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        // 设置服务器返回结果的类型:JSON(AFJSONResponseSerializer,AFHTTPResponseSerializer)
+        _sessionManager.requestSerializer  = [AFHTTPRequestSerializer serializer];
+        // 设置服务器返回结果的类型
         _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
         _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
                                                                      @"application/json",

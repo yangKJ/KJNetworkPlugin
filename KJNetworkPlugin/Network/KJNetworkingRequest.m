@@ -6,6 +6,7 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJNetworkingRequest.h"
+#import <objc/runtime.h>
 #import "KJBaseNetworking.h"
 
 @interface KJNetworkingRequest ()
@@ -49,6 +50,68 @@
         }
     }
     return [[self.ip stringByAppendingString:self.path ? self.path : @""] stringByAddingPercentEncodingWithAllowedCharacters:character];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
+    unsigned int count = 0;
+    Ivar * ivars = class_copyIvarList([self class], &count);
+    for (int i = 0; i < count; i++) {
+        const char *name = ivar_getName(ivars[i]);
+        NSString * key = [NSString stringWithUTF8String:name];
+        id value = [self valueForKey:key];
+        [aCoder encodeObject:value forKey:key];
+    }
+    free(ivars);
+}
+
+- (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
+    if (self = [super init]) {
+        unsigned int count = 0;
+        Ivar * ivars = class_copyIvarList([self class], &count);
+        for (int i = 0; i < count; i++) {
+            const char * name = ivar_getName(ivars[i]);
+            NSString * key = [NSString stringWithUTF8String:name];
+            id value = [aDecoder decodeObjectForKey:key];
+            [self setValue:value forKey:key];
+        }
+        free(ivars);
+    }
+    return self;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    id instance = [[[self class] allocWithZone:zone] init];
+    [self kj_copyingObject:instance];
+    return instance;
+}
+
+#pragma mark - NSMutableCopying
+
+- (id)mutableCopyWithZone:(nullable NSZone *)zone {
+    id instance = [[[self class] allocWithZone:zone] init];
+    [self kj_copyingObject:instance];
+    return instance;
+}
+
+/// 拷贝obj属性
+- (void)kj_copyingObject:(id)obj{
+    unsigned int count = 0;
+    Ivar * ivars = class_copyIvarList([self class], &count);
+    for (int i = 0; i < count; i++){
+        const char * name = ivar_getName(ivars[i]);
+        NSString * key = [NSString stringWithUTF8String:name];
+        id value = [self valueForKey:key];
+        if ([value respondsToSelector:@selector(copyWithZone:)]) {
+            [obj setValue:[value copy] forKey:key];
+        }else{
+            [obj setValue:value forKey:key];
+        }
+    }
+    free(ivars);
 }
 
 @end

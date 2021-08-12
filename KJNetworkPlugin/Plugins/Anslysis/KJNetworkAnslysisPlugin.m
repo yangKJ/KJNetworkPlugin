@@ -78,7 +78,7 @@
 }
 
 /// 判断是否有实现验证回调 和 解析回调
-- (id)anslysisDataWithresult:(id)result verifyCode:(BOOL *)verify{
+- (id)anslysisDataWithresult:(__unused id)result verifyCode:(BOOL *)verify{
     if (self.verify) { } else {
         self.verify = ^BOOL(id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -104,7 +104,7 @@
 }
 
 /// 解析数据结果
-- (id)anslysisResultWithJson:(id)json{
+- (id)anslysisResultWithJson:(__unused id)json{
     if (self.mapObjectBlock) {
         id response = [self.modelType mj_objectWithKeyValues:json];
         self.mapObjectBlock(response);

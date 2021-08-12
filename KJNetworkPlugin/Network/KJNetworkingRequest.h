@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class KJConstructingBody;
 @class KJDownloadBody;
 @protocol KJNetworkDelegate;
-@interface KJNetworkingRequest : NSObject
+@interface KJNetworkingRequest : NSObject <NSCoding, NSCopying, NSMutableCopying>
 
 /// 设置请求数据格式，默认 KJSerializerHTTP
 @property (nonatomic, assign) KJSerializer requestSerializer;

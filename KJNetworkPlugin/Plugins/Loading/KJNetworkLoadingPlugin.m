@@ -129,15 +129,7 @@
 /// 顶部控制器
 + (UIViewController *)topViewController{
     UIViewController *result = nil;
-    UIWindow *window = ({
-        UIWindow *window;
-        if (@available(iOS 13.0, *)) {
-            window = [UIApplication sharedApplication].windows.firstObject;
-        }else{
-            window = [UIApplication sharedApplication].keyWindow;
-        }
-        window;
-    });
+    UIWindow *window = (UIWindow *)[self kKeyWindow];
     if (window.windowLevel != UIWindowLevelNormal){
         NSArray *windows = [[UIApplication sharedApplication] windows];
         for (UIWindow * tmpWin in windows){
