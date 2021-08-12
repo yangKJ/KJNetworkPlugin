@@ -73,13 +73,13 @@
 
 #pragma mark - lazy
 
-- (KJNetworkingResponse *)response{
-    @synchronized (self) {
-        if (!_response) {
-            _response = [[KJNetworkingResponse alloc] init];
-        }
-        return _response;
-    }
-}
+//- (KJNetworkingResponse *)response{
+//    @synchronized (self) {
+//        if (!_response) {
+//            _response = [[KJNetworkingResponse alloc] init];
+//        }
+//        return _response;
+//    }
+//}
 
 @end

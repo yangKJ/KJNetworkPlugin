@@ -15,7 +15,13 @@
 /// 插件版网络请求
 + (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure{
     // 响应结果
-    __block KJNetworkingResponse * response = nil;
+    __block KJNetworkingResponse * response = [[KJNetworkingResponse alloc] init];
+    
+    // 保持插件`response`地址统一
+    for (id<KJNetworkDelegate> plugin in request.plugins) {
+        KJNetworkBasePlugin * __autoreleasing custom = (KJNetworkBasePlugin *)plugin;
+        [custom setValue:response forKey:@"response"];
+    }
     
     // 成功插件处理
     id (^successPluginHandle)(id, BOOL *) = ^id(id responseObject, BOOL * again){
@@ -27,7 +33,7 @@
     };
     
     // 失败插件处理
-    id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) = ^id(NSURLSessionDataTask * task, NSError *error, BOOL * again){
+    id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) = ^id(NSURLSessionDataTask * task, NSError * error, BOOL * again){
         [response setValue:task  forKey:@"task"];
         [response setValue:error forKey:@"error"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
