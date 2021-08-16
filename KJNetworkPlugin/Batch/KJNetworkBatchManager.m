@@ -31,7 +31,8 @@
 @end
 
 @interface KJNetworkBatchManager ()
-
+// 递归锁
+@property (nonatomic, strong) NSRecursiveLock *lock;
 // 配置文件
 @property (nonatomic, strong) KJBatchConfiguration * configuration;
 // 请求体
@@ -121,42 +122,45 @@
              requestSuccess:(BOOL)requestSuccess
                   reconnect:(KJNetworkBatchReconnect)reconnect{
     KJNetworkingRequest * currentRequest = * request;
-    @synchronized (self.requestingSet) {
-        [self.requestingSet removeObject:currentRequest];
-    }
-    @synchronized (self.failRequsetSet) {
-        if (requestSuccess) {
-            [self.failRequsetSet removeObject:currentRequest];
-        } else if (currentRequest.againRequestCount < self.configuration.againCount) {
-            if (self.configuration.opportunity == KJBatchReRequestOpportunityNone) {
-                currentRequest.againRequestCount += self.configuration.againCount;
-            } else {
-                currentRequest.againRequestCount += 1;
-            }
-            [self.failRequsetSet addObject:currentRequest];
-            if (self.configuration.opportunity == KJBatchReRequestOpportunityPromptly) {
-                return YES;
-            }
+    
+    [self.lock lock];
+    
+    [self.requestingSet removeObject:currentRequest];
+    if (requestSuccess) {
+        [self.failRequsetSet removeObject:currentRequest];
+    } else if (currentRequest.againRequestCount < self.configuration.againCount) {
+        if (self.configuration.opportunity == KJBatchReRequestOpportunityNone) {
+            currentRequest.againRequestCount += self.configuration.againCount;
+        } else {
+            currentRequest.againRequestCount += 1;
         }
-    }
-    @synchronized (self.unRequestSet) {
-        // 判断是否还存在未请求网络
-        [self.unRequestSet removeObject:currentRequest];
-        if (self.unRequestSet.count) {
-            * request = [self.unRequestSet anyObject];
+        [self.failRequsetSet addObject:currentRequest];
+        if (self.configuration.opportunity == KJBatchReRequestOpportunityPromptly) {
+            [self.lock unlock];
             return YES;
         }
-        // 重新请求逻辑处理，再次请求网络
-        @synchronized (self.failRequsetSet) {
-            NSArray * array = [self.failRequsetSet allObjects];
-            if (array.count && reconnect && reconnect(array)) {
-                [self.unRequestSet addObjectsFromArray:array];
-                * request = [self.unRequestSet anyObject];
-                [self.failRequsetSet removeAllObjects];
-                return YES;
-            }
-        }
     }
+    
+    // 判断是否还存在未请求网络
+    [self.unRequestSet removeObject:currentRequest];
+    if (self.unRequestSet.count) {
+        * request = [self.unRequestSet anyObject];
+        [self.lock unlock];
+        return YES;
+    }
+    
+    // 重新请求逻辑处理，再次请求网络
+    NSArray * array = [self.failRequsetSet allObjects];
+    if (array.count && reconnect && reconnect(array)) {
+        [self.unRequestSet addObjectsFromArray:array];
+        * request = [self.unRequestSet anyObject];
+        [self.failRequsetSet removeAllObjects];
+        [self.lock unlock];
+        return YES;
+    }
+    
+    [self.lock unlock];
+    
     return NO;
 }
 
@@ -192,6 +196,14 @@
 }
 
 #pragma mark - lazy
+
+- (NSRecursiveLock *)lock{
+    if (!_lock) {
+        _lock = [[NSRecursiveLock alloc] init];
+        _lock.name = @"kj.batch.network.lock";
+    }
+    return _lock;
+}
 
 - (NSMutableDictionary<NSString *, id> *)resultDictionary{
     if (!_resultDictionary) {
