@@ -197,10 +197,10 @@ static NSString *_baseURL;
 }
 
 - (NSURLSessionTask *)dataTaskWithHTTPMethod:(KJNetworkRequestMethod)method
-                           url:(NSString *)url
-                    parameters:(NSDictionary *)parameters
-                       success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-                       failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure{
+                                         url:(NSString *)url
+                                  parameters:(NSDictionary *)parameters
+                                     success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+                                     failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure{
     NSURLSessionTask * sessionTask = nil;
     if (method == KJNetworkRequestMethodGET){
         sessionTask = [self.sessionManager GET:url parameters:parameters headers:nil progress:nil success:success failure:failure];
@@ -460,17 +460,7 @@ static NSString *_baseURL;
 #pragma mark - 重置AFHTTPSessionManager相关属性
 
 - (void)setRequestSerializer:(KJSerializer)requestSerializer{
-    if (requestSerializer == KJSerializerHTTP &&
-        [self.sessionManager.requestSerializer isKindOfClass:[AFHTTPRequestSerializer class]]) {
-        return;
-    }
-    if (requestSerializer == KJSerializerJSON &&
-        [self.sessionManager.requestSerializer isKindOfClass:[AFJSONRequestSerializer class]]) {
-        return;
-    }
-    
     /// 保存已设置数据
-    NSDictionary * headInfo = self.sessionManager.requestSerializer.HTTPRequestHeaders;
     NSTimeInterval timeoutInterval = self.sessionManager.requestSerializer.timeoutInterval;
     
     switch (requestSerializer) {
@@ -486,21 +476,13 @@ static NSString *_baseURL;
     
     /// 重新设置数据
     self.sessionManager.requestSerializer.timeoutInterval = timeoutInterval;
+    NSDictionary * headInfo = [KJBaseNetworking baseParameters];
     for (NSString * key in headInfo) {
         [self.sessionManager.requestSerializer setValue:headInfo[key] forHTTPHeaderField:key];
     }
 }
 
 - (void)setResponseSerializer:(KJSerializer)responseSerializer{
-    if (responseSerializer == KJSerializerHTTP &&
-        [self.sessionManager.responseSerializer isKindOfClass:[AFHTTPResponseSerializer class]]) {
-        return;
-    }
-    if (responseSerializer == KJSerializerJSON &&
-        [self.sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
-        return;
-    }
-    
     switch (responseSerializer) {
         case KJSerializerHTTP:
             self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -511,6 +493,17 @@ static NSString *_baseURL;
         default:
             break;
     }
+    
+    /// 重新设置数据
+    self.sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
+                                                                     @"application/json",
+                                                                     @"text/html",
+                                                                     @"text/json",
+                                                                     @"text/plain",
+                                                                     @"text/javascript",
+                                                                     @"text/xml",
+                                                                     @"image/*",
+                                                                     nil];
 }
 
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval{
@@ -538,30 +531,6 @@ static NSString *_baseURL;
 - (AFHTTPSessionManager *)sessionManager{
     if (!_sessionManager) {
         _sessionManager = [AFHTTPSessionManager manager];
-        // 编码
-        _sessionManager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
-        // 设置请求超时时间
-        _sessionManager.requestSerializer.timeoutInterval = 30.f;
-        // 设置允许同时最大并发数量，过大容易出问题
-        _sessionManager.operationQueue.maxConcurrentOperationCount = 5;
-        // 设置请求参数接收类型
-        _sessionManager.requestSerializer  = [AFHTTPRequestSerializer serializer];
-        // 设置服务器返回结果的类型
-        _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
-                                                                     @"application/json",
-                                                                     @"text/html",
-                                                                     @"text/json",
-                                                                     @"text/plain",
-                                                                     @"text/javascript",
-                                                                     @"text/xml",
-                                                                     @"image/*",
-                                                                     nil];
-        // 配置默认参数
-        NSDictionary * headInfo = [KJBaseNetworking baseParameters];
-        for (NSString * key in headInfo) {
-            [_sessionManager.requestSerializer setValue:headInfo[key] forHTTPHeaderField:key];
-        }
     }
     return _sessionManager;
 }
@@ -655,8 +624,8 @@ static NSString *_baseURL;
         if ([obj isKindOfClass:[NSString class]]) {
             (i == (allKeys.count-1)) ? [desc appendFormat:@"%@\t%@ = \"%@\"\n", tab, key, obj] : [desc appendFormat:@"%@\t%@ = \"%@\",\n", tab, key, obj];
         }else if ([obj isKindOfClass:[NSArray class]] ||
-                 [obj isKindOfClass:[NSDictionary class]] ||
-                 [obj isKindOfClass:[NSSet class]]) {
+                  [obj isKindOfClass:[NSDictionary class]] ||
+                  [obj isKindOfClass:[NSSet class]]) {
             (i == (allKeys.count-1)) ?
             [desc appendFormat:@"%@\t%@ = %@\n", tab, key, [obj descriptionWithLocale:locale indent:level + 1]] :
             [desc appendFormat:@"%@\t%@ = %@,\n", tab, key, [obj descriptionWithLocale:locale indent:level + 1]];
