@@ -3,14 +3,15 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  插件管理器，插件中枢神经
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  插件管理器，插件中枢神经
 
 #import "KJBaseNetworking.h"
 #import "KJNetworkBasePlugin.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 插件管理器，插件中枢神经
 @interface KJNetworkPluginManager : KJBaseNetworking
 
 /// 备注提示：关于插件版网络使用技巧

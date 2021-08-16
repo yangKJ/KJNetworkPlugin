@@ -3,13 +3,14 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/25.
-//  配置自建证书插件
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  配置自建证书插件
 
 #import "KJNetworkBasePlugin.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 配置自建证书插件
 @interface KJNetworkCertificatePlugin : KJNetworkBasePlugin
 
 /// 配置自建证书的Https请求，参考链接：https://juejin.cn/post/6844903545464963085

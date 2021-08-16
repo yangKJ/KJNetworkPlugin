@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/26.
-//  链式网络请求
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  链式网络请求
 
 #import <Foundation/Foundation.h>
 #import "KJNetworkingRequest.h"
@@ -17,6 +17,8 @@ typedef void(^_Nullable KJNetworkChainSuccess)(NSArray<id> * responseArray);
 typedef void(^_Nullable KJNetworkChainFailure)(NSError * error);
 /// 链式网络处理下一个请求体
 typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChainRequest)(id responseObject);
+
+/// 链式网络请求
 @interface KJNetworkChainManager : NSObject
 
 /// 链式网络请求

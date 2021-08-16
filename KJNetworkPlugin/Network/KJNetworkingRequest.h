@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  请求相关
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  请求相关
 
 #import <Foundation/Foundation.h>
 #import "KJNetworkingType.h"
@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class KJConstructingBody;
 @class KJDownloadBody;
 @protocol KJNetworkDelegate;
+/// 请求相关
 @interface KJNetworkingRequest : NSObject <NSCoding, NSCopying, NSMutableCopying>
 
 /// 设置请求数据格式，默认 KJSerializerHTTP

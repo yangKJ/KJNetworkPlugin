@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/26.
-//  批量网络请求配置文件
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  批量网络请求配置文件
 
 #import <Foundation/Foundation.h>
 #import "KJNetworkingRequest.h"
@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, KJBatchReRequestOpportunity) {
     KJBatchReRequestOpportunityOther,   /// 其余网络请求之后
     KJBatchReRequestOpportunityPromptly,/// 立即重连
 };
+/// 批量网络请求配置文件
 @interface KJBatchConfiguration : NSObject
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, KJBatchReRequestOpportunity) {
 
 @end
 
+/// 批量网络请求结果体
 @interface KJBatchResponse : NSObject
 
 @property (nonatomic, strong) id responseObject;

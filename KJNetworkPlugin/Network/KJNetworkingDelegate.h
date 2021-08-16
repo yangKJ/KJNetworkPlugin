@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  插件协议，暂时抽离出来这几个方法。
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  插件协议，暂时抽离出来这几个方法。
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class KJNetworkingRequest;
 @class KJNetworkingResponse;
+/// 插件协议
 @protocol KJNetworkDelegate <NSObject>
 
 @optional;

@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  网络请求基类，基于 AFNetworking 封装使用
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  网络请求基类，基于 AFNetworking 封装使用
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// App初始化配置信息
 @interface KJBaseSuperNetworking : NSObject
 
 /// 存储网络请求
@@ -46,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// 网络请求基类
 @interface KJBaseNetworking : KJBaseSuperNetworking
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;

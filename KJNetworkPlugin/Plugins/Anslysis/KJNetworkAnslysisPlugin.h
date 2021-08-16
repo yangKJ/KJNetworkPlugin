@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/25.
-//  解析插件
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  解析插件
 
 #import "KJNetworkBasePlugin.h"
 
@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, KJNetworkAnslysisResult) {
     KJNetworkAnslysisResultObject,// 对象
     KJNetworkAnslysisResultArray, // 数组
 };
+/// 解析插件
 @interface KJNetworkAnslysisPlugin<T: NSObject *> : KJNetworkBasePlugin
 
 /// 模型类型，默认 [NSString class]

@@ -3,14 +3,15 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  响应结果相关
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  响应结果相关
 
 #import <Foundation/Foundation.h>
 #import "KJBaseNetworking.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 响应结果相关
 @interface KJNetworkingResponse : NSObject
 
 /// 网络请求插件时机，

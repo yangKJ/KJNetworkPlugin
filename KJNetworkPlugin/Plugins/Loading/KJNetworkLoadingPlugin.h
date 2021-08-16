@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class MBProgressHUD;
+/// 加载动画插件
 @interface KJNetworkLoadingPlugin : KJNetworkBasePlugin
 
 /// 是否需要显示加载小菊花，默认NO

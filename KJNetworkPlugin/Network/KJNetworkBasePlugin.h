@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
-//  插件公共类，插件父类
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  插件公共类，插件父类
 
 #import <Foundation/Foundation.h>
 #import "KJNetworkingDelegate.h"
@@ -13,6 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 插件基类
 @interface KJNetworkBasePlugin : NSObject <KJNetworkDelegate>
 
 /// 备注提示：关于插件基类

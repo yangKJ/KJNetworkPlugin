@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/25.
-//  网络缓存相关插件
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  网络缓存相关插件
 
 #import "KJNetworkBasePlugin.h"
 
@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, KJNetworkCacheNameEncryptType){
     KJNetworkCacheNameEncryptTypeSHA256,
 };
 @class YYCache;
+/// 网络缓存相关插件
 @interface KJNetworkCachePlugin : KJNetworkBasePlugin
 
 /// 缓存文件名加密方式，默认 KJNetworkCacheNameSercetTypeSHA256

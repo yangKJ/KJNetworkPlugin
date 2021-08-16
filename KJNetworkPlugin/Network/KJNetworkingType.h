@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/25.
-//  汇总所有枚举和回调声明
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  汇总所有枚举和回调声明
 
 #ifndef KJNetworkingType_h
 #define KJNetworkingType_h

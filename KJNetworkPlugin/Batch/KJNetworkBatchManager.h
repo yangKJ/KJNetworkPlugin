@@ -3,8 +3,8 @@
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/26.
-//  批量网络请求
 //  https://github.com/yangKJ/KJNetworkPlugin
+//  批量网络请求
 
 #import <Foundation/Foundation.h>
 #import "KJBatchConfiguration.h"
@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef BOOL(^_Nullable KJNetworkBatchReconnect)(NSArray<KJNetworkingRequest *> * reconnectArray);
 /// 批量结果回调
 typedef void(^_Nullable KJNetworkBatchComplete)(NSArray<KJBatchResponse *> * result);
+
+/// 批量网络请求
 @interface KJNetworkBatchManager : NSObject
 
 /// 批量网络请求
