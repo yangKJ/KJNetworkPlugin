@@ -471,6 +471,7 @@ static NSString *_baseURL;
 - (void)setRequestSerializer:(KJSerializer)requestSerializer{
     /// 保存已设置数据
     NSTimeInterval timeoutInterval = self.sessionManager.requestSerializer.timeoutInterval;
+    NSDictionary *header = self.sessionManager.requestSerializer.HTTPRequestHeaders;
     
     switch (requestSerializer) {
         case KJSerializerHTTP:
@@ -485,7 +486,8 @@ static NSString *_baseURL;
     
     /// 重新设置数据
     self.sessionManager.requestSerializer.timeoutInterval = timeoutInterval;
-    NSDictionary * headInfo = [KJBaseNetworking baseParameters];
+    NSMutableDictionary * headInfo = [NSMutableDictionary dictionaryWithDictionary:header];
+    [headInfo addEntriesFromDictionary:header];
     for (NSString * key in headInfo) {
         [self.sessionManager.requestSerializer setValue:headInfo[key] forHTTPHeaderField:key];
     }
