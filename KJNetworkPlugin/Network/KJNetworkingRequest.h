@@ -11,8 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class KJConstructingBody;
-@class KJDownloadBody;
 @protocol KJNetworkDelegate;
 /// 请求相关
 @interface KJNetworkingRequest : NSObject <NSCoding, NSCopying, NSMutableCopying>
@@ -42,35 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 网络请求插件时机，配合 `KJNetworkThiefPlugin` 插件使用效果极佳
 @property (nonatomic, assign, readonly) KJRequestOpportunity opportunity;
-
-/// 请求体标识符号，唯一标识
-@property (nonatomic, strong, readonly) NSString *requestIdentifier;
-
-/// 上传资源文件，需要使用时刻需要实例化该对象
-@property (nonatomic, strong, nullable) KJConstructingBody *constructingBody;
-
-/// 下载文件，需要使用时刻需要实例化该对象
-@property (nonatomic, strong, nullable) KJDownloadBody *downloadBody;
-
-@end
-
-/// 上传资源文件操作
-@interface KJConstructingBody : NSObject
-
-/// 上传资源，必须实现
-@property (nonatomic, copy, readwrite) void(^constructingBodyWithBlock)(id<AFMultipartFormData> formData);
-/// 上传进度
-@property (nonatomic, copy, readwrite) void(^uploadProgressWithBlock)(NSProgress * progress);
-
-@end
-
-/// 下载文件操作
-@interface KJDownloadBody : NSObject
-
-/// 文件下载路径，必须实现
-@property (nonatomic, copy, readwrite) NSURL * (^destination)(NSURL *targetPath, NSURLResponse *response);
-/// 下载进度
-@property (nonatomic, copy, readwrite) void(^downloadProgressWithBlock)(NSProgress * progress);
 
 @end
 

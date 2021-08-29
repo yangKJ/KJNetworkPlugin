@@ -15,6 +15,8 @@
 
 /// 重连次数
 @property (nonatomic, assign) NSInteger againRequestCount;
+/// 请求体标识符号，唯一标识
+@property (nonatomic, strong) NSString *requestIdentifier;
 
 @end
 
@@ -26,6 +28,14 @@
 
 - (void)setAgainRequestCount:(NSInteger)againRequestCount{
     objc_setAssociatedObject(self, @selector(againRequestCount), @(againRequestCount), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NSString *)requestIdentifier{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setRequestIdentifier:(NSString *)requestIdentifier{
+    objc_setAssociatedObject(self, @selector(requestIdentifier), requestIdentifier, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
@@ -92,7 +102,7 @@
     }
     dispatch_group_enter(group);
     __weak __typeof(&*self) weakself = self;
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull __request, id  _Nonnull responseObject) {
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest *__request, id responseObject) {
         dispatch_group_leave(group);
         @synchronized (weakself.resultDictionary) {
             [weakself.resultDictionary setValue:responseObject forKey:__request.requestIdentifier];
@@ -167,7 +177,7 @@
 /// 根据请求体标识符获取请求体
 - (__kindof KJNetworkingRequest * _Nonnull)currentRequestWithRequestIdentifier:(NSString *)requestIdentifier{
     __block NSInteger index = 0;
-    [self.requestArray enumerateObjectsUsingBlock:^(__kindof KJNetworkingRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.requestArray enumerateObjectsUsingBlock:^(__kindof KJNetworkingRequest * obj, NSUInteger idx, BOOL * stop) {
         if ([requestIdentifier isEqualToString:obj.requestIdentifier]) {
             index = idx;
             * stop = YES;
