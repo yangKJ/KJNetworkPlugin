@@ -74,9 +74,9 @@
 - (void)createHTTPBatchConfiguration:(KJBatchConfiguration *)configuration
                            reconnect:(KJNetworkBatchReconnect)reconnect
                             complete:(KJNetworkBatchComplete)complete{
-    NSInteger index = 520;
+    int index = 520;
     for (KJNetworkingRequest * request in configuration.requestArray) {
-        [request setValue:[NSString stringWithFormat:@"%ld", index] forKey:@"requestIdentifier"];
+        request.requestIdentifier = [NSString stringWithFormat:@"%d", index];
         index ++;
     }
     self.requestArray = configuration.requestArray;
