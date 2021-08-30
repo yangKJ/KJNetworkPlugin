@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "KJNetworkConfiguration.h"
+#import "KJNetworkingRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class KJNetworkingRequest;
 /// 网络管理器
 @interface KJNetworkManager : NSObject
 

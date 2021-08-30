@@ -41,7 +41,8 @@
                             destination:configuration.downloadBody.destination
                                progress:configuration.downloadBody.downloadProgressWithBlock
                                 success:^(NSURLSessionDataTask * task, id responseObject) {
-            kNetworkHandlingSuccess(responseObject, configuration, success, failure);
+            NSString * filePathString = (NSString *)responseObject;
+            success ? success(filePathString) : nil;
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure ? failure(error) : nil;
         }];
