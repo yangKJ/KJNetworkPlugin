@@ -14,6 +14,8 @@
 
 /// 插件版网络请求
 + (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure{
+    // 设置请求时机，切勿更改至`BasePlugin`当中，否则插件会出问题
+    [request setValue:@(KJRequestOpportunityPrepare) forKey:@"opportunity"];
     // 响应结果
     __block KJNetworkingResponse * response = [[KJNetworkingResponse alloc] init];
     // 保持插件`response`地址统一
@@ -24,6 +26,7 @@
     
     // 成功插件处理
     id (^successPluginHandle)(id, BOOL *) = ^id(id responseObject, BOOL * again){
+        [request setValue:@(KJRequestOpportunitySuccess) forKey:@"opportunity"];
         [response setValue:responseObject forKey:@"responseObject"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
             response = [plugin succeedWithRequest:request againRequest:again];
@@ -33,6 +36,7 @@
     
     // 失败插件处理
     id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) = ^id(NSURLSessionDataTask * task, NSError * error, BOOL * again){
+        [request setValue:@(KJRequestOpportunityFailure) forKey:@"opportunity"];
         [response setValue:task  forKey:@"task"];
         [response setValue:error forKey:@"error"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
@@ -43,6 +47,7 @@
     
     // 最终结果插件处理
     id (^processPluginHandle)(id, NSError **) = ^id(id responseObject, NSError **error){
+        [request setValue:@(KJRequestOpportunityProcess) forKey:@"opportunity"];
         [response setValue:responseObject forKey:@"tempResponse"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
             response = [plugin processSuccessResponseWithRequest:request error:error];
@@ -119,6 +124,7 @@
     
     // 网络请求开始时刻，插件处理
     BOOL stopRequest = NO;
+    [request setValue:@(KJRequestOpportunityWillSend) forKey:@"opportunity"];
     [response setValue:sessionTask forKey:@"task"];
     for (id<KJNetworkDelegate> plugin in request.plugins) {
         response = [plugin willSendWithRequest:request stopRequest:&stopRequest];

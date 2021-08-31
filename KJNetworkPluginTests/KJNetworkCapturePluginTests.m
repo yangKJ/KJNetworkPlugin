@@ -38,7 +38,7 @@
     
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
-    request.path = @"/headers";
+    request.path = @"/ip";
     request.responseSerializer = KJSerializerJSON;
     
     KJNetworkCapturePlugin * plugin = [KJNetworkCapturePlugin sharedInstance];

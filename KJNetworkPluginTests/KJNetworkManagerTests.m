@@ -27,13 +27,6 @@
     // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
-
 // 测试下载文件资源
 - (void)testDownload{
     
@@ -45,7 +38,9 @@
     
     KJDownloadBody *downloadBody = [[KJDownloadBody alloc] init];
     downloadBody.destination = ^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];        
+        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+                                                                    inDomain:NSUserDomainMask
+                                                           appropriateForURL:nil create:NO error:nil];
         return [downloadURL URLByAppendingPathComponent:response.suggestedFilename];
     };
     downloadBody.downloadProgressWithBlock = ^(NSProgress * _Nonnull progress) {
