@@ -8,6 +8,10 @@
 #import "KJNetworkManager.h"
 #import "KJNetworkPluginManager.h"
 
+#if __has_include("KJNetworkCapturePlugin.h")
+#import "KJNetworkCapturePlugin.h"
+#endif
+
 @implementation KJNetworkManager
 
 /// 二次封装插件版网络请求
@@ -15,7 +19,7 @@
 /// @param configuration 配置信息
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)HTTPRequest:(KJNetworkingRequest *)request
++ (void)HTTPRequest:(__kindof KJNetworkingRequest *)request
       configuration:(KJNetworkConfiguration * _Nullable)configuration
             success:(void(^_Nullable)(id responseObject))success
             failure:(void(^_Nullable)(NSError * error))failure{
@@ -48,6 +52,7 @@
         }];
     } else {
         // 插件版网络请求
+        if (configuration.openCapture) [self captureRequest:&request];
         [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * request, id responseObject) {
             kNetworkHandlingSuccess(responseObject, configuration, success, failure);
         } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
@@ -120,6 +125,31 @@ NS_INLINE void kNetworkHandlingSuccess(id responseObject,
 NS_INLINE BOOL kDictionaryContainsKey(NSDictionary * dict, NSString * key){
     if (!key) return NO;
     return dict[key] != nil;
+}
+
+/// 默认加入抓包插件
+/// @param request 请求体
++ (void)captureRequest:(__kindof KJNetworkingRequest **)request{
+    __kindof KJNetworkingRequest * tempRequest = * request;
+#if __has_include("KJNetworkCapturePlugin.h")
+    BOOL have = NO;
+    for (id<KJNetworkDelegate> plugin in tempRequest.plugins) {
+        if ([plugin isKindOfClass:[KJNetworkCapturePlugin class]]) {
+            have = YES;
+            break;
+        }
+    }
+    if (have == NO) {
+        KJNetworkCapturePlugin * capture = [KJNetworkCapturePlugin sharedInstance];
+        capture.openLog = YES;
+        NSMutableArray * temp = [NSMutableArray arrayWithObject:capture];
+        if (tempRequest.plugins) {
+            [temp addObject:tempRequest.plugins];
+        }
+        tempRequest.plugins = temp.mutableCopy;
+    }
+#endif
+    * request = tempRequest;
 }
 
 @end

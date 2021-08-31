@@ -15,7 +15,20 @@
     configuration.analysisResponseObject = YES;
     configuration.successCode = 1000;
     configuration.errorKeyName = @"message";
+#ifdef DEBUG
+    configuration.openCapture = YES;
+#else
+    configuration.openCapture = NO;
+#endif
     return configuration;
+}
+
+- (void)setOpenCapture:(BOOL)openCapture{
+#if __has_include("KJNetworkCapturePlugin.h")
+    _openCapture = openCapture;
+#else
+    _openCapture = NO;
+#endif
 }
 
 @end

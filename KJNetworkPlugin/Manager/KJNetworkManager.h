@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param configuration 配置信息
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)HTTPRequest:(KJNetworkingRequest *)request
++ (void)HTTPRequest:(__kindof KJNetworkingRequest *)request
       configuration:(KJNetworkConfiguration * _Nullable)configuration
             success:(void(^_Nullable)(id responseObject))success
             failure:(void(^_Nullable)(NSError * error))failure;

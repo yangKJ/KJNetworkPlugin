@@ -8,6 +8,7 @@
 #import <XCTest/XCTest.h>
 #import "KJNetworkManager.h"
 #import "KJNetworkCapturePlugin.h"
+#import "KJNetworkPluginManager.h"
 
 @interface KJNetworkCapturePluginTests : XCTestCase
 
@@ -45,6 +46,25 @@
     plugin.openLog = YES;
     request.plugins = @[plugin];
     
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+        [expectation fulfill];
+    } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
+        XCTFail(@"%@", error.localizedDescription);
+    }];
+    
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+    
+}
+
+// 测试默认携带抓包插件
+- (void)testDefaultCapturePlugin{
+    XCTestExpectation * expectation = [self expectationWithDescription:@"test default capture plugin."];
+    
+    KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+    request.method = KJNetworkRequestMethodGET;
+    request.path = @"/headers";
+    request.responseSerializer = KJSerializerJSON;
+    
     [KJNetworkManager HTTPRequest:request configuration:nil success:^(id  _Nonnull responseObject) {
         [expectation fulfill];
     } failure:^(NSError * _Nonnull error) {
@@ -65,6 +85,5 @@
     
     [self waitForExpectationsWithTimeout:30 handler:nil];
 }
-
 
 @end

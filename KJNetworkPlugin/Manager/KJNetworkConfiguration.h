@@ -29,7 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger successCode;
 /// 错误信息字段名，默认 `message`
 @property (nonatomic, strong) NSString *errorKeyName;
-
+/// 是否开启抓包插件，默认开启
+/// 需要配合 `Capture` 模块才能使用
+@property (nonatomic, assign) BOOL openCapture;
 
 /// 上传资源文件，需要使用时刻需要实例化该对象
 @property (nonatomic, strong, nullable) KJConstructingBody *constructingBody;
