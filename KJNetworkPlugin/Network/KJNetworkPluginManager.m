@@ -82,7 +82,8 @@
     
     // 网络请求
     NSURLSessionTask * sessionTask =
-    [baseNetworking HTTPWithMethod:request.method url:request.URLString parameters:request.secretParams success:^(NSURLSessionDataTask * task, id responseObject) {
+    [baseNetworking HTTPWithMethod:request.method url:request.URLString parameters:request.secretParams
+                           success:^(NSURLSessionDataTask * task, id responseObject) {
         BOOL again = NO;
         id successResponse = successPluginHandle(responseObject, &again);
         if (again) {// 再次重复网络请求
@@ -118,6 +119,7 @@
     
     // 网络请求开始时刻，插件处理
     BOOL stopRequest = NO;
+    [response setValue:sessionTask forKey:@"task"];
     for (id<KJNetworkDelegate> plugin in request.plugins) {
         response = [plugin willSendWithRequest:request stopRequest:&stopRequest];
     }

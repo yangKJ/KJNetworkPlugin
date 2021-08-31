@@ -184,7 +184,7 @@ static NSString *_baseURL;
         KJAppLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 REQUEST 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
                  \n请求方式 = %@\n请求URL = %@\n请求参数 = %@  \
                  \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
-                 [self kj_methodString:method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
+                 KJNetworkRequestMethodStringMap[method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
     }
     return [self dataTaskWithHTTPMethod:method url:url parameters:parameters success:^(NSURLSessionDataTask * task, id responseObject) {
         if ([KJBaseNetworking openLog]) {
@@ -415,18 +415,6 @@ static NSString *_baseURL;
 }
 
 #pragma mark - private method
-
-- (NSString *)kj_methodString:(KJNetworkRequestMethod)method{
-    switch (method) {
-        case KJNetworkRequestMethodGET:return @"GET";
-        case KJNetworkRequestMethodPOST:return @"POST";
-        case KJNetworkRequestMethodHEAD:return @"HEAD";
-        case KJNetworkRequestMethodPUT:return @"PUT";
-        case KJNetworkRequestMethodPATCH:return @"PATCH";
-        case KJNetworkRequestMethodDELETE:return @"DELETE";
-        default:break;
-    }
-}
 
 /// 拼接完整的url
 - (NSString *)printRequestWithPath:(NSString *)path parameters:(NSDictionary *)parameters{

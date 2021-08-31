@@ -29,7 +29,14 @@ typedef NS_ENUM(NSUInteger, KJNetworkRequestMethod){
     /**DELETE请求方式*/
     KJNetworkRequestMethodDELETE
 };
-
+static NSString * const _Nonnull KJNetworkRequestMethodStringMap[] = {
+    [KJNetworkRequestMethodGET]    = @"GET",
+    [KJNetworkRequestMethodPOST]   = @"POST",
+    [KJNetworkRequestMethodHEAD]   = @"HEAD",
+    [KJNetworkRequestMethodPUT]    = @"PUT",
+    [KJNetworkRequestMethodPATCH]  = @"PATCH",
+    [KJNetworkRequestMethodDELETE] = @"DELETE",
+};
 /// 网络状态
 typedef NS_ENUM(NSUInteger, KJNetworkStatusType){
     /**未知网络*/
@@ -47,7 +54,10 @@ typedef NS_ENUM(NSUInteger, KJSerializer){
     KJSerializerHTTP = 0, /// 二进制文件，NSData
     KJSerializerJSON = 1, /// JSON
 };
-
+static NSString * const _Nonnull KJSerializerStringMap[] = {
+    [KJSerializerHTTP] = @"HTTP",
+    [KJSerializerJSON] = @"JSON",
+};
 /// 插件请求时机
 typedef NS_ENUM(NSUInteger, KJRequestOpportunity) {
     KJRequestOpportunityPrepare, /// 开始准备网络请求
