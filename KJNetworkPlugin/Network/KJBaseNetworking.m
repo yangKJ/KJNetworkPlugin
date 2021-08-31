@@ -474,7 +474,7 @@ static NSString *_baseURL;
     
     /// 重新设置数据
     self.sessionManager.requestSerializer.timeoutInterval = timeoutInterval;
-    NSMutableDictionary * headInfo = [NSMutableDictionary dictionaryWithDictionary:header];
+    NSMutableDictionary * headInfo = [NSMutableDictionary dictionaryWithDictionary:[KJBaseNetworking baseParameters]];
     [headInfo addEntriesFromDictionary:header];
     for (NSString * key in headInfo) {
         [self.sessionManager.requestSerializer setValue:headInfo[key] forHTTPHeaderField:key];

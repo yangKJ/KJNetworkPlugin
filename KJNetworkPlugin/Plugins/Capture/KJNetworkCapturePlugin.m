@@ -143,7 +143,7 @@
 
 /// 请求参数转字符串
 + (NSString *)kHTTPParametersToString:(NSDictionary *)parameters{
-    if (parameters == nil || parameters.count == 0) return @"";
+    if (parameters == nil || parameters.count == 0) return @"空";
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
