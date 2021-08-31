@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL displayLoading;
 /// 是否需要展示错误提示，默认NO
 @property (nonatomic, assign) BOOL displayErrorMessage;
+/// 加载显示内容，默认空
+@property (nonatomic, strong) NSString *loadDisplayString;
 
 /// 创建小菊花加载
 /// @param message 显示文字

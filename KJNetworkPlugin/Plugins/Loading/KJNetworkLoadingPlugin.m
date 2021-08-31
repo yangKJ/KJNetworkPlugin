@@ -16,6 +16,15 @@
 
 @implementation KJNetworkLoadingPlugin
 
+- (instancetype)init{
+    if (self = [super init]) {
+        self.loadDisplayString = @"";
+        self.displayErrorMessage = NO;
+        self.displayLoading = NO;
+    }
+    return self;
+}
+
 /// 网络请求开始时刻请求
 /// @param request 请求相关数据
 /// @param stopRequest 是否停止网络请求
@@ -25,7 +34,7 @@
     
     // 显示加载框
     if (self.displayLoading) {
-        [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:@"" window:YES delay:0];
+        [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:YES delay:0];
     }
     
     return self.response;
