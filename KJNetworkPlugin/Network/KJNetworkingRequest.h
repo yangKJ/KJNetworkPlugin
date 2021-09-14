@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网络请求路径
 @property (nonatomic, strong) NSString *path;
 /// 请求参数
-@property (nonatomic, strong, nullable) id params;
+@property (nonatomic, strong, nullable) NSDictionary *params;
 /// 加密参数，不涉及加密时刻该数据与上面一致
-@property (nonatomic, strong, readonly) id secretParams;
+@property (nonatomic, strong, readonly) NSDictionary *secretParams;
 /// 网址请求地址
 @property (nonatomic, strong, readonly) NSString *URLString;
 

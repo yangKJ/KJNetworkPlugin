@@ -34,7 +34,7 @@
     return self;
 }
 
-- (void)setParams:(id)params{
+- (void)setParams:(NSDictionary *)params{
     _params = params;
     self.secretParams = params;
 }

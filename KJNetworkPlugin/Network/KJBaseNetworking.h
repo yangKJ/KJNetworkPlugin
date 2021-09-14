@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新默认基本参数
 /// @param value 更新值
 /// @param key 更新键
-+ (void)updateBaseParametersWithVaule:(id)value key:(NSString *)key;
++ (void)updateBaseParametersWithValue:(id)value key:(NSString *)key;
 
 /// 是否打开网络加载菊花，默认打开
 + (void)openNetworkActivityIndicator:(BOOL)open;

@@ -32,7 +32,7 @@
 /// 更新默认基本参数
 /// @param value 更新值
 /// @param key 更新键
-+ (void)updateBaseParametersWithVaule:(id)value key:(NSString *)key{
++ (void)updateBaseParametersWithValue:(id)value key:(NSString *)key{
     NSMutableDictionary * __autoreleasing dict = [NSMutableDictionary dictionaryWithDictionary:self.baseParameters];
     [dict setValue:value forKey:key];
     self.baseParameters = dict.mutableCopy;

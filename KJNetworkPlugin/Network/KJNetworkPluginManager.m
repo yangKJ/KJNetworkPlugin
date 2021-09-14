@@ -14,14 +14,13 @@
 
 /// 插件版网络请求
 + (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure{
-    // 设置请求时机，切勿更改至`BasePlugin`当中，否则插件会出问题
+    // 设置请求时机，切勿更改至`KJNetworkBasePlugin`当中，否则插件会出问题
     [request setValue:@(KJRequestOpportunityPrepare) forKey:@"opportunity"];
     // 响应结果
     __block KJNetworkingResponse * response = [[KJNetworkingResponse alloc] init];
     // 保持插件`response`地址统一
     for (id<KJNetworkDelegate> plugin in request.plugins) {
-        KJNetworkBasePlugin * __autoreleasing custom = (KJNetworkBasePlugin *)plugin;
-        [custom setValue:response forKey:@"response"];
+        [((KJNetworkBasePlugin *)plugin) setValue:response forKey:@"response"];
     }
     
     // 成功插件处理

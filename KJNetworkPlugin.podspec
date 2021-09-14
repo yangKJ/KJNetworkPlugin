@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
   s.source   = { :git => "https://github.com/yangKJ/KJNetworkPlugin.git", :tag => s.version.to_s}
   s.ios.deployment_target = '9.0'
   s.requires_arc = true
-  s.default_subspec = 'Network'
 
   s.subspec 'Network' do |net|
     net.source_files = "KJNetworkPlugin/Network/*.{h,m}"
