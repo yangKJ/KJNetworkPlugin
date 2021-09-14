@@ -19,13 +19,6 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
 
 @implementation KJNetworkCachePlugin
 
-- (instancetype)init{
-    if (self = [super init]) {
-        self.nameEncryptType = KJNetworkCacheNameEncryptTypeSHA256;
-    }
-    return self;
-}
-
 /// 开始准备网络请求
 /// @param request 请求相关数据
 /// @param endRequest 是否结束下面的网络请求
@@ -88,67 +81,99 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
     return self.response;
 }
 
-#pragma mark - 网络缓存
+/// 同步方式读取缓存数据
+- (id)cacheData{
+    return [self.dataCache objectForKey:kCacheKey(self.request.URLString, self.request.params)];
+}
+/// 存储网络数据
+- (void)saveCacheResponseObject:(id)responseObject{
+    if (responseObject == nil) return;
+    @synchronized (self.dataCache) {
+        [self.dataCache setObject:responseObject
+                           forKey:kCacheKey(self.request.URLString, self.request.params)
+                        withBlock:nil];
+    }
+}
+
+#pragma mark - public method
+
+/// 读取指定网络缓存
+/// @param url 网络链接
+/// @param parameters 参数
+/// @return 返回网络缓存数据
++ (id)readCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters{
+    if (url == nil) return nil;
+    YYCache * __autoreleasing dataCache = [YYCache cacheWithName:kNetworkResponseCache];
+    return [dataCache objectForKey:kCacheKey(url, parameters)];
+}
+
+/// 存储指定网络缓存数据
+/// @param url 网络链接
+/// @param parameters 参数
+/// @param httpData 网络数据
++ (void)saveCacheWithURL:(NSString *)url
+              parameters:(NSDictionary *)parameters
+                httpData:(id)httpData{
+    if (url == nil || httpData == nil) return;
+    YYCache * __autoreleasing dataCache = [YYCache cacheWithName:kNetworkResponseCache];
+    [dataCache setObject:httpData forKey:kCacheKey(url, parameters) withBlock:nil];
+}
+
+/// 清除全部缓存
++ (void)removeAllCache{
+    YYCache * __autoreleasing dataCache = [YYCache cacheWithName:kNetworkResponseCache];
+    [dataCache removeAllObjects];
+}
+
+/// 清除指定网络缓存
+/// @param url 网络链接
+/// @param parameters 参数
++ (void)removeCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters{
+    if (url == nil) return;
+    YYCache * __autoreleasing dataCache = [YYCache cacheWithName:kNetworkResponseCache];
+    [dataCache removeObjectForKey:kCacheKey(url, parameters)];
+}
+
+/// 获取网络缓存的总大小
+/// @return 缓存大小，单位字节
++ (NSInteger)getCacheSize{
+    YYCache * __autoreleasing dataCache = [YYCache cacheWithName:kNetworkResponseCache];
+    return [dataCache.diskCache totalCost];
+}
+
+#pragma mark - private method
+
+/// 缓存键
+/// @param url 网络链接
+/// @param parameters 参数
+NS_INLINE NSString * kCacheKey(NSString * url, NSDictionary * parameters){
+    if (parameters == nil) return kCacheSHA512String(url);
+    // 将参数字典转换成字符串
+    NSData *stringData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+    NSString *paraString = [[NSString alloc] initWithData:stringData encoding:NSUTF8StringEncoding];
+    return kCacheSHA512String([NSString stringWithFormat:@"%@%@",url,paraString]);
+}
+
+/// 加密
+NS_INLINE NSString * kCacheSHA512String(NSString * string){
+    const char * cstr = [string cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData * data = [NSData dataWithBytes:cstr length:string.length];
+    uint8_t digest[CC_SHA512_DIGEST_LENGTH];
+    CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
+    NSMutableString * output = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    return [NSString stringWithString:output];
+}
+
+#pragma mark - lazy
 
 - (YYCache *)dataCache{
     if (!_dataCache) {
         _dataCache = [YYCache cacheWithName:kNetworkResponseCache];
     }
     return _dataCache;
-}
-/// 同步方式读取缓存数据
-- (id)cacheData{
-    NSString *cacheKey = [self cacheKeyWithURL:self.request.URLString parameters:self.request.params];
-    return [self.dataCache objectForKey:cacheKey];
-}
-/// 存储网络数据
-- (void)saveCacheResponseObject:(id)responseObject{
-    if (responseObject) {
-        NSString *cacheKey = [self cacheKeyWithURL:self.request.URLString parameters:self.request.params];
-        @synchronized (self.dataCache) {
-            [self.dataCache setObject:responseObject forKey:cacheKey withBlock:nil];
-        }
-    }
-}
-/// 缓存数据
-- (NSString *)cacheKeyWithURL:(NSString *)url parameters:(NSDictionary *)parameters{
-    if (parameters == nil) return url;
-    // 将参数字典转换成字符串
-    NSData *stringData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-    NSString *paraString = [[NSString alloc] initWithData:stringData encoding:NSUTF8StringEncoding];
-    // 将URL与转换好的参数字符串拼接在一起,成为最终存储的KEY值
-    NSString *cacheKey = [NSString stringWithFormat:@"%@%@",url,paraString];
-    return [self kj_cacheNameEncryptWithKey:cacheKey];
-}
-
-/// 加密
-- (NSString *)kj_cacheNameEncryptWithKey:(NSString *)key{
-    if (self.nameEncryptType == KJNetworkCacheNameEncryptTypeMD5) {
-        const char *value = [key UTF8String];
-        unsigned char buffer[CC_MD5_DIGEST_LENGTH];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        CC_MD5(value, (CC_LONG)strlen(value), buffer);
-#pragma clang diagnostic pop
-        NSMutableString * outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-        for (NSInteger count = 0; count < CC_MD5_DIGEST_LENGTH; count++){
-            [outputString appendFormat:@"%02x",buffer[count]];
-        }
-        return outputString.mutableCopy;
-    } else if (self.nameEncryptType == KJNetworkCacheNameEncryptTypeSHA256) {
-        const char * data = [key cStringUsingEncoding:NSASCIIStringEncoding];
-        NSData * keyData = [NSData dataWithBytes:data length:strlen(data)];
-        uint8_t digest[CC_SHA256_DIGEST_LENGTH] = {0};
-        CC_SHA256(keyData.bytes, (CC_LONG)keyData.length, digest);
-        NSData * outData = [NSData dataWithBytes:digest length:CC_SHA256_DIGEST_LENGTH];
-        NSString * outputString = [outData description];
-        outputString = [outputString stringByReplacingOccurrencesOfString:@" " withString:@""];
-        outputString = [outputString stringByReplacingOccurrencesOfString:@"<" withString:@""];
-        outputString = [outputString stringByReplacingOccurrencesOfString:@">" withString:@""];
-        return outputString;
-    } else {
-        return key;
-    }
 }
 
 @end

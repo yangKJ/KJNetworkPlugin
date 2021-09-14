@@ -24,21 +24,41 @@ typedef NS_ENUM(NSUInteger, KJNetworkCachePolicy){
     /**先从缓存读取数据，然后在从网络获取并且缓存，在这种情况下，Block将产生两次调用*/
     KJNetworkCachePolicyCacheThenNetwork = 5
 };
-/// 缓存文件名加密方式
-typedef NS_ENUM(NSUInteger, KJNetworkCacheNameEncryptType){
-    KJNetworkCacheNameEncryptTypeMD5,
-    KJNetworkCacheNameEncryptTypeSHA256,
-};
+
 @class YYCache;
 /// 网络缓存相关插件
 @interface KJNetworkCachePlugin : KJNetworkBasePlugin
 
-/// 缓存文件名加密方式，默认 KJNetworkCacheNameSercetTypeSHA256
-@property (nonatomic, assign) KJNetworkCacheNameEncryptType nameEncryptType;
 /// 缓存方式，默认 KJNetworkCacheMethodNone
 @property (nonatomic, assign) KJNetworkCachePolicy cachePolicy;
 /// 缓存相关
 @property (nonatomic, strong, readonly) YYCache *dataCache;
+
+/// 读取指定网络缓存
+/// @param url 网络链接
+/// @param parameters 参数
+/// @return 返回网络缓存数据
++ (id)readCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters;
+
+/// 存储指定网络缓存数据
+/// @param url 网络链接
+/// @param parameters 参数
+/// @param httpData 网络数据
++ (void)saveCacheWithURL:(NSString *)url
+              parameters:(NSDictionary *)parameters
+                httpData:(id)httpData;
+
+/// 清除全部缓存
++ (void)removeAllCache;
+
+/// 清除指定网络缓存
+/// @param url 网络链接
+/// @param parameters 参数
++ (void)removeCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters;
+
+/// 获取网络缓存的总大小
+/// @return 缓存大小，单位字节
++ (NSInteger)getCacheSize;
 
 @end
 
