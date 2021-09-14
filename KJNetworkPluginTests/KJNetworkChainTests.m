@@ -7,6 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import "KJNetworkChainManager.h"
+#import "KJChainChannelApi.h"
 
 @interface KJNetworkChainTests : XCTestCase
 
@@ -40,16 +41,8 @@
     [KJNetworkChainManager HTTPChainRequest:request failure:^(NSError * _Nonnull error) {
         XCTFail(@"%@", error.localizedDescription);
     }].chain(^__kindof KJNetworkingRequest * _Nullable(id  _Nonnull responseObject) {
-        NSArray * array = responseObject[@"channels"];
-        NSDictionary * dict = array[arc4random() % array.count];
-        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
-        request.method = KJNetworkRequestMethodGET;
-        request.ip = @"https://www.douban.com";
-        request.path = [@"/j/app/radio/channels/channel_id=" stringByAppendingFormat:@"%@",dict[@"channel_id"]];
-        request.responseSerializer = KJSerializerJSON;
-        return request;
+        return [[KJChainChannelApi alloc] initWithResponseObject:responseObject];
     }).lastChain(^(id  _Nonnull responseObject) {
-        NSLog(@"----%@",responseObject);
         [expectation fulfill];
     });
     
@@ -72,14 +65,7 @@
     } failure:^(NSError * _Nonnull error) {
         XCTFail(@"%@", error.localizedDescription);
     } chain:^__kindof KJNetworkingRequest * _Nullable(id  _Nonnull responseObject) {
-        NSArray * array = responseObject[@"channels"];
-        NSDictionary * dict = array[arc4random() % array.count];
-        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
-        request.method = KJNetworkRequestMethodGET;
-        request.ip = @"https://www.douban.com";
-        request.path = [@"/j/app/radio/channels/channel_id=" stringByAppendingFormat:@"%@",dict[@"channel_id"]];
-        request.responseSerializer = KJSerializerJSON;
-        return request;
+        return [[KJChainChannelApi alloc] initWithResponseObject:responseObject];
     }, ^__kindof KJNetworkingRequest * _Nullable(id  _Nonnull responseObject) {
         KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
         request.method = KJNetworkRequestMethodGET;
