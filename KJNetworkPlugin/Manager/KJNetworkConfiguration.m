@@ -15,6 +15,7 @@
     configuration.analysisResponseObject = YES;
     configuration.successCode = 1000;
     configuration.errorKeyName = @"message";
+    configuration.codeKeyName = @"code";
 #ifdef DEBUG
     configuration.openCapture = YES;
 #else

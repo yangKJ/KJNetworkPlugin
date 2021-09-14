@@ -96,7 +96,7 @@ NS_INLINE void kNetworkHandlingSuccess(id responseObject,
             } else {
                 if ([result isKindOfClass:[NSDictionary class]]) {
                     // 是否处理自己服务器的请求，处理 code
-                    NSInteger code = [result[@"code"] integerValue];
+                    NSInteger code = [result[configuration.codeKeyName] integerValue];
                     if (code == configuration.successCode) {
                         success ? success((result)) : nil;
                     } else {

@@ -27,8 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL analysisResponseObject;
 /// 正确Code编码，默认1000
 @property (nonatomic, assign) NSInteger successCode;
+/// 状态名字段名，默认 `code`
+@property (nonatomic, strong) NSString *codeKeyName;
 /// 错误信息字段名，默认 `message`
 @property (nonatomic, strong) NSString *errorKeyName;
+
 /// 是否开启抓包插件，默认开启
 /// 需要配合 `Capture` 模块才能使用
 @property (nonatomic, assign) BOOL openCapture;
