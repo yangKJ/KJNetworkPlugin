@@ -21,6 +21,7 @@
 - 支持网络缓存插件
 - 支持配置自建证书插件
 - 支持修改请求体和获取响应结果插件
+- 支持网络日志抓包插件
 - 支持批量操作
 - 支持链式网络请求
 
@@ -42,11 +43,13 @@
   - Cache：缓存插件
   - Certificate：自建证书插件
   - Thief：修改器插件
+  - Capture：网络日志抓包插件
 
 ### Network版块
-- **KJBaseNetworking**：网络请求基类，基于 AFNetworking 封装使用
 
-这里也提供两个入口，设置通用的根路径和通用参数，类似：userID，token等
+<details open><summary><font size=2>**KJBaseNetworking**：网络请求基类，基于 AFNetworking 封装使用</font></summary>
+
+- 这里也提供两个入口，设置通用的根路径和通用参数，类似：userID，token等
 
 ```
 /// 根路径地址
@@ -55,16 +58,40 @@
 @property (nonatomic, strong, class) NSDictionary *baseParameters;
 
 ```
+- 封装的有基本的网络请求，上传下载文件等方法
 
-封装的有基本的网络请求，上传下载文件等方法
+</details>
 
-- **KJNetworkingRequest**：请求体，设置网络请求相关参数，其中包含参数，请求方式，插件等等
+<details><summary><font size=2>**KJNetworkingRequest**：请求体，设置网络请求相关参数，其中包含参数，请求方式，插件等等</font></summary>
 
-- **KJNetworkingResponse**：响应请求结果，获取插件之间产生的数据等等
+</details>
 
-- **KJNetworkingType**：汇总所有枚举和回调声明
+<details><summary><font size=2>**KJNetworkingResponse**：响应请求结果，获取插件之间产生的数据等等</font></summary>
 
-- **KJNetworkingDelegate**：插件协议，目前抽离出以下5条协议方法，其中大致分为开始时刻、网络请求时刻、网络成功、网络失败、最终返回
+</details>
+
+<details><summary><font size=2>**KJNetworkingType**：汇总所有枚举和回调声明</font></summary>
+
+</details>
+
+<details><summary><font size=2>**KJNetworkBasePlugin**：插件基类，插件父类</font></summary>
+
+</details>
+
+<details><summary><font size=2>**KJNetworkPluginManager**：插件管理器，中枢神经</font></summary>
+
+```
+/// 插件版网络请求
+/// @param request 请求体
+/// @param success 成功回调
+/// @param failure 失败回调
++ (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure;
+```
+</details>
+
+<details><summary><font size=2>**KJNetworkingDelegate**：插件协议，管理网络请求结果</font></summary>
+
+- 目前抽离出以下5条协议方法，其中大致分为开始时刻、网络请求时刻、网络成功、网络失败、最终返回
 
 ```
 /// 开始准备网络请求
@@ -96,25 +123,13 @@
 /// @param error 错误信息
 /// @return 返回最终加工之后的数据
 - (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error;
-
 ```
-
-- **KJNetworkBasePlugin**：插件基类，插件父类
-
-- **KJNetworkPluginManager**：插件管理器，中枢神经
-
-```
-/// 插件版网络请求
-/// @param request 请求体
-/// @param success 成功回调
-/// @param failure 失败回调
-+ (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure;
-```
+</details>
 
 ### Plugins插件集合
 - **[插件使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
 
-**目前已有5款插件供使用：**
+**目前已有6款插件供使用：**
 
 - [**KJNetworkLoadingPlugin**](Docs/LOADING.md)：基于MBProgressHUD封装的加载框和错误提示框插件
 
@@ -124,7 +139,9 @@
 
 - [**KJNetworkCertificatePlugin**](Docs/CERTIFICATE.md)：配置自建证书插件
 
-- [**KJNetworkThiefPlugin**](Docs/THIEF.md)：修改`KJNetworkingRequest`和获取 `KJNetworkingResponse`插件
+- [**KJNetworkThiefPlugin**](Docs/THIEF.md)：修改`KJNetworkingRequest`和获取`KJNetworkingResponse`插件
+
+- [**KJNetworkCapturePlugin**](Docs/CAPTURE.md)：网络日志抓包插件
 
 ### Chain链式插件网络
 - [**链式网络使用教程**](Docs/CHAIN.md)
