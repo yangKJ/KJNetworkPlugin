@@ -144,7 +144,7 @@ NS_INLINE BOOL kDictionaryContainsKey(NSDictionary * dict, NSString * key){
         capture.openLog = YES;
         NSMutableArray * temp = [NSMutableArray arrayWithObject:capture];
         if (tempRequest.plugins) {
-            [temp addObject:tempRequest.plugins];
+            [temp addObjectsFromArray:tempRequest.plugins];
         }
         tempRequest.plugins = temp.mutableCopy;
     }
