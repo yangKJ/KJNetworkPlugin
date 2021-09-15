@@ -40,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param message 显示内容
 /// @param window 是否显示在窗口
 /// @param delay 延迟展示时间
-+ (void)showTipMessage:(NSString *)message
-                window:(BOOL)window
-                 delay:(NSTimeInterval)delay;
++ (MBProgressHUD *)showTipMessage:(NSString *)message
+                           window:(BOOL)window
+                            delay:(NSTimeInterval)delay;
 
 /// 窗口视图
 + (UIView *)kKeyWindow;

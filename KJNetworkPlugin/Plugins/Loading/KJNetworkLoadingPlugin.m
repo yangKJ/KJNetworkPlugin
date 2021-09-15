@@ -10,7 +10,7 @@
 
 @interface KJNetworkLoadingPlugin ()
 
-@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) MBProgressHUD *failHud;
 
 @end
 
@@ -27,6 +27,27 @@
     return self;
 }
 
+/// 开始准备网络请求
+/// @param request 请求相关数据
+/// @param endRequest 是否结束下面的网络请求
+/// @return 返回缓存数据，successResponse 不为空表示存在缓存数据
+- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
+    [super prepareWithRequest:request endRequest:endRequest];
+    
+    // 清除上次的错误提示
+    if (self.displayErrorMessage && self.failHud) {
+        [KJNetworkLoadingPlugin hideMBProgressHUD];
+        NSTimer * hideDelayTimer = [self.failHud valueForKey:@"hideDelayTimer"];
+        if (hideDelayTimer) {
+            [hideDelayTimer invalidate];
+            hideDelayTimer = nil;
+        }
+        self.failHud = nil;
+    }
+    
+    return self.response;
+}
+
 /// 网络请求开始时刻请求
 /// @param request 请求相关数据
 /// @param stopRequest 是否停止网络请求
@@ -36,7 +57,15 @@
     
     // 显示加载框
     if (self.displayLoading) {
-        [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:self.displayInWindow delay:0];
+        MBProgressHUD * hud = nil;
+        if (self.displayInWindow) {
+            hud = [MBProgressHUD HUDForView:[KJNetworkLoadingPlugin kKeyWindow]];
+        } else {
+            hud = [MBProgressHUD HUDForView:[KJNetworkLoadingPlugin topViewController].view];
+        }
+        if (hud == nil) {
+            [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:self.displayInWindow delay:0];
+        }
     }
     
     return self.response;
@@ -74,12 +103,14 @@
     if (self.displayErrorMessage) {
         if (self.delayHiddenLoading) {
             __weak __typeof(&*self) weakself = self;
-            NSString * string = [weakself.response.error.localizedDescription copy];
+            NSString * string = [self.response.error.localizedDescription copy];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [KJNetworkLoadingPlugin showTipHUD:string];
+                if (weakself.response.responseObject == nil) {
+                    weakself.failHud = [KJNetworkLoadingPlugin showTipMessage:string window:weakself.displayInWindow delay:2];
+                }
             });
         } else {
-            [KJNetworkLoadingPlugin showTipHUD:self.response.error.localizedDescription];
+            self.failHud = [KJNetworkLoadingPlugin showTipMessage:self.response.error.localizedDescription window:self.displayInWindow delay:2];
         }
     }
     
@@ -102,7 +133,7 @@
     UIView *view = window ? [self kKeyWindow] : [self topViewController].view;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.removeFromSuperViewOnHide = YES;
-    hud.label.text = message ? message : NSLocalizedString(@"加载中...", nil);
+    hud.label.text = message ? message : NSLocalizedString(@"Loading", nil);
     hud.label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
     hud.label.numberOfLines = 0;
     hud.backgroundView.color = [UIColor colorWithRed:18/255.0 green:20/255.0 blue:20/255.0 alpha:0.1];
@@ -130,7 +161,7 @@
     [self showTipMessage:message window:YES delay:2.5];
 }
 
-+ (void)showTipMessage:(NSString *)message window:(BOOL)window delay:(NSTimeInterval)delay{
++ (MBProgressHUD *)showTipMessage:(NSString *)message window:(BOOL)window delay:(NSTimeInterval)delay{
     MBProgressHUD *hud = [self createMBProgressHUDWithMessage:message window:window delay:delay];
     hud.mode = MBProgressHUDModeText;
     if (delay > 0) {
@@ -141,6 +172,8 @@
     hud.label.textColor = UIColor.whiteColor;
     hud.contentColor = UIColor.whiteColor;
     hud.offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height / 3);
+    
+    return hud;
 }
 
 
