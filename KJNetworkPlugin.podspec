@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = "KJNetworkPlugin"
-  s.version  = "1.0.9"
+  s.version  = "1.0.10"
   s.summary  = "A Network Plugin With AFNetworking."
   s.homepage = "https://github.com/yangKJ/KJNetworkPlugin"
   s.license  = "MIT"
