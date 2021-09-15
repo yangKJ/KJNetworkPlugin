@@ -13,12 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 加载动画插件
 @interface KJNetworkLoadingPlugin : KJNetworkBasePlugin
 
+/// 是否显示再Window，默认YES
+@property (nonatomic, assign) BOOL displayInWindow;
 /// 是否需要显示加载小菊花，默认NO
 @property (nonatomic, assign) BOOL displayLoading;
 /// 是否需要展示错误提示，默认NO
 @property (nonatomic, assign) BOOL displayErrorMessage;
 /// 加载显示内容，默认空
-@property (nonatomic, strong) NSString *loadDisplayString;
+@property (nonatomic, strong, nullable) NSString *loadDisplayString;
+/// 故意延迟消失加载loading，默认零秒
+@property (nonatomic, assign) CGFloat delayHiddenLoading;
 
 /// 创建小菊花加载
 /// @param message 显示文字

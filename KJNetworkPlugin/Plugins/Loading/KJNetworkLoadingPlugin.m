@@ -21,6 +21,8 @@
         self.loadDisplayString = @"";
         self.displayErrorMessage = NO;
         self.displayLoading = NO;
+        self.delayHiddenLoading = 0.0;
+        self.displayInWindow = YES;
     }
     return self;
 }
@@ -34,7 +36,7 @@
     
     // 显示加载框
     if (self.displayLoading) {
-        [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:YES delay:0];
+        [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:self.displayInWindow delay:0];
     }
     
     return self.response;
@@ -49,7 +51,13 @@
     
     // 隐藏加载框
     if (self.displayLoading) {
-        [KJNetworkLoadingPlugin hideMBProgressHUD];
+        if (self.delayHiddenLoading) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [KJNetworkLoadingPlugin hideMBProgressHUD];
+            });
+        } else {
+            [KJNetworkLoadingPlugin hideMBProgressHUD];
+        }
     }
     
     return self.response;
@@ -64,7 +72,14 @@
     
     // 错误提醒
     if (self.displayErrorMessage) {
-        [KJNetworkLoadingPlugin showTipHUD:self.response.error.localizedDescription];
+        if (self.delayHiddenLoading) {
+            __weak __typeof(&*self) weakself = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [KJNetworkLoadingPlugin showTipHUD:weakself.response.error.localizedDescription];
+            });
+        } else {
+            [KJNetworkLoadingPlugin showTipHUD:self.response.error.localizedDescription];
+        }
     }
     
     return self.response;
@@ -89,19 +104,22 @@
     hud.label.text = message ? message : NSLocalizedString(@"加载中...", nil);
     hud.label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
     hud.label.numberOfLines = 0;
-    hud.backgroundView.color = [UIColor colorWithRed:18 / 255.0 green:20 / 255.0 blue:20 / 255.0 alpha:0.05];
+    hud.backgroundView.color = [UIColor colorWithRed:18/255.0 green:20/255.0 blue:20/255.0 alpha:0.1];
     hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
     hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
     hud.bezelView.color = [UIColor.blackColor colorWithAlphaComponent:0.7];
     hud.bezelView.layer.cornerRadius = 14;
     hud.label.textColor = UIColor.whiteColor;
-    hud.userInteractionEnabled = YES;
     
     hud.mode = MBProgressHUDModeIndeterminate;
     if (delay > 0) {
         [hud hideAnimated:YES afterDelay:delay];
     }
-    hud.label.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
+    hud.label.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+    
+    // 设置菊花框为白色
+    UIActivityIndicatorView *indicatorView = [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]];
+    indicatorView.color = [UIColor whiteColor];
     
     return hud;
 }
@@ -121,7 +139,7 @@
     hud.bezelView.layer.cornerRadius = 14;
     hud.label.textColor = UIColor.whiteColor;
     hud.contentColor = UIColor.whiteColor;
-    hud.offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height / 4);
+    hud.offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height / 3);
 }
 
 
@@ -129,8 +147,11 @@
     UIWindow *window;
     if (@available(iOS 13.0, *)) {
         window = [UIApplication sharedApplication].windows.firstObject;
-    }else{
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         window = [UIApplication sharedApplication].keyWindow;
+#pragma clang diagnostic pop
     }
     return (UIView *)window;
 }
@@ -139,7 +160,7 @@
 + (UIViewController *)topViewController{
     UIViewController *result = nil;
     UIWindow *window = (UIWindow *)[self kKeyWindow];
-    if (window.windowLevel != UIWindowLevelNormal){
+    if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
         for (UIWindow * tmpWin in windows){
             if (tmpWin.windowLevel == UIWindowLevelNormal){
@@ -152,14 +173,14 @@
     while (vc.presentedViewController) {
         vc = vc.presentedViewController;
     }
-    if ([vc isKindOfClass:[UITabBarController class]]){
+    if ([vc isKindOfClass:[UITabBarController class]]) {
         UITabBarController * tabbar = (UITabBarController *)vc;
         UINavigationController * nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
         result = nav.childViewControllers.lastObject;
-    }else if ([vc isKindOfClass:[UINavigationController class]]){
+    } else if ([vc isKindOfClass:[UINavigationController class]]) {
         UIViewController * nav = (UIViewController *)vc;
         result = nav.childViewControllers.lastObject;
-    }else{
+    } else {
         result = vc;
     }
     return result;
