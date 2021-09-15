@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    KJBaseNetworking.openLog = YES;
+    KJBaseNetworking.openLog = NO;
     KJBaseNetworking.baseURL = @"https://www.httpbin.org";
     
     return YES;

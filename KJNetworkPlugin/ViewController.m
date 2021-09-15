@@ -8,6 +8,8 @@
 #import "ViewController.h"
 #import "KJNetworkPluginManager.h"
 #import "KJNetworkLoadingPlugin.h"
+#import "KJNetworkManager.h"
+#import "KJNetworkThiefPlugin.h"
 
 @interface ViewController ()
 
@@ -21,17 +23,37 @@
     
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
-    request.ip = @"https://www.douban.com";
+    request.ip = @"https://www.test.com";
+    request.path = @"/ip(null)";
     request.responseSerializer = KJSerializerJSON;
     
     KJNetworkLoadingPlugin * plugin = [[KJNetworkLoadingPlugin alloc] init];
     plugin.displayLoading = YES;
     plugin.displayErrorMessage = YES;
-    request.plugins = @[plugin];
+    plugin.delayHiddenLoading = 2.5;
+    plugin.displayInWindow = NO;
     
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+    KJNetworkThiefPlugin * thiefPlugin = [[KJNetworkThiefPlugin alloc] init];
+    thiefPlugin.maxAgainRequestCount = 2;
+    thiefPlugin.againRequest = YES;
+    thiefPlugin.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
+        if (request.opportunity == KJRequestOpportunityFailure) {
+            request.ip = @"https://www.httpbin.org";
+            request.path = @"/ip";
+        }
+    };
+    thiefPlugin.kGetResponse = ^(KJNetworkingResponse * _Nonnull response) {
         
-    } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
+    };
+    
+    request.plugins = @[plugin, thiefPlugin];
+
+    KJNetworkConfiguration * configuration = [KJNetworkConfiguration defaultConfiguration];
+    configuration.openCapture = YES;
+    
+    [KJNetworkManager HTTPRequest:request configuration:configuration success:^(id  _Nonnull responseObject) {
+        
+    } failure:^(NSError * _Nonnull error) {
         
     }];
 

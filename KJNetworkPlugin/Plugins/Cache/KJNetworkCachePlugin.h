@@ -38,14 +38,14 @@ typedef NS_ENUM(NSUInteger, KJNetworkCachePolicy){
 /// @param url 网络链接
 /// @param parameters 参数
 /// @return 返回网络缓存数据
-+ (id)readCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters;
++ (id)readCacheWithURL:(NSString *)url parameters:(nullable NSDictionary *)parameters;
 
 /// 存储指定网络缓存数据
 /// @param url 网络链接
 /// @param parameters 参数
 /// @param httpData 网络数据
 + (void)saveCacheWithURL:(NSString *)url
-              parameters:(NSDictionary *)parameters
+              parameters:(NSDictionary * _Nullable)parameters
                 httpData:(id)httpData;
 
 /// 清除全部缓存
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger, KJNetworkCachePolicy){
 /// 清除指定网络缓存
 /// @param url 网络链接
 /// @param parameters 参数
-+ (void)removeCacheWithURL:(NSString *)url parameters:(NSDictionary *)parameters;
++ (void)removeCacheWithURL:(NSString *)url parameters:(nullable NSDictionary *)parameters;
 
 /// 获取网络缓存的总大小
 /// @return 缓存大小，单位字节
