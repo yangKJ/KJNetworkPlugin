@@ -29,7 +29,6 @@
 /// @return 返回准备插件处理后的数据
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
     [super prepareWithRequest:request endRequest:endRequest];
-    self.currentAgainRequestCount = 0;
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
@@ -45,7 +44,6 @@
 /// @return 返回网络请求开始时刻插件处理后的数据
 - (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
     [super willSendWithRequest:request stopRequest:stopRequest];
-    self.currentAgainRequestCount = 0;
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
@@ -77,10 +75,9 @@
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super failureWithRequest:request againRequest:againRequest];
+    * againRequest = self.againRequest;
     if (++self.currentAgainRequestCount >= self.maxAgainRequestCount) {
         * againRequest = NO;
-    } else {
-        * againRequest = self.againRequest;
     }
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
