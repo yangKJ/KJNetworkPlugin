@@ -9,6 +9,12 @@
 #import <MJExtension/MJExtension.h>
 #import <CommonCrypto/CommonDigest.h>
 
+#ifdef DEBUG
+#define KJCaptureLog(FORMAT, ...) fprintf(stderr,"%s", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#else
+#define KJCaptureLog(FORMAT, ...) nil
+#endif
+
 @interface KJNetworkCapturePlugin ()
 
 @property (nonatomic, strong) NSURLSessionTask * task;
@@ -50,12 +56,13 @@
     
     self.task = self.response.task;
     if (self.openLog) {
-        NSLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 REQUEST 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
-              \n请求方式 = %@\n请求URL = %@\n请求参数 = %@\n请求头 = %@  \
-              \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
-              KJNetworkRequestMethodStringMap[request.method], request.URLString,
-              [KJNetworkCapturePlugin kHTTPParametersToString:request.params],
-              [KJNetworkCapturePlugin kHTTPParametersToString:self.task.currentRequest.allHTTPHeaderFields]);
+        KJCaptureLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 网络抓包 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
+                     \n请求方式 = %@\n请求地址 = %@\n请求路径 = %@\n请求链接 = %@\n请求参数 = %@\n请求头 = %@  \
+                     \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 网络抓包 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<\n",
+                     KJNetworkRequestMethodStringMap[request.method], request.ip, request.path ?: @"空",
+                     [KJNetworkCapturePlugin kIntactURLWithRequest:request header:self.task.currentRequest.allHTTPHeaderFields],
+                     [KJNetworkCapturePlugin kHTTPParametersToString:request.params],
+                     [KJNetworkCapturePlugin kHTTPParametersToString:self.task.currentRequest.allHTTPHeaderFields]);
     }
     
     return self.response;
@@ -79,6 +86,11 @@
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super failureWithRequest:request againRequest:againRequest];
+    
+    KJCaptureLog(@">>>>>>>>>>>>>>>>>>>>> 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 >>>>>>>>>>>>>>>>>>>>>>>>>>  \
+                 \n错误编码 = %ld\n错误信息 = %@\n错误详情 = %@ \
+                 \n<<<<<<<<<<<<<<<<<<<<< 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 <<<<<<<<<<<<<<<<<<<<<<<<<<\n",
+                 (long)self.response.error.code, self.response.error.localizedDescription, self.response.error.userInfo);
     
     return self.response;
 }
@@ -136,7 +148,7 @@
         NSString * __autoreleasing key = [KJNetworkCapturePlugin SHA512String:string];
         [weakSelf.responseDict setValue:capture forKey:key];
         if (weakSelf.openLog) {
-            NSLog(@"\n🎷🎷🎷请求结果 = %@", capture.responseJSONString);
+            KJCaptureLog(@"🎷🎷🎷网络抓包请求结果 = %@\n", [KJNetworkCapturePlugin kAnslysisJSON:responseObject]);
         }
     });
 }
@@ -158,6 +170,57 @@
     for (int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++)
     [output appendFormat:@"%02x", digest[i]];
     return [NSString stringWithString:output];
+}
+
+/// 解析JSON数据
++ (id)kAnslysisJSON:(id)json{
+    if (json == nil || json == (id)kCFNull) return nil;
+    id responseObject = nil;
+    NSData * jsonData = nil;
+    if ([json isKindOfClass:[NSDictionary class]] || [json isKindOfClass:[NSArray class]]) {
+        responseObject = json;
+    } else if ([json isKindOfClass:[NSString class]]) {
+        jsonData = [(NSString *)json dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([json isKindOfClass:[NSData class]]) {
+        jsonData = json;
+    }
+    if (jsonData) {
+        responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
+        if (responseObject) {
+            responseObject = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        }
+    }
+    return responseObject;
+}
+
+/// 完整的链接地址，可直接在网站打开调用
+/// @param request 请求体
+/// @param header 请求头
++ (NSString *)kIntactURLWithRequest:(KJNetworkingRequest *)request header:(NSDictionary *)header{
+    NSMutableArray *parts = [NSMutableArray array];
+    NSMutableDictionary * parameters = [NSMutableDictionary dictionaryWithDictionary:header];
+    /// 排除默认的三个参数
+    if (parameters.count <= 2) {
+        [parameters removeAllObjects];
+    } else {
+        [parameters removeObjectForKey:@"User-Agent"];
+        [parameters removeObjectForKey:@"Accept-Language"];
+    }
+    if (request.params) {
+        [parameters addEntriesFromDictionary:request.params];
+    }
+    [parameters enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        key = [key stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        obj = [obj stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *part = [NSString stringWithFormat:@"%@=%@", key, obj];
+        [parts addObject:part];
+    }];
+    if (parts.count == 0) {
+        return request.URLString;
+    }
+    NSString *queryString = [parts componentsJoinedByString:@"&"];
+    queryString = queryString ? [NSString stringWithFormat:@"?%@", queryString] : @"";
+    return [NSString stringWithFormat:@"%@%@", request.URLString, queryString];
 }
 
 #pragma mark - lazy
