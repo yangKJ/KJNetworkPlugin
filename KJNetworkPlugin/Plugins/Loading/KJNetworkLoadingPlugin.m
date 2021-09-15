@@ -74,8 +74,9 @@
     if (self.displayErrorMessage) {
         if (self.delayHiddenLoading) {
             __weak __typeof(&*self) weakself = self;
+            NSString * string = [weakself.response.error.localizedDescription copy];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [KJNetworkLoadingPlugin showTipHUD:weakself.response.error.localizedDescription];
+                [KJNetworkLoadingPlugin showTipHUD:string];
             });
         } else {
             [KJNetworkLoadingPlugin showTipHUD:self.response.error.localizedDescription];
