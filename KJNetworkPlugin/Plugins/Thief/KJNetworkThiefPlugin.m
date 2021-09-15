@@ -7,7 +7,21 @@
 
 #import "KJNetworkThiefPlugin.h"
 
+@interface KJNetworkThiefPlugin ()
+
+@property (nonatomic, assign) NSInteger currentAgainRequestCount;
+
+@end
+
 @implementation KJNetworkThiefPlugin
+
+- (instancetype)init{
+    if (self = [super init]) {
+        self.currentAgainRequestCount = 0;
+        self.maxAgainRequestCount = 3;
+    }
+    return self;
+}
 
 /// 开始准备网络请求
 /// @param request 请求相关数据
@@ -15,6 +29,7 @@
 /// @return 返回准备插件处理后的数据
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
     [super prepareWithRequest:request endRequest:endRequest];
+    self.currentAgainRequestCount = 0;
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
@@ -30,6 +45,7 @@
 /// @return 返回网络请求开始时刻插件处理后的数据
 - (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
     [super willSendWithRequest:request stopRequest:stopRequest];
+    self.currentAgainRequestCount = 0;
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
@@ -45,6 +61,7 @@
 /// @return 返回成功插件处理后的数据
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super succeedWithRequest:request againRequest:againRequest];
+    self.currentAgainRequestCount = 0;
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
@@ -60,13 +77,27 @@
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super failureWithRequest:request againRequest:againRequest];
-    * againRequest = self.againRequest;
+    if (++self.currentAgainRequestCount >= self.maxAgainRequestCount) {
+        * againRequest = NO;
+    } else {
+        * againRequest = self.againRequest;
+    }
     if (self.kChangeRequest) {
         self.kChangeRequest(request);
     }
     if (self.kGetResponse) {
         self.kGetResponse(self.response);
     }
+    return self.response;
+}
+
+/// 准备返回给业务逻辑时刻调用
+/// @param request 请求相关数据
+/// @param error 错误信息
+/// @return 返回最终加工之后的数据
+- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error{
+    [super processSuccessResponseWithRequest:request error:error];
+    self.currentAgainRequestCount = 0;
     return self.response;
 }
 
