@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KJBaseSuperNetworking : NSObject
 
 /// 存储网络请求
-@property (nonatomic, strong, class) NSMutableArray *sessionTaskDatas;
+@property (nonatomic, strong, class) NSMutableArray<NSURLSessionTask *> *sessionTaskDatas;
 /// 根路径地址
 @property (nonatomic, strong, class) NSString *baseURL;
 /// 基本参数，类似：userID，token等
@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 取消指定URL的Http请求
 + (void)cancelRequestWithURL:(NSString *)url;
 
+/// 获取指定task
++ (NSURLSessionTask *)appointTaskWithTaskIdentifier:(NSUInteger)taskIdentifier;
+
 @end
 
 /// 网络请求基类
@@ -61,26 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 默认初始化方法
 + (instancetype)sharedDefault;
 
-#pragma mark - 网络请求板块
+#pragma mark - network
 
-/// GET请求
-/// @param url 请求地址
-/// @param parameters 请求参数
-/// @param success 成功回调
-/// @param failure 失败回调
-- (void)GETHTTPRequsetWithURL:(NSString *)url
-                   parameters:(NSDictionary * _Nullable)parameters
-                      success:(KJNetworkSuccess)success
-                      failure:(KJNetworkFailure)failure;
-/// POST请求
-/// @param url 请求地址
-/// @param parameters 请求参数
-/// @param success 成功回调
-/// @param failure 失败回调
-- (void)POSTHTTPRequsetWithURL:(NSString *)url
-                    parameters:(NSDictionary * _Nullable)parameters
-                       success:(KJNetworkSuccess)success
-                       failure:(KJNetworkFailure)failure;
 /// 网络请求处理
 /// @param method 请求方式
 /// @param url 请求地址
@@ -93,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
                              success:(KJNetworkSuccess)success
                              failure:(KJNetworkFailure)failure;
 
-#pragma mark - 上传下载
+#pragma mark - upload
 
 /// 上传资源
 /// @param url 请求地址
@@ -108,51 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
                                           progress:(KJNetworkProgress)progress
                                            success:(KJNetworkSuccess)success
                                            failure:(KJNetworkFailure)failure;
-/// 上传文件
-/// @param url 请求地址
-/// @param parameters 请求参数
-/// @param name 文件对应服务器上的字段
-/// @param filePath 文件路径
-/// @param progress 上传进度
-/// @param success 成功回调
-/// @param failure 失败回调
-- (void)uploadFileWithURL:(NSString *)url
-               parameters:(NSDictionary * _Nullable)parameters
-                     name:(NSString *)name
-                 filePath:(NSString *)filePath
-                 progress:(KJNetworkProgress)progress
-                  success:(KJNetworkSuccess)success
-                  failure:(KJNetworkFailure)failure;
-/// 上传图片文件
-/// @param url 请求地址
-/// @param parameters 请求参数
-/// @param images 图片数组
-/// @param name 文件对应服务器上的字段
-/// @param fileName 文件名
-/// @param mimeType 图片文件类型：png/jpeg(默认类型)
-/// @param progress 上传进度
-/// @param success 成功回调
-/// @param failure 失败回调
-- (void)uploadImageURL:(NSString *)url
-            parameters:(NSDictionary * _Nullable)parameters
-                images:(NSArray<UIImage *> *)images
-                  name:(NSString *)name
-              fileName:(NSString *)fileName
-              mimeType:(NSString * _Nullable)mimeType
-              progress:(KJNetworkProgress)progress
-               success:(KJNetworkSuccess)success
-               failure:(KJNetworkFailure)failure;
-/// 下载文件
-/// @param url 请求地址
-/// @param fileDir 文件存储的目录，默认存储目录为KJDownloader，当未创建文件夹的话会自动创建
-/// @param progress 文件下载的进度信息
-/// @param success 成功回调
-/// @param failure 失败回调
-- (void)downloadWithURL:(NSString *)url
-                fileDir:(NSString * _Nullable)fileDir
-               progress:(KJNetworkProgress)progress
-                success:(KJNetworkSuccess)success
-                failure:(KJNetworkFailure)failure;
+
+#pragma mark - download
 
 /// 下载文件
 /// @param url 请求地址

@@ -14,26 +14,34 @@
 
 @implementation KJNetworkManager
 
+/// 取消网络请求，
++ (void)cancelRequestWithTask:(NSURLSessionTask *)task{
+    if (task == nil) {
+        return;
+    }
+    [KJBaseNetworking cancelRequestWithURL:task.currentRequest.URL.absoluteString];
+}
+
 /// 二次封装插件版网络请求
 /// @param request 请求体
 /// @param configuration 配置信息
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)HTTPRequest:(__kindof KJNetworkingRequest *)request
-      configuration:(KJNetworkConfiguration * _Nullable)configuration
-            success:(void(^_Nullable)(id responseObject))success
-            failure:(void(^_Nullable)(NSError * error))failure{
++ (nullable NSURLSessionTask *)HTTPRequest:(__kindof KJNetworkingRequest *)request
+                             configuration:(KJNetworkConfiguration * _Nullable)configuration
+                                   success:(void(^_Nullable)(id responseObject))success
+                                   failure:(void(^_Nullable)(NSError * error))failure{
     if (configuration == nil) {
         configuration = [KJNetworkConfiguration defaultConfiguration];
     }
     if (configuration.constructingBody) {
         // 是否为上传资源相关
         KJBaseNetworking * baseNetworking = [KJNetworkManager createBaseNetworkingWithRequest:request];
-        [baseNetworking postMultipartFormDataWithURL:request.URLString
-                                              params:request.secretParams
-                           constructingBodyWithBlock:configuration.constructingBody.constructingBodyWithBlock
-                                            progress:configuration.constructingBody.uploadProgressWithBlock
-                                             success:^(NSURLSessionDataTask * task, id responseObject) {
+        return [baseNetworking postMultipartFormDataWithURL:request.URLString
+                                                     params:request.secretParams
+                                  constructingBodyWithBlock:configuration.constructingBody.constructingBodyWithBlock
+                                                   progress:configuration.constructingBody.uploadProgressWithBlock
+                                                    success:^(NSURLSessionDataTask * task, id responseObject) {
             kNetworkHandlingSuccess(responseObject, configuration, success, failure);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure ? failure(error) : nil;
@@ -41,10 +49,10 @@
     } else if (configuration.downloadBody) {
         // 是否为下载文件
         KJBaseNetworking * baseNetworking = [KJNetworkManager createBaseNetworkingWithRequest:request];
-        [baseNetworking downloadWithURL:request.URLString
-                            destination:configuration.downloadBody.destination
-                               progress:configuration.downloadBody.downloadProgressWithBlock
-                                success:^(NSURLSessionDataTask * task, id responseObject) {
+        return [baseNetworking downloadWithURL:request.URLString
+                                   destination:configuration.downloadBody.destination
+                                      progress:configuration.downloadBody.downloadProgressWithBlock
+                                       success:^(NSURLSessionDataTask * task, id responseObject) {
             NSString * filePathString = (NSString *)responseObject;
             success ? success(filePathString) : nil;
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -58,6 +66,8 @@
         } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
             failure ? failure(error) : nil;
         }];
+        NSUInteger taskIdentifier = [[request valueForKey:@"taskIdentifier"] unsignedIntegerValue];
+        return [KJBaseNetworking appointTaskWithTaskIdentifier:taskIdentifier];
     }
 }
 
@@ -142,10 +152,12 @@ NS_INLINE BOOL kDictionaryContainsKey(NSDictionary * dict, NSString * key){
     if (have == NO) {
         KJNetworkCapturePlugin * capture = [KJNetworkCapturePlugin sharedInstance];
         capture.openLog = YES;
-        NSMutableArray * temp = [NSMutableArray arrayWithObject:capture];
+        NSMutableArray * temp = [NSMutableArray array];
         if (tempRequest.plugins) {
             [temp addObjectsFromArray:tempRequest.plugins];
         }
+        // 抓包插件处于最后一个
+        [temp addObject:capture];
         tempRequest.plugins = temp.mutableCopy;
     }
 #endif

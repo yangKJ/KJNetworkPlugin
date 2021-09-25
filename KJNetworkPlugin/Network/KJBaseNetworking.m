@@ -99,6 +99,20 @@
     }
 }
 
+/// 获取指定task
++ (NSURLSessionTask *)appointTaskWithTaskIdentifier:(NSUInteger)taskIdentifier{
+    @synchronized (self) {
+        __block NSURLSessionTask * _task = nil;
+        [self.sessionTaskDatas enumerateObjectsUsingBlock:^(NSURLSessionTask * task, NSUInteger idx, BOOL * stop) {
+            if (task.taskIdentifier == taskIdentifier) {
+                _task = task;
+                *stop = YES;
+            }
+        }];
+        return _task;
+    }
+}
+
 /// 是否打开网络加载菊花(默认打开)
 + (void)openNetworkActivityIndicator:(BOOL)open{
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:open];
@@ -159,21 +173,7 @@ static NSString *_baseURL;
     }
 }
 
-#pragma mark - 网络请求处理
-
-- (void)GETHTTPRequsetWithURL:(NSString *)url
-                   parameters:(NSDictionary *)parameters
-                      success:(KJNetworkSuccess)success
-                      failure:(KJNetworkFailure)failure{
-    [self HTTPWithMethod:KJNetworkRequestMethodGET url:url parameters:parameters success:success failure:failure];
-}
-
-- (void)POSTHTTPRequsetWithURL:(NSString *)url
-                    parameters:(NSDictionary *)parameters
-                       success:(KJNetworkSuccess)success
-                       failure:(KJNetworkFailure)failure{
-    [self HTTPWithMethod:KJNetworkRequestMethodPOST url:url parameters:parameters success:success failure:failure];
-}
+#pragma mark - nework
 
 - (NSURLSessionTask *)HTTPWithMethod:(KJNetworkRequestMethod)method
                                  url:(NSString *)url
@@ -186,7 +186,8 @@ static NSString *_baseURL;
                  \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
                  KJNetworkRequestMethodStringMap[method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
     }
-    return [self dataTaskWithHTTPMethod:method url:url parameters:parameters success:^(NSURLSessionDataTask * task, id responseObject) {
+    return [self dataTaskWithHTTPMethod:method url:url parameters:parameters
+                                success:^(NSURLSessionDataTask * task, id responseObject) {
         if ([KJBaseNetworking openLog]) {
             KJAppLog(@"🎷🎷🎷请求结果 = %@", [KJBaseNetworking kHTTPResponseObjectToString:responseObject]);
         }
@@ -208,10 +209,10 @@ static NSString *_baseURL;
 - (NSURLSessionTask *)dataTaskWithHTTPMethod:(KJNetworkRequestMethod)method
                                          url:(NSString *)url
                                   parameters:(NSDictionary *)parameters
-                                     success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-                                     failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure{
+                                     success:(void(^)(NSURLSessionDataTask *, id _Nullable))success
+                                     failure:(void(^)(NSURLSessionDataTask *, NSError *))failure{
     NSURLSessionTask * sessionTask = nil;
-    if (method == KJNetworkRequestMethodGET){
+    if (method == KJNetworkRequestMethodGET) {
         sessionTask = [self.sessionManager GET:url parameters:parameters headers:nil progress:nil success:success failure:failure];
     }else if (method == KJNetworkRequestMethodPOST) {
         sessionTask = [self.sessionManager POST:url parameters:parameters headers:nil progress:nil success:success failure:failure];
@@ -230,7 +231,7 @@ static NSString *_baseURL;
     return sessionTask;
 }
 
-#pragma mark - 上传下载
+#pragma mark - upload
 
 /// 上传资源
 - (NSURLSessionTask *)postMultipartFormDataWithURL:(NSString *)url
@@ -240,7 +241,8 @@ static NSString *_baseURL;
                                            success:(KJNetworkSuccess)success
                                            failure:(KJNetworkFailure)failure{
     NSURLSessionTask * sessionTask =
-    [self.sessionManager POST:url parameters:params headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [self.sessionManager POST:url parameters:params headers:nil
+    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         block ? block(formData) : nil;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -259,131 +261,7 @@ static NSString *_baseURL;
     return sessionTask;
 }
 
-#pragma mark - 上传文件
-- (void)uploadFileWithURL:(NSString *)url
-               parameters:(NSDictionary *)parameters
-                     name:(NSString *)name
-                 filePath:(NSString *)filePath
-                 progress:(KJNetworkProgress)progress
-                  success:(KJNetworkSuccess)success
-                  failure:(KJNetworkFailure)failure{
-    NSURLSessionTask * sessionTask =
-    [self.sessionManager POST:url parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSError * error = nil;
-        [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:name error:&error];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            progress ? progress(uploadProgress) : nil;
-        });
-    } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-        [KJBaseNetworking.sessionTaskDatas removeObject:task];
-        success ? success(task,responseObject) : nil;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [KJBaseNetworking.sessionTaskDatas removeObject:task];
-        failure ? failure(task, error) : nil;
-    }];
-    if (sessionTask) {
-        [KJBaseNetworking.sessionTaskDatas addObject:sessionTask];
-    }
-}
-
-#pragma mark - 上传图片文件
-- (void)uploadImageURL:(NSString *)url
-            parameters:(NSDictionary *)parameters
-                images:(NSArray<UIImage *> *)images
-                  name:(NSString *)name
-              fileName:(NSString *)fileName
-              mimeType:(NSString *)mimeType
-              progress:(KJNetworkProgress)progress
-               success:(KJNetworkSuccess)success
-               failure:(KJNetworkFailure)failure{
-    NSURLSessionTask * sessionTask =
-    [self.sessionManager POST:url parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //压缩-添加-上传图片
-        [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSData * imageData = UIImageJPEGRepresentation(image, 0.5);
-            NSString * tempFileName = [NSString stringWithFormat:@"%@%lu.%@",fileName, (unsigned long)idx, mimeType ?: @"jpeg"];
-            NSString * temMimeType = [NSString stringWithFormat:@"image/%@",mimeType ?: @"jpeg"];
-            [formData appendPartWithFileData:imageData name:name fileName:tempFileName mimeType:temMimeType];
-        }];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            progress ? progress(uploadProgress) : nil;
-        });
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [KJBaseNetworking.sessionTaskDatas removeObject:task];
-        success ? success(task,responseObject) : nil;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [KJBaseNetworking.sessionTaskDatas removeObject:task];
-        failure ? failure(task, error) : nil;
-    }];
-    if (sessionTask) {
-        [KJBaseNetworking.sessionTaskDatas addObject:sessionTask];
-    }
-}
-
-#pragma mark - 下载文件
-- (void)downloadWithURL:(NSString *)url
-                fileDir:(NSString *)fileDir
-               progress:(KJNetworkProgress)progress
-                success:(KJNetworkSuccess)success
-                failure:(KJNetworkFailure)failure{
-    if (fileDir.length == 0) {
-        if ([KJBaseNetworking openLog]) {
-            KJAppLog(@"🎷🎷🎷下载路径为空，使用默认目录");
-        }
-        NSString * documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        fileDir = [documents stringByAppendingPathComponent:@"KJDownloader"];
-    }
-    
-    NSString *fileName = url.lastPathComponent;
-    NSString *savePath = [fileDir stringByAppendingPathComponent:fileName];
-    
-    NSFileManager * fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:savePath]) {//文件已下载，直接返回
-        if ([KJBaseNetworking openLog]) {
-            KJAppLog(@"🎷🎷🎷文件已下载，直接返回");
-        }
-        success ? success(nil,savePath) : nil;
-        return;
-    }
-    
-    NSError * createError = nil;
-    if (![fileManager fileExistsAtPath:fileDir]) {//文件夹不存在，创建目录
-        if ([KJBaseNetworking openLog]) {
-            KJAppLog(@"🎷🎷🎷文件夹不存在，创建目录");
-        }
-        [fileManager createDirectoryAtPath:fileDir withIntermediateDirectories:YES attributes:nil error:&createError];
-    }
-    if (createError) {
-        failure ? failure(nil, createError) : nil;
-        return;
-    }
-    
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    __block NSURLSessionDownloadTask * downloadTask =
-    [self.sessionManager downloadTaskWithRequest:request progress:^(NSProgress * downloadProgress) {
-        if ([KJBaseNetworking openLog]) {
-            KJAppLog(@"🎷🎷🎷下载进度:%.2f%%",100.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            progress ? progress(downloadProgress) : nil;
-        });
-    } destination:^NSURL * (NSURL * targetPath, NSURLResponse * response) {
-        return [NSURL fileURLWithPath:savePath]; // 返回的是文件存放在本地沙盒的地址NSURL对象
-    } completionHandler:^(NSURLResponse * response, NSURL * filePath, NSError * error) {
-        [KJBaseNetworking.sessionTaskDatas removeObject:downloadTask];
-        if (failure && error) {
-            failure ? failure(nil, error) : nil;
-            return;
-        }
-        success ? success(nil,filePath.absoluteString) : nil;
-    }];
-    [downloadTask resume]; // 启动下载任务
-    if (downloadTask) {
-        [KJBaseNetworking.sessionTaskDatas addObject:downloadTask];
-    }
-}
+#pragma mark - download
 
 - (NSURLSessionTask *)downloadWithURL:(NSString *)url
                           destination:(KJNetworkDestination)destination
@@ -405,7 +283,7 @@ static NSString *_baseURL;
             failure ? failure(nil, error) : nil;
             return;
         }
-        success ? success(nil,filePath.absoluteString) : nil;
+        success ? success(nil, filePath.absoluteString) : nil;
     }];
     [downloadTask resume];
     if (downloadTask) {
@@ -430,23 +308,30 @@ static NSString *_baseURL;
 /// 请求参数转字符串
 + (NSString *)kHTTPParametersToString:(NSDictionary *)parameters{
     if (parameters == nil || parameters.count == 0) return @"空";
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:nil];
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:parameters
+                                                        options:NSJSONWritingPrettyPrinted
+                                                          error:nil];
     return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 /// 请求结果转换
-+ (id)kHTTPResponseObjectToString:(id)responseObject{
++ (NSString *)kHTTPResponseObjectToString:(id)responseObject{
     if (responseObject == nil) return @"";
     NSError * error = nil;
-    if ([responseObject isKindOfClass:NSDictionary.class] || [responseObject isKindOfClass:NSArray.class]) {
+    if ([responseObject isKindOfClass:NSDictionary.class] ||
+        [responseObject isKindOfClass:NSArray.class]) {
         
     } else {
-        responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingFragmentsAllowed error:&error];
+        responseObject = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                         options:NSJSONReadingFragmentsAllowed
+                                                           error:&error];
         if (error != nil) {
             return @"";
         }
     }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
     if (jsonData) {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     } else {

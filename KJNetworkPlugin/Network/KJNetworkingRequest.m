@@ -18,6 +18,8 @@
 @property (nonatomic, assign) BOOL useSemaphore;
 /// 网络请求插件时机，配合小偷插件使用效果极佳
 @property (nonatomic, assign) KJRequestOpportunity opportunity;
+/// 网络请求标识符号
+@property (nonatomic, assign) NSUInteger taskIdentifier;
 
 @end
 
@@ -47,7 +49,8 @@
             self.path = [NSString stringWithFormat:@"/%@", self.path];
         }
     }
-    return [[self.ip stringByAppendingString:self.path ? self.path : @""] stringByAddingPercentEncodingWithAllowedCharacters:character];
+    return [[self.ip stringByAppendingString:self.path ? self.path : @""]
+            stringByAddingPercentEncodingWithAllowedCharacters:character];
 }
 
 #pragma mark - NSCoding
