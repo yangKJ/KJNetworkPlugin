@@ -18,7 +18,8 @@
             self.path = [NSString stringWithFormat:@"/%@", self.path];
         }
     }
-    return [[self.ip stringByAppendingString:self.path ? self.path : @""] stringByAddingPercentEncodingWithAllowedCharacters:character];
+    return [[self.ip stringByAppendingString:self.path ? self.path : @""]
+            stringByAddingPercentEncodingWithAllowedCharacters:character];
 }
 
 #ifdef DEBUG

@@ -57,7 +57,7 @@
         [self.response setValue:response forKey:@"processResponse"];
     } else {
         NSString * description = @"code analysis error.";
-        NSInteger code = -250;
+        NSInteger code = -200;
         if ([result isKindOfClass:[NSDictionary class]]) {
             code = [result[@"code"] integerValue];
             for (NSString * key in self.messages) {

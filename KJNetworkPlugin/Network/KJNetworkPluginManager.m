@@ -6,6 +6,9 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJNetworkPluginManager.h"
+#import "KJNetworkingResponse.h"
+#import "KJNetworkingDelegate.h"
+
 #if __has_include("KJNetworkingRequest+KJCertificate.h")
 #import "KJNetworkingRequest+KJCertificate.h"
 #endif
@@ -20,7 +23,7 @@
     __block KJNetworkingResponse * response = [[KJNetworkingResponse alloc] init];
     // 保持插件`response`地址统一
     for (id<KJNetworkDelegate> plugin in request.plugins) {
-        [((KJNetworkBasePlugin *)plugin) setValue:response forKey:@"response"];
+        [((id)plugin) setValue:response forKey:@"response"];
     }
     
     // 成功插件处理
@@ -91,6 +94,9 @@
         BOOL again = NO;
         id successResponse = successPluginHandle(responseObject, &again);
         if (again) {// 再次重复网络请求
+            @synchronized (KJBaseNetworking.sessionTaskDatas) {
+                [KJBaseNetworking.sessionTaskDatas removeObject:task];
+            }
             [KJNetworkPluginManager HTTPPluginRequest:request success:success failure:failure];
             return;
         }
@@ -105,6 +111,9 @@
         BOOL again = NO;
         id failureResponse = failurePluginHandle(task, error, &again);
         if (again) {// 再次重复网络请求
+            @synchronized (KJBaseNetworking.sessionTaskDatas) {
+                [KJBaseNetworking.sessionTaskDatas removeObject:task];
+            }
             [KJNetworkPluginManager HTTPPluginRequest:request success:success failure:failure];
             return;
         }
@@ -124,6 +133,7 @@
     // 网络请求开始时刻，插件处理
     BOOL stopRequest = NO;
     [request setValue:@(KJRequestOpportunityWillSend) forKey:@"opportunity"];
+    [request setValue:@(sessionTask.taskIdentifier) forKey:@"taskIdentifier"];
     [response setValue:sessionTask forKey:@"task"];
     for (id<KJNetworkDelegate> plugin in request.plugins) {
         response = [plugin willSendWithRequest:request stopRequest:&stopRequest];

@@ -7,7 +7,7 @@
 //  插件管理器，插件中枢神经
 
 #import "KJBaseNetworking.h"
-#import "KJNetworkBasePlugin.h"
+#import "KJNetworkingRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

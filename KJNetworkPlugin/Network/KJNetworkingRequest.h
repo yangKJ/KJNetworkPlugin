@@ -23,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 /// 默认请求头
 @property (nonatomic, strong) NSDictionary *header;
-/// 插件数组
+/// 插件数组，插件加入顺序会直接影响到每种插件的处理
+/// 插件之间的数据会单线影响，前面的插件数据会被后面执行的插件所修改
+/// 备注：在添加插件时刻需要注意添加顺序
 @property (nonatomic, strong) NSArray<id<KJNetworkDelegate>>*plugins;
 /// 请求类型，默认 KJNetworkRequestMethodPOST
 @property (nonatomic, assign) KJNetworkRequestMethod method;

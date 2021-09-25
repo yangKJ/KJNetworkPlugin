@@ -186,10 +186,20 @@
 			path = Chain;
 			sourceTree = "<group>";
 		};
+		6852B32926FED428007A94C6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6870CDED26AD51A500960EAE /* KJNetworkBasePlugin.h */,
+				6870CDEE26AD51A500960EAE /* KJNetworkBasePlugin.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		6870CE0026AD521A00960EAE /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
 				6870CE3526AD6EB000960EAE /* Anslysis */,
+				6852B32926FED428007A94C6 /* Base */,
 				6870CE0F26AD672E00960EAE /* Cache */,
 				C9E75DA726DDD5BB00081273 /* Capture */,
 				6870CE0826AD5B8000960EAE /* Certificate */,
@@ -242,8 +252,6 @@
 			children = (
 				6872D60B26AC66BE00A6FD3C /* KJBaseNetworking.h */,
 				6872D60A26AC66BE00A6FD3C /* KJBaseNetworking.m */,
-				6870CDED26AD51A500960EAE /* KJNetworkBasePlugin.h */,
-				6870CDEE26AD51A500960EAE /* KJNetworkBasePlugin.m */,
 				6870CDFF26AD51DC00960EAE /* KJNetworkingDelegate.h */,
 				6870CDE726AD50FE00960EAE /* KJNetworkingRequest.h */,
 				6870CDE826AD50FE00960EAE /* KJNetworkingRequest.m */,
@@ -672,7 +680,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -725,7 +733,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -742,6 +750,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KJNetworkPlugin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -761,6 +770,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KJNetworkPlugin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

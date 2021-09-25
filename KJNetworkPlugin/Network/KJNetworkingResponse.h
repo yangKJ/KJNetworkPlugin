@@ -7,7 +7,7 @@
 //  响应结果相关
 
 #import <Foundation/Foundation.h>
-#import "KJBaseNetworking.h"
+#import "KJNetworkingType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

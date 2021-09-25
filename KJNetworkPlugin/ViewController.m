@@ -24,7 +24,7 @@
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.test.com";
-    request.path = @"/ip(null)";
+    request.path = @"/ip";
     request.responseSerializer = KJSerializerJSON;
     
     KJNetworkLoadingPlugin * plugin = [[KJNetworkLoadingPlugin alloc] init];
@@ -39,7 +39,6 @@
     thiefPlugin.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
         if (request.opportunity == KJRequestOpportunityFailure) {
             request.ip = @"https://www.httpbin.org";
-            request.path = @"/ip";
         }
     };
     thiefPlugin.kGetResponse = ^(KJNetworkingResponse * _Nonnull response) {

@@ -64,7 +64,9 @@
             hud = [MBProgressHUD HUDForView:[KJNetworkLoadingPlugin topViewController].view];
         }
         if (hud == nil) {
-            [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString window:self.displayInWindow delay:0];
+            [KJNetworkLoadingPlugin createMBProgressHUDWithMessage:self.loadDisplayString
+                                                            window:self.displayInWindow
+                                                             delay:0];
         }
     }
     
@@ -81,7 +83,8 @@
     // 隐藏加载框
     if (self.displayLoading) {
         if (self.delayHiddenLoading) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)),
+                           dispatch_get_main_queue(), ^{
                 [KJNetworkLoadingPlugin hideMBProgressHUD];
             });
         } else {
@@ -104,13 +107,18 @@
         if (self.delayHiddenLoading) {
             __weak __typeof(&*self) weakself = self;
             NSString * string = [self.response.error.localizedDescription copy];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayHiddenLoading * NSEC_PER_SEC)),
+                           dispatch_get_main_queue(), ^{
                 if (weakself.response.responseObject == nil) {
-                    weakself.failHud = [KJNetworkLoadingPlugin showTipMessage:string window:weakself.displayInWindow delay:2];
+                    weakself.failHud = [KJNetworkLoadingPlugin showTipMessage:string
+                                                                       window:weakself.displayInWindow
+                                                                        delay:2];
                 }
             });
         } else {
-            self.failHud = [KJNetworkLoadingPlugin showTipMessage:self.response.error.localizedDescription window:self.displayInWindow delay:2];
+            self.failHud = [KJNetworkLoadingPlugin showTipMessage:self.response.error.localizedDescription
+                                                           window:self.displayInWindow
+                                                            delay:2];
         }
     }
     
@@ -181,11 +189,8 @@
     UIWindow *window;
     if (@available(iOS 13.0, *)) {
         window = [UIApplication sharedApplication].windows.firstObject;
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        window = [UIApplication sharedApplication].keyWindow;
-#pragma clang diagnostic pop
+    } else if (@available(iOS 11.0, *)) {
+        window = [[UIApplication sharedApplication] delegate].window;
     }
     return (UIView *)window;
 }

@@ -10,9 +10,9 @@
 #import <CommonCrypto/CommonDigest.h>
 
 #ifdef DEBUG
-#define KJCaptureLog(FORMAT, ...) fprintf(stderr,"%s", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#define KJCAPTURELog(FORMAT, ...) fprintf(stderr,"%s", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
-#define KJCaptureLog(FORMAT, ...) nil
+#define KJCAPTURELog(FORMAT, ...) nil
 #endif
 
 @interface KJNetworkCapturePlugin ()
@@ -56,7 +56,7 @@
     
     self.task = self.response.task;
     if (self.openLog) {
-        KJCaptureLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 网络抓包 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
+        KJCAPTURELog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 网络抓包 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
                      \n请求方式 = %@\n请求地址 = %@\n请求路径 = %@\n请求链接 = %@\n请求参数 = %@\n请求头 = %@  \
                      \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 网络抓包 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<\n",
                      KJNetworkRequestMethodStringMap[request.method], request.ip, request.path ?: @"空",
@@ -87,7 +87,7 @@
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super failureWithRequest:request againRequest:againRequest];
     
-    KJCaptureLog(@">>>>>>>>>>>>>>>>>>>>> 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 >>>>>>>>>>>>>>>>>>>>>>>>>>  \
+    KJCAPTURELog(@">>>>>>>>>>>>>>>>>>>>> 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 >>>>>>>>>>>>>>>>>>>>>>>>>>  \
                  \n错误编码 = %ld\n错误信息 = %@\n错误详情 = %@ \
                  \n<<<<<<<<<<<<<<<<<<<<< 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 <<<<<<<<<<<<<<<<<<<<<<<<<<\n",
                  (long)self.response.error.code, self.response.error.localizedDescription, self.response.error.userInfo);
@@ -112,7 +112,8 @@
 /// @param path 网络请求路径
 /// @param params 请求参数
 /// @param complete 读取回调
-+ (void)readLogWithIp:(NSString *)ip path:(NSString *)path params:(nullable id)params complete:(void(^)(KJCaptureResponse * response))complete{
++ (void)readLogWithIp:(NSString *)ip path:(NSString *)path params:(nullable id)params
+             complete:(void(^)(KJCaptureResponse * response))complete{
     // 异步多读单写
     dispatch_sync([KJNetworkCapturePlugin sharedInstance].currentQueue, ^{
         NSCharacterSet *character = [NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<>+"].invertedSet;
@@ -148,7 +149,7 @@
         NSString * __autoreleasing key = [KJNetworkCapturePlugin SHA512String:string];
         [weakSelf.responseDict setValue:capture forKey:key];
         if (weakSelf.openLog) {
-            KJCaptureLog(@"🎷🎷🎷网络抓包请求结果 = %@\n", [KJNetworkCapturePlugin kAnslysisJSON:responseObject]);
+            KJCAPTURELog(@"🎷🎷🎷网络抓包请求结果 = %@\n", [KJNetworkCapturePlugin kAnslysisJSON:responseObject]);
         }
     });
 }
