@@ -20,6 +20,12 @@ typedef NS_OPTIONS(NSUInteger, KJNetworkRefreshPageType) {
     KJNetworkRefreshPageTypeString = 1 << 1,// 字符串
     KJNetworkRefreshPageTypeNumber = 1 << 2,// 对象
 };
+/// 刷新结局数据类型
+typedef NS_ENUM(NSUInteger, KJNetworkRefreshDataState) {
+    KJNetworkRefreshDataStateEndRefresh, // 下拉刷新
+    KJNetworkRefreshDataStateLoadMore, // 上拉加载更多
+    KJNetworkRefreshDataStateNomore, // 上拉加载全部数据
+};
 /// 下拉刷新和加载更多插件
 @interface KJNetworkRefreshPlugin : KJNetworkBasePlugin
 
@@ -38,10 +44,10 @@ typedef NS_OPTIONS(NSUInteger, KJNetworkRefreshPageType) {
 /// 该参数会加入至请求参数之中，因此网络调用时可不传入该参数
 @property (nonatomic, strong) NSString *pageParameterName;
 
-/// 解析数据条数
+/// 解析数据条数，如果想主动结束加载请返回-1
 @property (nonatomic, copy, readwrite) NSInteger(^kAnslysisDataCount)(id responseObject);
 /// 请求全部数据回调
-@property (nonatomic, copy, readwrite) void(^kRequestDatasComplete)(BOOL requestAll);
+@property (nonatomic, copy, readwrite) void(^kRequestDataState)(KJNetworkRefreshDataState state);
 
 @end
 

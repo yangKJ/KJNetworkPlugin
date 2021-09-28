@@ -21,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param success 成功回调
 /// @param failure 失败回调
 + (nullable NSURLSessionTask *)HTTPRequest:(__kindof KJNetworkingRequest *)request
-                             configuration:(KJNetworkConfiguration * _Nullable)configuration
-                                   success:(void(^_Nullable)(id responseObject))success
-                                   failure:(void(^_Nullable)(NSError * error))failure;
+                             configuration:(nullable KJNetworkConfiguration *)configuration
+                                   success:(nullable void(^)(id responseObject))success
+                                   failure:(nullable void(^)(NSError * error))failure;
 
 /// 取消网络请求，
 + (void)cancelRequestWithTask:(NSURLSessionTask *)task;

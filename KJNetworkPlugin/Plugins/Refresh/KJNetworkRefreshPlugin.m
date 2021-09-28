@@ -62,16 +62,42 @@
     NSString * key = kRefreshSHA512String(request.URLString);
     NSInteger page = [KJNetworkRefreshPlugin.pageDictionary[key] integerValue];
     
-    if (self.refreshMethod == KJNetworkRefreshMethodRefresh) {
-        page = self.startPage;
-    } else if (self.refreshMethod == KJNetworkRefreshMethodAddmore) {
-        page += 1;
+    switch (self.refreshMethod) {
+        case KJNetworkRefreshMethodRefresh:
+            page = self.startPage;
+            break;
+        case KJNetworkRefreshMethodAddmore:
+            page += 1;
+            break;
+        default:break;
     }
     [KJNetworkRefreshPlugin.pageDictionary setValue:@(page) forKey:key];
     
     if (self.kAnslysisDataCount) {
         NSInteger count = self.kAnslysisDataCount(self.response.processResponse);
-        self.kRequestDatasComplete ? self.kRequestDatasComplete(count < self.pageSize) : nil;
+        KJNetworkRefreshDataState state = KJNetworkRefreshDataStateEndRefresh;
+        if ((count < self.pageSize && count > 0) || count == -1) {
+            switch (self.refreshMethod) {
+                case KJNetworkRefreshMethodRefresh:
+                    state = KJNetworkRefreshDataStateEndRefresh;
+                    break;
+                case KJNetworkRefreshMethodAddmore:
+                    state = KJNetworkRefreshDataStateNomore;
+                    break;
+                default:break;
+            }
+        } else {
+            switch (self.refreshMethod) {
+                case KJNetworkRefreshMethodRefresh:
+                    state = KJNetworkRefreshDataStateEndRefresh;
+                    break;
+                case KJNetworkRefreshMethodAddmore:
+                    state = KJNetworkRefreshDataStateLoadMore;
+                    break;
+                default:break;
+            }
+        }
+        self.kRequestDataState ? self.kRequestDataState(state) : nil;
     }
     
     return self.response;

@@ -29,7 +29,7 @@ typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChainRe
 + (void)HTTPChainRequest:(__kindof KJNetworkingRequest *)request
                  success:(KJNetworkChainSuccess)success
                  failure:(KJNetworkChainFailure)failure
-                   chain:(KJNetworkNextChainRequest)chain,...;
+                   chain:(KJNetworkNextChainRequest)chain,... NS_REQUIRES_NIL_TERMINATION;
 
 
 //******************************** 链式网络请求 ********************************

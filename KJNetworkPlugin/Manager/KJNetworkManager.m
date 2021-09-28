@@ -28,9 +28,9 @@
 /// @param success 成功回调
 /// @param failure 失败回调
 + (nullable NSURLSessionTask *)HTTPRequest:(__kindof KJNetworkingRequest *)request
-                             configuration:(KJNetworkConfiguration * _Nullable)configuration
-                                   success:(void(^_Nullable)(id responseObject))success
-                                   failure:(void(^_Nullable)(NSError * error))failure{
+                             configuration:(nullable KJNetworkConfiguration *)configuration
+                                   success:(nullable void(^)(id responseObject))success
+                                   failure:(nullable void(^)(NSError * error))failure{
     if (configuration == nil) {
         configuration = [KJNetworkConfiguration defaultConfiguration];
     }
