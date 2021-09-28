@@ -34,6 +34,10 @@ typedef NS_ENUM(NSUInteger, KJNetworkCachePolicy){
 /// 缓存相关
 @property (nonatomic, strong, readonly) YYCache *dataCache;
 
+/// 特别提示：网络请求是否使用过 `dispatch_group_enter` 和 `dispatch_group_leave`
+/// 并且使用 `KJNetworkCachePolicyCacheThenNetwork` 方式，则需要开启yes
+@property (nonatomic, assign) BOOL useGroup;
+
 /// 读取指定网络缓存
 /// @param url 网络链接
 /// @param parameters 参数

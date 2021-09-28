@@ -82,6 +82,17 @@
             failure ? failure(request, response.error) : nil;
         }
         return;
+    } else if (prepareResponse) {
+        // 缓存插件，STNetworkCachePolicyCacheThenNetwork 抛出本地数据
+        if ([[response valueForKey:@"cacheCastLocalResponse"] boolValue]) {
+            NSError * processError = nil;
+            id processResponse = processPluginHandle(prepareResponse, &processError);
+            if (processError == nil) {
+                success ? success(request, processResponse) : nil;
+            } else {
+                failure ? failure(request, response.error) : nil;
+            }
+        }
     }
     
     // 网络请求基类

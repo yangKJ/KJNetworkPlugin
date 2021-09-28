@@ -25,25 +25,39 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
 /// @return 返回准备插件处理后的数据
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
     [super prepareWithRequest:request endRequest:endRequest];
-    if (self.cachePolicy == KJNetworkCachePolicyCacheOnly ||
-        self.cachePolicy == KJNetworkCachePolicyCacheElseNetwork ||
-        self.cachePolicy == KJNetworkCachePolicyCacheThenNetwork) {
-        id response = [self cacheData];
-        if (response) {
-            if (self.cachePolicy == KJNetworkCachePolicyCacheElseNetwork) {
+    
+    switch (self.cachePolicy) {
+        case KJNetworkCachePolicyCacheOnly:{// 只从缓存读数据
+            id response = [self cacheData];
+            if (response) {
+                [self.response setValue:response forKey:@"prepareResponse"];
+            } else {
+                NSError *error = [NSError errorWithDomain:@"kj.cache.plugin"
+                                                     code:-200
+                                                 userInfo:@{NSLocalizedDescriptionKey: @"No local cache"}];
+                [self.response setValue:error forKey:@"error"];
+            }
+            * endRequest = YES;
+        } break;
+        case KJNetworkCachePolicyCacheElseNetwork:{// 先从缓存读取，没有再从网络获取
+            id response = [self cacheData];
+            if (response) {
+                [self.response setValue:response forKey:@"prepareResponse"];
                 * endRequest = YES;
             }
-            [self.response setValue:response forKey:@"prepareResponse"];
-        } else {
-            NSError *error = [NSError errorWithDomain:@"kj.cache.plugin"
-                                                 code:-200
-                                             userInfo:@{NSLocalizedDescriptionKey: @"No local cache"}];
-            [self.response setValue:error forKey:@"error"];
-            if (self.cachePolicy == KJNetworkCachePolicyCacheOnly) {
-                * endRequest = YES;
+        } break;
+        case KJNetworkCachePolicyCacheThenNetwork:{// 先从缓存读取，再从网络获取并且缓存，这种情况下，Block将产生两次调用
+            id response = [self cacheData];
+            if (response) {
+                [self.response setValue:response forKey:@"prepareResponse"];
+                if (self.useGroup == NO) {
+                    [self.response setValue:@(YES) forKey:@"cacheCastLocalResponse"];
+                }
             }
-        }
+        } break;
+        default:break;
     }
+    
     return self.response;
 }
 
@@ -53,12 +67,17 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
 /// @return 返回成功插件处理后的数据
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super succeedWithRequest:request againRequest:againRequest];
-    if (self.cachePolicy == KJNetworkCachePolicyNetworkOnly ||
-        self.cachePolicy == KJNetworkCachePolicyCacheElseNetwork ||
-        self.cachePolicy == KJNetworkCachePolicyNetworkElseCache ||
-        self.cachePolicy == KJNetworkCachePolicyCacheThenNetwork) {
-        [self saveCacheResponseObject:self.response.responseObject];
+    
+    switch (self.cachePolicy) {
+        case KJNetworkCachePolicyNetworkOnly:
+        case KJNetworkCachePolicyCacheElseNetwork:
+        case KJNetworkCachePolicyNetworkElseCache:
+        case KJNetworkCachePolicyCacheThenNetwork:
+            [self saveCacheResponseObject:self.response.responseObject];
+            break;
+        default:break;
     }
+    
     return self.response;
 }
 
@@ -68,16 +87,15 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
 /// @return 返回失败插件处理后的数据
 - (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
     [super failureWithRequest:request againRequest:againRequest];
+    
     if (self.cachePolicy == KJNetworkCachePolicyNetworkElseCache) {
         id response = [self cacheData];
         if (response == nil) {
-            NSError *error = [NSError errorWithDomain:@"kj.cache.plugin"
-                                                 code:-200
-                                             userInfo:@{NSLocalizedDescriptionKey: @"No local cache"}];
-            [self.response setValue:error forKey:@"error"];
+            return self.response;
         }
         [self.response setValue:response forKey:@"failureResponse"];
     }
+    
     return self.response;
 }
 
