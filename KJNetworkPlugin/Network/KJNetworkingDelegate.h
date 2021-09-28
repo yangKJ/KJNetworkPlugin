@@ -11,8 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class KJNetworkingRequest;
-@class KJNetworkingResponse;
+@class KJNetworkingRequest , KJNetworkingResponse;
 /// 插件协议
 @protocol KJNetworkDelegate <NSObject>
 

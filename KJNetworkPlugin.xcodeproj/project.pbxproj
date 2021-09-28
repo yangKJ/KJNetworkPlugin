@@ -128,6 +128,7 @@
 		8431717BA28A692FC4CDEF20 /* Pods_KJNetworkPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPluginTests.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPluginTests/Pods-KJNetworkPluginTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C92503FC26C9FCDC008287D6 /* KJNetworkOtherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkOtherTests.m; sourceTree = "<group>"; };
+		C954633D2702EC1C00A9C991 /* KJNetworkingConsoleLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkingConsoleLog.h; sourceTree = "<group>"; };
 		C96224D226EEE7FF005884BF /* KJChainChannelApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJChainChannelApi.h; sourceTree = "<group>"; };
 		C96224D326EEE7FF005884BF /* KJChainChannelApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJChainChannelApi.m; sourceTree = "<group>"; };
 		C987146F26DE42CD00A07553 /* KJNetworkCapturePluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCapturePluginTests.m; sourceTree = "<group>"; };
@@ -256,6 +257,7 @@
 			children = (
 				6872D60B26AC66BE00A6FD3C /* KJBaseNetworking.h */,
 				6872D60A26AC66BE00A6FD3C /* KJBaseNetworking.m */,
+				C954633D2702EC1C00A9C991 /* KJNetworkingConsoleLog.h */,
 				6870CDFF26AD51DC00960EAE /* KJNetworkingDelegate.h */,
 				6870CDE726AD50FE00960EAE /* KJNetworkingRequest.h */,
 				6870CDE826AD50FE00960EAE /* KJNetworkingRequest.m */,
