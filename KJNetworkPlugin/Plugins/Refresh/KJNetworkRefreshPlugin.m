@@ -71,39 +71,66 @@
             break;
         default:break;
     }
-    [KJNetworkRefreshPlugin.pageDictionary setValue:@(page) forKey:key];
     
-    if (self.kAnslysisDataCount) {
-        NSInteger count = self.kAnslysisDataCount(self.response.processResponse);
-        KJNetworkRefreshDataState state = KJNetworkRefreshDataStateEndRefresh;
-        if ((count < self.pageSize && count > 0) || count == -1) {
-            switch (self.refreshMethod) {
-                case KJNetworkRefreshMethodRefresh:
-                    state = KJNetworkRefreshDataStateEndRefresh;
-                    break;
-                case KJNetworkRefreshMethodAddmore:
-                    state = KJNetworkRefreshDataStateNomore;
-                    break;
-                default:break;
-            }
-        } else {
-            switch (self.refreshMethod) {
-                case KJNetworkRefreshMethodRefresh:
-                    state = KJNetworkRefreshDataStateEndRefresh;
-                    break;
-                case KJNetworkRefreshMethodAddmore:
-                    state = KJNetworkRefreshDataStateLoadMore;
-                    break;
-                default:break;
-            }
-        }
-        self.kRequestDataState ? self.kRequestDataState(state) : nil;
+    @synchronized (KJNetworkRefreshPlugin.pageDictionary) {
+        [KJNetworkRefreshPlugin.pageDictionary setValue:@(page) forKey:key];
     }
+    
+    NSInteger count = [self customAnslysisDataCount];
+    KJNetworkRefreshDataState state = KJNetworkRefreshDataStateEndRefresh;
+    if ((count < self.pageSize && count > 0) || count == -1) {
+        switch (self.refreshMethod) {
+            case KJNetworkRefreshMethodRefresh:
+                state = KJNetworkRefreshDataStateEndRefresh;
+                break;
+            case KJNetworkRefreshMethodAddmore:
+                state = KJNetworkRefreshDataStateNomore;
+                break;
+            default:break;
+        }
+    } else {
+        switch (self.refreshMethod) {
+            case KJNetworkRefreshMethodRefresh:
+                state = KJNetworkRefreshDataStateEndRefresh;
+                break;
+            case KJNetworkRefreshMethodAddmore:
+                state = KJNetworkRefreshDataStateLoadMore;
+                break;
+            default:break;
+        }
+    }
+    self.kRequestDataState ? self.kRequestDataState(state) : nil;
     
     return self.response;
 }
 
 #pragma mark - private method
+
+/// 默认解析方案
+- (NSInteger)customAnslysisDataCount{
+    if ([self.response.processResponse isKindOfClass:[NSDictionary class]]) {
+        // 解析 `data` 为数组
+        if (kRefreshDictionaryContainsKey(self.response.processResponse, @"data")) {
+            id data = self.response.processResponse[@"data"];
+            if ([data isKindOfClass:[NSArray class]]) {
+                return [data count];
+            } else if ([data isKindOfClass:[NSDictionary class]]) {
+                // 解析 `data` 当中的 `list` 为数组
+                if (kRefreshDictionaryContainsKey(data, @"list")) {
+                    id list = data[@"list"];
+                    if ([list isKindOfClass:[NSArray class]]) {
+                        return [list count];
+                    }
+                }
+            }
+        }
+    }
+    // 自行解析
+    if (self.kAnslysisDataCount) {
+        return self.kAnslysisDataCount(self.response.processResponse);
+    }
+    return -1;
+}
 
 /// 加密
 NS_INLINE NSString * kRefreshSHA512String(NSString * string){

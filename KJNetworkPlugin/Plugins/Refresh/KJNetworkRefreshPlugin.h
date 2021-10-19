@@ -45,6 +45,8 @@ typedef NS_ENUM(NSUInteger, KJNetworkRefreshDataState) {
 @property (nonatomic, strong) NSString *pageParameterName;
 
 /// 解析数据条数，如果想主动结束加载请返回-1
+/// 默认解析 `data` 为数组，或者 `data` 当中的 `list` 为数组
+/// 其余模式请自行解析
 @property (nonatomic, copy, readwrite) NSInteger(^kAnslysisDataCount)(id responseObject);
 /// 请求全部数据回调
 @property (nonatomic, copy, readwrite) void(^kRequestDataState)(KJNetworkRefreshDataState state);

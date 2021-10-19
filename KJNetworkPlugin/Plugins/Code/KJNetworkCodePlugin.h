@@ -71,6 +71,10 @@ static NSString * const _Nonnull KJHTTPCodeStatusStringMap[] = {
 /// HTTP状态码处理，https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status
 @interface KJNetworkCodePlugin : KJNetworkBasePlugin
 
+/// 获取服务器Code信息
+/// @param error 错误
++ (NSString *)errorCodeString:(NSError *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

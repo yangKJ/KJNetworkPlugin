@@ -23,4 +23,13 @@
     return self.response;
 }
 
+/// 获取服务器Code信息
+/// @param error 错误
++ (NSString *)errorCodeString:(NSError *)error{
+    if (error == nil) {
+        return @"";
+    }
+    return KJHTTPCodeStatusStringMap[error.code];
+}
+
 @end
