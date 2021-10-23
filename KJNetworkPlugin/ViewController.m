@@ -50,9 +50,9 @@
     KJNetworkConfiguration * configuration = [KJNetworkConfiguration defaultConfiguration];
     configuration.openCapture = YES;
     
-    [KJNetworkManager HTTPRequest:request configuration:configuration success:^(id  _Nonnull responseObject) {
+    [KJNetworkManager HTTPRequest:request configuration:configuration success:^(KJNetworkComplete * complete) {
         
-    } failure:^(NSError * _Nonnull error) {
+    } failure:^(KJNetworkComplete * _Nonnull complete) {
         
     }];
 

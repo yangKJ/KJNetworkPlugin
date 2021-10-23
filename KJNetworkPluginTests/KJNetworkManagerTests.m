@@ -51,11 +51,11 @@
     KJNetworkConfiguration *configuration = [KJNetworkConfiguration defaultConfiguration];
     configuration.downloadBody = downloadBody;
     
-    [KJNetworkManager HTTPRequest:request configuration:configuration success:^(id  _Nonnull responseObject) {
-        NSLog(@"🎷🎷---%@",responseObject);
+    [KJNetworkManager HTTPRequest:request configuration:configuration success:^(KJNetworkComplete * complete) {
+        NSLog(@"🎷🎷---%@", complete.responseObject);
         [expectation fulfill];
-    } failure:^(NSError * _Nonnull error) {
-        XCTFail(@"%@", error.localizedDescription);
+    } failure:^(KJNetworkComplete * _Nonnull complete) {
+        XCTFail(@"%@", complete.error.localizedDescription);
     }];
     
     [self waitForExpectationsWithTimeout:300 handler:nil];

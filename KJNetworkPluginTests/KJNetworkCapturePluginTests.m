@@ -65,10 +65,10 @@
     request.path = @"/headers";
     request.responseSerializer = KJSerializerJSON;
     
-    [KJNetworkManager HTTPRequest:request configuration:nil success:^(id  _Nonnull responseObject) {
+    [KJNetworkManager HTTPRequest:request configuration:nil success:^(KJNetworkComplete * complete) {
         [expectation fulfill];
-    } failure:^(NSError * _Nonnull error) {
-        XCTFail(@"%@", error.localizedDescription);
+    } failure:^(KJNetworkComplete * _Nonnull complete) {
+        XCTFail(@"%@", complete.error.localizedDescription);
     }];
     
     [self waitForExpectationsWithTimeout:30 handler:nil];
