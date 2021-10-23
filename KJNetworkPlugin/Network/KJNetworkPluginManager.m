@@ -92,6 +92,8 @@
             } else {
                 failure ? failure(request, response.error) : nil;
             }
+            [request  setValue:@(NO) forKey:@"cacheData"];
+            [response setValue:@(NO) forKey:@"cacheCastLocalResponse"];
         }
     }
     

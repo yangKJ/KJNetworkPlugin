@@ -30,6 +30,7 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
         case KJNetworkCachePolicyCacheOnly:{// 只从缓存读数据
             id response = [self cacheData];
             if (response) {
+                [request setValue:@(YES) forKey:@"cacheData"];
                 [self.response setValue:response forKey:@"prepareResponse"];
             } else {
                 NSError *error = [NSError errorWithDomain:@"kj.cache.plugin"
@@ -42,6 +43,7 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
         case KJNetworkCachePolicyCacheElseNetwork:{// 先从缓存读取，没有再从网络获取
             id response = [self cacheData];
             if (response) {
+                [request setValue:@(YES) forKey:@"cacheData"];
                 [self.response setValue:response forKey:@"prepareResponse"];
                 * endRequest = YES;
             }
@@ -49,10 +51,9 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
         case KJNetworkCachePolicyCacheThenNetwork:{// 先从缓存读取，再从网络获取并且缓存，这种情况下，Block将产生两次调用
             id response = [self cacheData];
             if (response) {
+                [request setValue:@(YES) forKey:@"cacheData"];
                 [self.response setValue:response forKey:@"prepareResponse"];
-                if (self.useGroup == NO) {
-                    [self.response setValue:@(YES) forKey:@"cacheCastLocalResponse"];
-                }
+                [self.response setValue:@(YES) forKey:@"cacheCastLocalResponse"];
             }
         } break;
         default:break;
@@ -93,6 +94,7 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
         if (response == nil) {
             return self.response;
         }
+        [request setValue:@(YES) forKey:@"cacheData"];
         [self.response setValue:response forKey:@"failureResponse"];
     }
     

@@ -20,6 +20,8 @@
 @property (nonatomic, assign) KJRequestOpportunity opportunity;
 /// 网络请求标识符号
 @property (nonatomic, assign) NSUInteger taskIdentifier;
+/// 是否为缓存数据，配合 `KJNetworkCachePlugin` 插件使用
+@property (nonatomic, assign) BOOL cacheData;
 
 @end
 

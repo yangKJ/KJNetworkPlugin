@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 网络请求插件时机，配合 `KJNetworkThiefPlugin` 插件使用效果极佳
 @property (nonatomic, assign, readonly) KJRequestOpportunity opportunity;
+/// 是否为缓存数据，配合 `KJNetworkCachePlugin` 插件使用
+@property (nonatomic, assign, readonly) BOOL cacheData;
 
 @end
 
