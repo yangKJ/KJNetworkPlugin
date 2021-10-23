@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		680F441F2723AE360006ECCF /* KJNetworkComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = 680F441E2723AE360006ECCF /* KJNetworkComplete.m */; };
 		681F85A726AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */; };
 		681F85B726ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */; };
 		6839508326AF05E40037791A /* KJNetworkBatchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839508226AF05E40037791A /* KJNetworkBatchManager.m */; };
@@ -65,6 +66,8 @@
 		2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.release.xcconfig"; sourceTree = "<group>"; };
 		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		680F441D2723AE360006ECCF /* KJNetworkComplete.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KJNetworkComplete.h; sourceTree = "<group>"; };
+		680F441E2723AE360006ECCF /* KJNetworkComplete.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkComplete.m; sourceTree = "<group>"; };
 		681F85A526AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KJNetworkingRequest+KJCertificate.h"; sourceTree = "<group>"; };
 		681F85A626AD9FF400F72B7B /* KJNetworkingRequest+KJCertificate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "KJNetworkingRequest+KJCertificate.m"; sourceTree = "<group>"; };
 		681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCertificatePluginTests.m; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 		6832C4D726D6987000A83F9F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				680F441D2723AE360006ECCF /* KJNetworkComplete.h */,
+				680F441E2723AE360006ECCF /* KJNetworkComplete.m */,
 				68BA07F826DB7C4200996B00 /* KJNetworkConfiguration.h */,
 				68BA07F926DB7C4200996B00 /* KJNetworkConfiguration.m */,
 				68BA07F126DB7BF000996B00 /* KJNetworkManager.h */,
@@ -596,6 +601,7 @@
 				6839509C26AF0E160037791A /* KJNetworkChainManager.m in Sources */,
 				6870CE3826AD6EB000960EAE /* KJNetworkAnslysisPlugin.m in Sources */,
 				C9E75DAA26DDD77500081273 /* KJNetworkCapturePlugin.m in Sources */,
+				680F441F2723AE360006ECCF /* KJNetworkComplete.m in Sources */,
 				68E9CE9426B03CD50087228F /* KJNetworkLoadingPlugin.m in Sources */,
 				688E7A4C26AC401100C53AAD /* AppDelegate.m in Sources */,
 				6870CE0B26AD5B8000960EAE /* KJNetworkCertificatePlugin.m in Sources */,

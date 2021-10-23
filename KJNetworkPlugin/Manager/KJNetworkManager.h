@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KJNetworkConfiguration.h"
 #import "KJNetworkingRequest.h"
+#import "KJNetworkComplete.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,8 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param failure 失败回调
 + (nullable NSURLSessionTask *)HTTPRequest:(__kindof KJNetworkingRequest *)request
                              configuration:(nullable KJNetworkConfiguration *)configuration
-                                   success:(nullable void(^)(id responseObject))success
-                                   failure:(nullable void(^)(NSError * error))failure;
+                                   success:(nullable void(^)(KJNetworkComplete * complete))success
+                                   failure:(nullable void(^)(KJNetworkComplete * complete))failure;
+
+/// 二次封装插件版网络请求
+/// @param request 请求体
+/// @param configuration 配置信息
+/// @param complete 结果回调
++ (nullable NSURLSessionTask *)HTTPRequest:(__kindof KJNetworkingRequest *)request
+                             configuration:(nullable KJNetworkConfiguration *)configuration
+                                  complete:(nullable KJNetworkPluginComplete)complete;
 
 /// 取消网络请求，
 + (void)cancelRequestWithTask:(NSURLSessionTask *)task;

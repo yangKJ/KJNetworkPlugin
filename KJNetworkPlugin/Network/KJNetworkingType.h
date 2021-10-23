@@ -66,6 +66,11 @@ typedef NS_ENUM(NSUInteger, KJRequestOpportunity) {
     KJRequestOpportunityFailure, /// 失败
     KJRequestOpportunityProcess  /// 最终处理时刻
 };
+/// 网络请求结果类型
+typedef NS_ENUM(NSUInteger, KJResponseObjectType) {
+    KJResponseObjectTypeSuccess, /// 成功
+    KJResponseObjectTypeFailure, /// 失败
+};
 
 @protocol AFMultipartFormData;
 /// 成功回调
@@ -84,6 +89,10 @@ typedef NSURL * _Nonnull(^_Nullable KJNetworkDestination)(NSURL * targetPath, NS
 typedef void(^_Nullable KJNetworkPluginSuccess)(KJNetworkingRequest * request, id responseObject);
 /// 插件失败回调
 typedef void(^_Nullable KJNetworkPluginFailure)(KJNetworkingRequest * request, NSError * error);
+
+@class KJNetworkComplete;
+/// 网球请求结果回调
+typedef void(^_Nullable KJNetworkPluginComplete)(KJResponseObjectType objectType, KJNetworkComplete * complete);
 
 NS_ASSUME_NONNULL_END
 
