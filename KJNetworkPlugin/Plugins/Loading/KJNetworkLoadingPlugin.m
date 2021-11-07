@@ -158,7 +158,8 @@
     hud.label.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     
     // 设置菊花框为白色
-    UIActivityIndicatorView *indicatorView = [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]];
+    UIActivityIndicatorView * indicatorView =
+    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]];
     indicatorView.color = [UIColor whiteColor];
     
     return hud;
@@ -201,9 +202,9 @@
     UIWindow *window = (UIWindow *)[self kKeyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        for (UIWindow * tmpWin in windows){
-            if (tmpWin.windowLevel == UIWindowLevelNormal){
-                window = tmpWin;
+        for (UIWindow * win in windows) {
+            if (win.windowLevel == UIWindowLevelNormal) {
+                window = win;
                 break;
             }
         }

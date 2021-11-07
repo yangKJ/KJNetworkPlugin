@@ -37,7 +37,8 @@
     };
     
     // 失败插件处理
-    id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) = ^id(NSURLSessionDataTask * task, NSError * error, BOOL * again){
+    id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) =
+    ^id(NSURLSessionDataTask * task, NSError * error, BOOL * again){
         [request setValue:@(KJRequestOpportunityFailure) forKey:@"opportunity"];
         [response setValue:task  forKey:@"task"];
         [response setValue:error forKey:@"error"];
@@ -72,7 +73,8 @@
         if (prepareResponse) {
             BOOL again = NO;
             NSError * processError = nil;
-            id processResponse = processPluginHandle(successPluginHandle(prepareResponse, &again), &processError);
+            id successResponse = successPluginHandle(prepareResponse, &again);
+            id processResponse = processPluginHandle(successResponse, &processError);
             if (processError == nil) {
                 success ? success(request, processResponse) : nil;
             } else {
@@ -170,7 +172,8 @@
         }
         if ([[request valueForKey:@"useSemaphore"] boolValue]) {
             // 解决信号量卡顿主线程问题，开启一条子线程
-            baseNetworking.sessionManager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            baseNetworking.sessionManager.completionQueue =
+            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         }
 #if __has_include("KJNetworkingRequest+KJCertificate.h")
         if (request.certificatePath && request.certificatePath.length) {

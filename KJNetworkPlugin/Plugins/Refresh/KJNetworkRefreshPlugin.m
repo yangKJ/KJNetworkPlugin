@@ -41,7 +41,7 @@
     } else if (self.refreshMethod == KJNetworkRefreshMethodAddmore) {
         NSString * key = kRefreshSHA512String(request.URLString);
         if (kRefreshDictionaryContainsKey(_pageDictionary, key)) {
-            NSInteger page = [_pageDictionary[key] integerValue];
+            int page = [_pageDictionary[key] intValue];
             param = [self setParams:param key:self.pageParameterName value:page];
         }
     }
@@ -60,7 +60,7 @@
     [super processSuccessResponseWithRequest:request error:error];
     
     NSString * key = kRefreshSHA512String(request.URLString);
-    NSInteger page = [KJNetworkRefreshPlugin.pageDictionary[key] integerValue];
+    int page = [KJNetworkRefreshPlugin.pageDictionary[key] intValue];
     
     switch (self.refreshMethod) {
         case KJNetworkRefreshMethodRefresh:
@@ -153,12 +153,13 @@ NS_INLINE BOOL kRefreshDictionaryContainsKey(NSDictionary * dict, NSString * key
 /// @param params 参数
 /// @param key 字段名
 /// @param value 对应值
-- (NSMutableDictionary *)setParams:(NSMutableDictionary *)params key:(NSString *)key value:(NSInteger)value{
+- (NSMutableDictionary *)setParams:(NSMutableDictionary *)params
+                               key:(NSString *)key value:(int)value{
     if (!kRefreshDictionaryContainsKey(params, key)) {
         BOOL set = NO;
         if (self.pageType == 1 || (self.pageType & KJNetworkRefreshPageTypeString)) {
             set = YES;
-            [params setValue:[NSString stringWithFormat:@"%ld",value] forKey:key];
+            [params setValue:[NSString stringWithFormat:@"%d", value] forKey:key];
         }
         if (set == NO) {
             if (self.pageType == 2 || (self.pageType & KJNetworkRefreshPageTypeNumber)) {

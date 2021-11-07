@@ -34,9 +34,9 @@ typedef NS_ENUM(NSUInteger, KJNetworkRefreshDataState) {
 /// 分页参数类型，默认 KJNetworkRefreshPageTypeString
 @property (nonatomic, assign) KJNetworkRefreshPageType pageType;
 /// 分页起始值，默认为零
-@property (nonatomic, assign) NSInteger startPage;
+@property (nonatomic, assign) int startPage;
 /// 每页个数，默认 20 条
-@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, assign) int pageSize;
 /// 每页参数名，默认 `pageSize`
 /// 该参数会加入至请求参数之中，因此网络调用时可不传入该参数
 @property (nonatomic, strong) NSString *pageSizeParameterName;
