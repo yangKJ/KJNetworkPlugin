@@ -8,6 +8,7 @@
 - 熟悉swift的朋友应该都知道一款优秀的三方库[Moya](https://github.com/Moya/Moya)，插件版网络请求是真香，于是乎借鉴思路制作一款纯oc版本的插件网络请求库
 - 熟悉oc的朋友又应该都知道一款优秀的三方库[YTKNetwork](https://github.com/yuantiku/YTKNetwork)，基于对象的协议版网络请求，然后他的批量网络请求和链式网络请求也超级香
 - 结合一下两者优点，制作一款`批量`和`链式`插件版网络请求库
+- 目前整理九款插件：**解析插件，缓存插件，配置自建证书插件，加载提示插件，修改请求插件，日志抓包插件，错误码插件，刷新插件，网络错误和空数据插件**
 
 ### 功能清单
 插件版网络请求可以更方便快捷的定制专属网络请求，并且支持批量操作，链式操作
@@ -22,6 +23,9 @@
 - 支持配置自建证书插件
 - 支持修改请求体和获取响应结果插件
 - 支持网络日志抓包插件
+- 支持刷新加载更多插件
+- 支持错误码解析插件
+- 支持错误和空数据UI展示插件
 - 支持批量操作
 - 支持链式网络请求
 
@@ -44,6 +48,9 @@
   - Certificate：自建证书插件
   - Thief：修改器插件
   - Capture：网络日志抓包插件
+  - Code：错误码插件
+  - Refresh：刷新插件
+  - Empty：网络错误和空数据UI插件
 
 ### Network版块
 
@@ -129,7 +136,7 @@
 ### Plugins插件集合
 - **[插件使用教程](https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)**
 
-**目前已有6款插件供使用：**
+**目前已有9款插件供使用：**
 
 - [**KJNetworkLoadingPlugin**](Docs/LOADING.md)：基于MBProgressHUD封装的加载框和错误提示框插件
 
@@ -142,6 +149,12 @@
 - [**KJNetworkThiefPlugin**](Docs/THIEF.md)：修改`KJNetworkingRequest`和获取`KJNetworkingResponse`插件
 
 - [**KJNetworkCapturePlugin**](Docs/CAPTURE.md)：网络日志抓包插件
+
+- [**KJNetworkCodePlugin**](Docs/CODE.md)：错误码解析插件
+
+- [**KJNetworkRefreshPlugin**](Docs/REFRESH.md)：刷新加载更多插件
+
+- [**KJNetworkEmptyPlugin**](Docs/EMPTY.md)：错误信息和空数据UI展示插件
 
 ### Chain链式插件网络
 - [**链式网络使用教程**](Docs/CHAIN.md)
