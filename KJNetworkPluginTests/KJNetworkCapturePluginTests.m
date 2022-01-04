@@ -46,7 +46,7 @@
     plugin.openLog = YES;
     request.plugins = @[plugin];
     
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * request, id responseObject) {
         [expectation fulfill];
     } failure:^(KJNetworkingRequest * _Nonnull request, NSError * _Nonnull error) {
         XCTFail(@"%@", error.localizedDescription);

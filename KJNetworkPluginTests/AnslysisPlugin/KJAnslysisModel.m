@@ -6,7 +6,6 @@
 //  https://github.com/yangKJ/KJNetworkPlugin
 
 #import "KJAnslysisModel.h"
-#import <MJExtension/MJExtension.h>
 
 @implementation KJAnslysisModel
 

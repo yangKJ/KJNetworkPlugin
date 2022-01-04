@@ -1,26 +1,35 @@
 //
-//  ViewController.m
+//  HomeViewController.m
 //  KJNetworkPlugin
 //
 //  Created by 77。 on 2021/7/24.
 //  https://github.com/yangKJ/KJNetworkPlugin
 
-#import "ViewController.h"
+//  ****************************************************
+//  更多插件使用技巧，请查看测试用例 `KJNetworkPluginTests`
+//  ****************************************************
+
+#import "HomeViewController.h"
 #import "KJNetworkPluginManager.h"
 #import "KJNetworkLoadingPlugin.h"
 #import "KJNetworkManager.h"
 #import "KJNetworkThiefPlugin.h"
 
-@interface ViewController ()
+@interface HomeViewController ()
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self testLoadingAndThief];
+}
+
+/// 测试加载插件和修改器插件
+- (void)testLoadingAndThief{
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.test.com";
@@ -55,8 +64,6 @@
     } failure:^(KJNetworkComplete * _Nonnull complete) {
         
     }];
-
 }
-
 
 @end

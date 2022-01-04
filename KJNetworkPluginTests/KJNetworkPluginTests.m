@@ -41,7 +41,7 @@
     request.path = @"/ip";
     request.responseSerializer = KJSerializerJSON;
     
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * request, id responseObject) {
         XCTAssertNotNil(responseObject, @"data should not be nil");
         
         NSString *origin = responseObject[@"origin"];
@@ -64,7 +64,7 @@
     request.path = @"/post";
     request.params = @{@"param1":@"value1"};
     
-    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * _Nonnull request, id  _Nonnull responseObject) {
+    [KJNetworkPluginManager HTTPPluginRequest:request success:^(KJNetworkingRequest * request, id responseObject) {
         XCTAssertNotNil(responseObject, @"data should not be nil");
         
         NSDictionary *dic = [responseObject mj_JSONObject];

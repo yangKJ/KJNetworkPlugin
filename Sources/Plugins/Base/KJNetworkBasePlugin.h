@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 此插件为所以子插件父类，内部已实现全部协议，子类可根据需要来重载协议
 /// 重载之时，必须调用父类方法，否则可能会出现未解之谜，切记切记
 /// 子插件请保持功能单一性原则，可参考文档来设计属于您的专属插件
-/// 专属插件设计文档：
+/// 专属插件设计文档：https://github.com/yangKJ/KJNetworkPlugin/wiki/%E6%8F%92%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3
 
 @property (nonatomic, strong, readonly) KJNetworkingRequest *request;
 @property (nonatomic, strong, readonly) KJNetworkingResponse *response;

@@ -45,7 +45,10 @@
     };
     downloadBody.downloadProgressWithBlock = ^(NSProgress * _Nonnull progress) {
         XCTAssertTrue(progress.completedUnitCount > 0);
-        NSLog(@"Downloading: %lld / %lld -- %.2f", progress.completedUnitCount, progress.totalUnitCount, progress.completedUnitCount / (double)progress.totalUnitCount * 100);
+        NSLog(@"Downloading: %lld / %lld -- %.2f",
+              progress.completedUnitCount,
+              progress.totalUnitCount,
+              progress.completedUnitCount / (double)progress.totalUnitCount * 100);
     };
     
     KJNetworkConfiguration *configuration = [KJNetworkConfiguration defaultConfiguration];

@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param request 请求体
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure;
++ (void)HTTPPluginRequest:(KJNetworkingRequest *)request
+                  success:(KJNetworkPluginSuccess)success
+                  failure:(KJNetworkPluginFailure)failure;
 
 @end
 

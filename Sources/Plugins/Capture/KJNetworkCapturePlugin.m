@@ -112,7 +112,9 @@
 /// @param path 网络请求路径
 /// @param params 请求参数
 /// @param complete 读取回调
-+ (void)readLogWithIp:(NSString *)ip path:(NSString *)path params:(nullable id)params
++ (void)readLogWithIp:(NSString *)ip
+                 path:(NSString *)path
+               params:(nullable id)params
              complete:(void(^)(KJCaptureResponse * response))complete{
     // 异步多读单写
     dispatch_sync([KJNetworkCapturePlugin sharedInstance].currentQueue, ^{

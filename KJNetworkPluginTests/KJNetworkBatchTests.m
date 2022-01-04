@@ -67,7 +67,8 @@
     configuration.maxQueue = 3;
     configuration.requestArray = array.mutableCopy;
     
-    [KJNetworkBatchManager HTTPBatchRequestConfiguration:configuration reconnect:^BOOL(NSArray<KJNetworkingRequest *> * _Nonnull reconnectArray) {
+    [KJNetworkBatchManager HTTPBatchRequestConfiguration:configuration
+                                               reconnect:^BOOL(NSArray<KJNetworkingRequest *> * reconnectArray) {
         return YES;
     } complete:^(NSArray<KJBatchResponse *> * _Nonnull result) {
         NSLog(@"----%@",result);
