@@ -17,6 +17,7 @@ typedef BOOL(^_Nullable KJNetworkBatchReconnect)(NSArray<KJNetworkingRequest *> 
 typedef void(^_Nullable KJNetworkBatchComplete)(NSArray<KJBatchResponse *> * result);
 
 /// 批量网络请求
+/// 使用文档：https://github.com/yangKJ/KJNetworkPlugin/blob/master/Docs/BATCH.md
 @interface KJNetworkBatchManager : NSObject
 
 /// 批量网络请求

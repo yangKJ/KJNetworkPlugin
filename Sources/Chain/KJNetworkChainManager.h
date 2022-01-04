@@ -19,6 +19,7 @@ typedef void(^_Nullable KJNetworkChainFailure)(NSError * error);
 typedef __kindof KJNetworkingRequest * _Nullable(^_Nullable KJNetworkNextChainRequest)(id responseObject);
 
 /// 链式网络请求
+/// 使用文档：https://github.com/yangKJ/KJNetworkPlugin/blob/master/Docs/CHAIN.md
 @interface KJNetworkChainManager : NSObject
 
 /// 链式网络请求
