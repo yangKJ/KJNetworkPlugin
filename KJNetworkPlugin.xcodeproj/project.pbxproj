@@ -117,7 +117,7 @@
 		043F1F3D2783ECE700C43364 /* KJNetworkBatchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkBatchManager.h; sourceTree = "<group>"; };
 		043F1F3E2783ECE700C43364 /* KJBatchConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJBatchConfiguration.m; sourceTree = "<group>"; };
 		043F1F572783ED8800C43364 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		043F1F582783ED8800C43364 /* KJNetworkPlugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = KJNetworkPlugin.podspec; sourceTree = SOURCE_ROOT; };
+		043F1F582783ED8800C43364 /* KJNetworkPlugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = KJNetworkPlugin.podspec; sourceTree = SOURCE_ROOT; };
 		2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.release.xcconfig"; sourceTree = "<group>"; };
 		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,16 +205,16 @@
 			path = AnslysisPlugin;
 			sourceTree = "<group>";
 		};
-		043F1EFC2783ECE700C43364 /* Sources */ = {
+		043F1EFC2783ECE700C43364 /* NetworkPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				043F1EFD2783ECE700C43364 /* Plugins */,
-				043F1F242783ECE700C43364 /* Network */,
+				043F1F3A2783ECE700C43364 /* Batch */,
 				043F1F302783ECE700C43364 /* Chain */,
 				043F1F332783ECE700C43364 /* Manager */,
-				043F1F3A2783ECE700C43364 /* Batch */,
+				043F1F242783ECE700C43364 /* Network */,
+				043F1EFD2783ECE700C43364 /* Plugins */,
 			);
-			path = Sources;
+			path = NetworkPlugin;
 			sourceTree = SOURCE_ROOT;
 		};
 		043F1EFD2783ECE700C43364 /* Plugins */ = {
@@ -410,8 +410,8 @@
 				688E7A4B26AC401100C53AAD /* AppDelegate.m */,
 				688E7A5026AC401100C53AAD /* HomeViewController.h */,
 				688E7A5126AC401100C53AAD /* HomeViewController.m */,
+				043F1EFC2783ECE700C43364 /* NetworkPlugin */,
 				043F1EF62783E7F000C43364 /* Resources */,
-				043F1EFC2783ECE700C43364 /* Sources */,
 			);
 			path = KJNetworkPlugin;
 			sourceTree = "<group>";

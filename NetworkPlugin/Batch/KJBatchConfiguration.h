@@ -10,6 +10,7 @@
 #import "KJNetworkingRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /// 网络请求失败重连时机
 typedef NS_ENUM(NSUInteger, KJBatchReRequestOpportunity) {
     KJBatchReRequestOpportunityNone = 0,/// 不重新请求

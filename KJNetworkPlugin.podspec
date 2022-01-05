@@ -19,73 +19,73 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.subspec 'Network' do |xx|
-    xx.source_files = "Sources/Network/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Network/*.{h,m}"
     xx.dependency 'AFNetworking', "~> 4.0.0"
   end
   
   s.subspec 'Manager' do |xx|
-    xx.source_files = "Sources/Manager/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Manager/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Network'
   end
   
   s.subspec 'Batch' do |xx|
-    xx.source_files = "Sources/Batch/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Batch/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Network'
   end
   
   s.subspec 'Chain' do |xx|
-    xx.source_files = "Sources/Chain/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Chain/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Network'
   end
   
   ################## 插件板块 ##################
   
   s.subspec 'Base' do |xx|
-    xx.source_files = "Sources/Plugins/Base/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Base/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Network'
   end
 
   s.subspec 'Thief' do |xx|
-    xx.source_files = "Sources/Plugins/Thief/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Thief/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
   end
   
   s.subspec 'Certificate' do |xx|
-    xx.source_files = "Sources/Plugins/Certificate/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Certificate/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
   end
 
   s.subspec 'Cache' do |xx|
-    xx.source_files = "Sources/Plugins/Cache/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Cache/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
     xx.dependency 'YYCache', "~> 1.0.4"
   end
   
   s.subspec 'Anslysis' do |xx|
-    xx.source_files = "Sources/Plugins/Anslysis/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Anslysis/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
     xx.dependency 'MJExtension', "~> 3.3.0"
   end
   
   s.subspec 'Loading' do |xx|
-    xx.source_files = "Sources/Plugins/Loading/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Loading/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
     xx.dependency 'MBProgressHUD', "~> 1.2.0"
   end
   
   s.subspec 'Capture' do |xx|
-    xx.source_files = "Sources/Plugins/Capture/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Capture/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
     xx.dependency 'MJExtension', "~> 3.3.0"
   end
 
   s.subspec 'Code' do |xx|
-    xx.source_files = "Sources/Plugins/Code/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Code/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
   end
 
   s.subspec 'Refresh' do |xx|
-    xx.source_files = "Sources/Plugins/Refresh/*.{h,m}"
+    xx.source_files = "NetworkPlugin/Plugins/Refresh/*.{h,m}"
     xx.dependency 'KJNetworkPlugin/Base'
   end
   
