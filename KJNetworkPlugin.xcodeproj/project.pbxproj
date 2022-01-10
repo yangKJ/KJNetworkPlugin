@@ -11,7 +11,6 @@
 		043F1EFA2783EB1B00C43364 /* KJAnslysisModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6870CE5626AD9C1D00960EAE /* KJAnslysisModel.m */; };
 		043F1F3F2783ECE800C43364 /* KJCaptureResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F012783ECE700C43364 /* KJCaptureResponse.m */; };
 		043F1F402783ECE800C43364 /* KJNetworkCapturePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F022783ECE700C43364 /* KJNetworkCapturePlugin.m */; };
-		043F1F412783ECE800C43364 /* KJNetworkLoadingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F052783ECE700C43364 /* KJNetworkLoadingPlugin.m */; };
 		043F1F422783ECE800C43364 /* KJNetworkCachePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F082783ECE700C43364 /* KJNetworkCachePlugin.m */; };
 		043F1F432783ECE800C43364 /* KJEmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F0B2783ECE700C43364 /* KJEmptyDataView.m */; };
 		043F1F442783ECE800C43364 /* KJNetworkEmptyPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F0D2783ECE700C43364 /* KJNetworkEmptyPlugin.m */; };
@@ -34,7 +33,13 @@
 		043F1F552783ECE800C43364 /* KJNetworkBatchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F3B2783ECE700C43364 /* KJNetworkBatchManager.m */; };
 		043F1F562783ECE800C43364 /* KJBatchConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F1F3E2783ECE700C43364 /* KJBatchConfiguration.m */; };
 		043F1F592783ED8800C43364 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 043F1F572783ED8800C43364 /* README.md */; };
-		043F1F5A2783ED8800C43364 /* KJNetworkPlugin.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 043F1F582783ED8800C43364 /* KJNetworkPlugin.podspec */; };
+		04E0CA602788940900D8565C /* KJNetworkZipPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0CA5F2788940900D8565C /* KJNetworkZipPlugin.swift */; };
+		04E0CA622788A45000D8565C /* KJNetworkIndicatorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0CA612788A45000D8565C /* KJNetworkIndicatorPlugin.swift */; };
+		04E0CA642788A47900D8565C /* KJNetworkSecretPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0CA632788A47900D8565C /* KJNetworkSecretPlugin.swift */; };
+		04E0CA662788A48C00D8565C /* KJNetworkWarningPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0CA652788A48C00D8565C /* KJNetworkWarningPlugin.swift */; };
+		04E0CA682788C2C100D8565C /* KJNetworkPlugin.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 04E0CA672788C2C100D8565C /* KJNetworkPlugin.podspec */; };
+		04EDC58A278BFF1900838754 /* README_EN.md in Resources */ = {isa = PBXBuildFile; fileRef = 04EDC589278BFF1900838754 /* README_EN.md */; };
+		04EDC58F278C0BB800838754 /* KJNetworkLoadingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EDC58E278C0BB800838754 /* KJNetworkLoadingPlugin.m */; };
 		681F85B726ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F85B626ADA3BB00F72B7B /* KJNetworkCertificatePluginTests.m */; };
 		683E825326BAE22F00ED0F36 /* KJNetworkThiefPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 683E825226BAE22F00ED0F36 /* KJNetworkThiefPluginTests.m */; };
 		683F923326B98A4900BC3DAF /* KJNetworkBatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F923226B98A4900BC3DAF /* KJNetworkBatchTests.m */; };
@@ -69,8 +74,6 @@
 		043F1F002783ECE700C43364 /* KJNetworkCapturePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkCapturePlugin.h; sourceTree = "<group>"; };
 		043F1F012783ECE700C43364 /* KJCaptureResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJCaptureResponse.m; sourceTree = "<group>"; };
 		043F1F022783ECE700C43364 /* KJNetworkCapturePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCapturePlugin.m; sourceTree = "<group>"; };
-		043F1F042783ECE700C43364 /* KJNetworkLoadingPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkLoadingPlugin.h; sourceTree = "<group>"; };
-		043F1F052783ECE700C43364 /* KJNetworkLoadingPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkLoadingPlugin.m; sourceTree = "<group>"; };
 		043F1F072783ECE700C43364 /* KJNetworkCachePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkCachePlugin.h; sourceTree = "<group>"; };
 		043F1F082783ECE700C43364 /* KJNetworkCachePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkCachePlugin.m; sourceTree = "<group>"; };
 		043F1F0A2783ECE700C43364 /* KJNetworkEmptyPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkEmptyPlugin.h; sourceTree = "<group>"; };
@@ -117,7 +120,15 @@
 		043F1F3D2783ECE700C43364 /* KJNetworkBatchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkBatchManager.h; sourceTree = "<group>"; };
 		043F1F3E2783ECE700C43364 /* KJBatchConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJBatchConfiguration.m; sourceTree = "<group>"; };
 		043F1F572783ED8800C43364 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		043F1F582783ED8800C43364 /* KJNetworkPlugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = KJNetworkPlugin.podspec; sourceTree = SOURCE_ROOT; };
+		04E0CA5E2788940900D8565C /* KJNetworkPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KJNetworkPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
+		04E0CA5F2788940900D8565C /* KJNetworkZipPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJNetworkZipPlugin.swift; sourceTree = "<group>"; };
+		04E0CA612788A45000D8565C /* KJNetworkIndicatorPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJNetworkIndicatorPlugin.swift; sourceTree = "<group>"; };
+		04E0CA632788A47900D8565C /* KJNetworkSecretPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJNetworkSecretPlugin.swift; sourceTree = "<group>"; };
+		04E0CA652788A48C00D8565C /* KJNetworkWarningPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJNetworkWarningPlugin.swift; sourceTree = "<group>"; };
+		04E0CA672788C2C100D8565C /* KJNetworkPlugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = KJNetworkPlugin.podspec; sourceTree = SOURCE_ROOT; };
+		04EDC589278BFF1900838754 /* README_EN.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README_EN.md; sourceTree = SOURCE_ROOT; };
+		04EDC58D278C0BB800838754 /* KJNetworkLoadingPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KJNetworkLoadingPlugin.h; sourceTree = "<group>"; };
+		04EDC58E278C0BB800838754 /* KJNetworkLoadingPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KJNetworkLoadingPlugin.m; sourceTree = "<group>"; };
 		2B02037ECC58E7B6B727E0E5 /* Pods-KJNetworkPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.debug.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		39DA7BB0C940C3F9E0468CDD /* Pods-KJNetworkPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KJNetworkPlugin.release.xcconfig"; path = "Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin.release.xcconfig"; sourceTree = "<group>"; };
 		52AA47A9F473C02A3856AEDE /* Pods_KJNetworkPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KJNetworkPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,7 +191,8 @@
 				688E7A5C26AC401300C53AAD /* main.m */,
 				688E7A5326AC401100C53AAD /* Main.storyboard */,
 				043F1F572783ED8800C43364 /* README.md */,
-				043F1F582783ED8800C43364 /* KJNetworkPlugin.podspec */,
+				04EDC589278BFF1900838754 /* README_EN.md */,
+				04E0CA672788C2C100D8565C /* KJNetworkPlugin.podspec */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -227,9 +239,13 @@
 				043F1F102783ECE700C43364 /* Certificate */,
 				043F1F1B2783ECE700C43364 /* Code */,
 				043F1F092783ECE700C43364 /* Empty */,
+				04E0CA5C278893A500D8565C /* Indicator */,
 				043F1F032783ECE700C43364 /* Loading */,
 				043F1F152783ECE700C43364 /* Refresh */,
+				04E0CA5B2788939C00D8565C /* Secret */,
 				043F1F1E2783ECE700C43364 /* Thief */,
+				04E0CA5D278893AB00D8565C /* Warning */,
+				04E0CA5A2788939300D8565C /* Zip */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -248,8 +264,8 @@
 		043F1F032783ECE700C43364 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
-				043F1F042783ECE700C43364 /* KJNetworkLoadingPlugin.h */,
-				043F1F052783ECE700C43364 /* KJNetworkLoadingPlugin.m */,
+				04EDC58D278C0BB800838754 /* KJNetworkLoadingPlugin.h */,
+				04EDC58E278C0BB800838754 /* KJNetworkLoadingPlugin.m */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -326,6 +342,7 @@
 		043F1F212783ECE700C43364 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				04E0CA5E2788940900D8565C /* KJNetworkPlugin-Bridging-Header.h */,
 				043F1F232783ECE700C43364 /* KJNetworkBasePlugin.h */,
 				043F1F222783ECE700C43364 /* KJNetworkBasePlugin.m */,
 			);
@@ -381,6 +398,38 @@
 				043F1F3B2783ECE700C43364 /* KJNetworkBatchManager.m */,
 			);
 			path = Batch;
+			sourceTree = "<group>";
+		};
+		04E0CA5A2788939300D8565C /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				04E0CA5F2788940900D8565C /* KJNetworkZipPlugin.swift */,
+			);
+			path = Zip;
+			sourceTree = "<group>";
+		};
+		04E0CA5B2788939C00D8565C /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				04E0CA632788A47900D8565C /* KJNetworkSecretPlugin.swift */,
+			);
+			path = Secret;
+			sourceTree = "<group>";
+		};
+		04E0CA5C278893A500D8565C /* Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				04E0CA612788A45000D8565C /* KJNetworkIndicatorPlugin.swift */,
+			);
+			path = Indicator;
+			sourceTree = "<group>";
+		};
+		04E0CA5D278893AB00D8565C /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				04E0CA652788A48C00D8565C /* KJNetworkWarningPlugin.swift */,
+			);
+			path = Warning;
 			sourceTree = "<group>";
 		};
 		688E7A3E26AC401100C53AAD = {
@@ -505,6 +554,7 @@
 				TargetAttributes = {
 					688E7A4626AC401100C53AAD = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1320;
 					};
 					688E7A6126AC401300C53AAD = {
 						CreatedOnToolsVersion = 12.4;
@@ -536,7 +586,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				043F1F5A2783ED8800C43364 /* KJNetworkPlugin.podspec in Resources */,
+				04E0CA682788C2C100D8565C /* KJNetworkPlugin.podspec in Resources */,
+				04EDC58A278BFF1900838754 /* README_EN.md in Resources */,
 				688E7A5A26AC401300C53AAD /* LaunchScreen.storyboard in Resources */,
 				688E7A5726AC401300C53AAD /* Assets.xcassets in Resources */,
 				043F1F592783ED8800C43364 /* README.md in Resources */,
@@ -639,9 +690,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E0CA602788940900D8565C /* KJNetworkZipPlugin.swift in Sources */,
 				688E7A5226AC401100C53AAD /* HomeViewController.m in Sources */,
+				04E0CA622788A45000D8565C /* KJNetworkIndicatorPlugin.swift in Sources */,
 				043F1F4A2783ECE800C43364 /* KJNetworkCodePlugin.m in Sources */,
 				043F1F532783ECE800C43364 /* KJNetworkConfiguration.m in Sources */,
+				04E0CA662788A48C00D8565C /* KJNetworkWarningPlugin.swift in Sources */,
 				043F1F4E2783ECE800C43364 /* KJNetworkPluginManager.m in Sources */,
 				043F1F4C2783ECE800C43364 /* KJNetworkBasePlugin.m in Sources */,
 				043F1F402783ECE800C43364 /* KJNetworkCapturePlugin.m in Sources */,
@@ -659,13 +713,14 @@
 				043F1F542783ECE800C43364 /* KJNetworkManager.m in Sources */,
 				043F1F502783ECE800C43364 /* KJNetworkingRequest.m in Sources */,
 				043F1F432783ECE800C43364 /* KJEmptyDataView.m in Sources */,
+				04E0CA642788A47900D8565C /* KJNetworkSecretPlugin.swift in Sources */,
 				043F1F442783ECE800C43364 /* KJNetworkEmptyPlugin.m in Sources */,
 				688E7A5D26AC401300C53AAD /* main.m in Sources */,
-				043F1F412783ECE800C43364 /* KJNetworkLoadingPlugin.m in Sources */,
 				043F1F4F2783ECE800C43364 /* KJNetworkingResponse.m in Sources */,
 				043F1F452783ECE800C43364 /* KJEmptyProvider.m in Sources */,
 				043F1F4B2783ECE800C43364 /* KJNetworkThiefPlugin.m in Sources */,
 				043F1F512783ECE800C43364 /* KJNetworkChainManager.m in Sources */,
+				04EDC58F278C0BB800838754 /* KJNetworkLoadingPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,7 +890,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/KJNetworkPlugin/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -846,6 +903,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangkejun.KJNetworkPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NetworkPlugin/Plugins/Base/KJNetworkPlugin-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -856,7 +916,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/KJNetworkPlugin/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -867,6 +929,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangkejun.KJNetworkPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NetworkPlugin/Plugins/Base/KJNetworkPlugin-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -875,6 +939,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C1275CACFD3930F2E9D49032 /* Pods-KJNetworkPluginTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -900,6 +965,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F6D1F7AA19B7E043B3F542AD /* Pods-KJNetworkPluginTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";

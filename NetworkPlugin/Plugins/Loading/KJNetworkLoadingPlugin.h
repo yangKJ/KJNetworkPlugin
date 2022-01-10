@@ -9,6 +9,7 @@
 #import "KJNetworkBasePlugin.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @class MBProgressHUD;
 /// 加载动画插件
 @interface KJNetworkLoadingPlugin : KJNetworkBasePlugin
@@ -17,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL displayInWindow;
 /// 是否需要显示加载小菊花，默认NO
 @property (nonatomic, assign) BOOL displayLoading;
-/// 是否需要展示错误提示，默认NO
-@property (nonatomic, assign) BOOL displayErrorMessage;
 /// 加载显示内容，默认空
 @property (nonatomic, strong, nullable) NSString *loadDisplayString;
 /// 故意延迟消失加载loading，默认零秒

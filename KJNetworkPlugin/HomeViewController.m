@@ -14,8 +14,11 @@
 #import "KJNetworkLoadingPlugin.h"
 #import "KJNetworkManager.h"
 #import "KJNetworkThiefPlugin.h"
+#import "KJNetworkPlugin-Swift.h"
 
 @interface HomeViewController ()
+
+@property (nonatomic, strong) UILabel * IPLabel;
 
 @end
 
@@ -24,23 +27,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self testLoadingAndThief];
+    [self setupUI];
+    [self testPlugins];
+}
+
+- (void)setupUI{
+    [self.view addSubview:self.IPLabel];
 }
 
 /// 测试加载插件和修改器插件
-- (void)testLoadingAndThief{
+- (void)testPlugins{
     KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
     request.method = KJNetworkRequestMethodGET;
     request.ip = @"https://www.test.com";
     request.path = @"/ip";
+    request.timeoutInterval = 10;
     request.responseSerializer = KJSerializerJSON;
     
-    KJNetworkLoadingPlugin * plugin = [[KJNetworkLoadingPlugin alloc] init];
-    plugin.displayLoading = YES;
-    plugin.displayErrorMessage = YES;
-    plugin.delayHiddenLoading = 2.5;
-    plugin.displayInWindow = NO;
+    KJNetworkIndicatorPlugin * indicator = [[KJNetworkIndicatorPlugin alloc] init];
+    
+    KJNetworkLoadingPlugin * loading = [[KJNetworkLoadingPlugin alloc] init];
+    loading.displayLoading = YES;
+    loading.delayHiddenLoading = 1.;
+    loading.displayInWindow = NO;
     
     KJNetworkThiefPlugin * thiefPlugin = [[KJNetworkThiefPlugin alloc] init];
     thiefPlugin.maxAgainRequestCount = 2;
@@ -50,20 +59,36 @@
             request.ip = @"https://www.httpbin.org";
         }
     };
-    thiefPlugin.kGetResponse = ^(KJNetworkingResponse * _Nonnull response) {
-        
-    };
     
-    request.plugins = @[plugin, thiefPlugin];
+    request.plugins = @[indicator, loading, thiefPlugin];
 
     KJNetworkConfiguration * configuration = [KJNetworkConfiguration defaultConfiguration];
     configuration.openCapture = YES;
     
     [KJNetworkManager HTTPRequest:request configuration:configuration success:^(KJNetworkComplete * complete) {
-        
+        self.IPLabel.text =  [self.IPLabel.text stringByAppendingString:complete.responseObject[@"origin"]];
     } failure:^(KJNetworkComplete * _Nonnull complete) {
         
     }];
+}
+
+#pragma mark - lazy
+
+- (UILabel *)IPLabel{
+    if (!_IPLabel) {
+        _IPLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, self.view.frame.size.width - 60, 30)];
+        _IPLabel.center = CGPointMake(_IPLabel.center.x, 100);
+        _IPLabel.textColor = UIColor.greenColor;
+        _IPLabel.backgroundColor = [UIColor.greenColor colorWithAlphaComponent:0.15];
+        _IPLabel.layer.cornerRadius = 5;
+        _IPLabel.layer.borderWidth = 1;
+        _IPLabel.layer.borderColor = UIColor.greenColor.CGColor;
+        _IPLabel.layer.masksToBounds = YES;
+        _IPLabel.textAlignment = NSTextAlignmentCenter;
+        _IPLabel.font = [UIFont systemFontOfSize:15];
+        _IPLabel.text = @"IP Address: ";
+    }
+    return _IPLabel;
 }
 
 @end
