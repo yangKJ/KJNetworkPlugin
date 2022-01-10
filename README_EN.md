@@ -11,27 +11,31 @@
 
 > + [**中文文档**](https://github.com/yangKJ/KJNetworkPlugin/blob/master/README.md)
 
-### Plug-in network, support batch and chain operation
+### Network Plugin, support batch and chain operation
 - Friends who are familiar with swift should know an excellent three-party library [Moya](https://github.com/Moya/Moya), the plug-in version of the network request is really fragrant, so I use the idea to make a pure oc version of the plug-in Network request library.
 - Friends who are familiar with oc should know an excellent three-party library [YTKNetwork](https://github.com/yuantiku/YTKNetwork), object-based protocol version network request, and then his batch network request and chain network The request is also super fragrant.
 - Combining some of the advantages of the two, make a pure OC version of the batch and chain plug-in version of the network request library.
 
 ### Function list
-> + <font color=red>The plug-in version of the network request can be more convenient and quick to customize the exclusive network request, and supports batch operation and chain operation.</font>
+<font color=red>The plug-in version of the network request can be more convenient and quick to customize the exclusive network request, and supports batch operation and chain operation.</font>
 
 - Support basic network requests, download and upload files
 - Support configuration of general request and path, general parameters, etc.
-- Support setting loading and prompt box plugin
-- Support analysis result plug-in
+- Support batch operation
+- Support chain network request
+- Support setting loading animation plugin
+- Support analysis result plugin
 - Support web cache plugin
-- Support configuration of self-built certificate plug-in
-- Support to modify the request body and get the response result plug-in
+- Support configuration of self-built certificate plugin
+- Support to modify the request body and get the response result plugin
 - Support network log packet capture plugin
 - Support refresh to load more plugins
 - Support error code parsing plugin
 - Support error and empty data UI display plugin
-- Support batch operation
-- Support chain network request
+- Support display indicator plugin
+- Support failed error prompt plugin
+- Support request parameter set secret key plugin
+- Support network data unzip and parameter zip plugin
 
 ### Network
 <details open><summary><font size=2>**KJBaseNetworking**: network request base class, based on AFNetworking package use</font></summary>
@@ -47,19 +51,15 @@
 > Packaged methods include basic network requests, upload and download files, etc.
 </details>
 
-<details><summary><font size=2>**KJNetworkingRequest**: Request body, set network request related parameters, including parameters, request method, plug-ins, etc.</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingRequest**: Request body, set network request related parameters, including parameters, request method, plug-ins, etc.</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkingResponse**: Respond to the request result, get the data generated between plug-ins, etc.</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingResponse**: Respond to the request result, get the data generated between plugins, etc.</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkingType**: Summarize all enumerations and callback declarations</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingType**: Summarize all enumerations and callback declarations</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkBasePlugin**: plug-in base class, plug-in parent class</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkBasePlugin**: Plugin base class, plug-in parent class</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkPluginManager**: Plug-in manager, central nervous system</font></summary>
+<details><summary><font size=2>**KJNetworkPluginManager**: Plugin manager, central nervous system</font></summary>
 
 ```
 /// Plug-in version network request
@@ -70,7 +70,7 @@
 ```
 </details>
 
-<details><summary><font size=2>**KJNetworkingDelegate**: plug-in protocol, manage network request results</font></summary>
+<details><summary><font size=2>**KJNetworkingDelegate**: Plugin protocol, manage network request results</font></summary>
 
 <font color=red>**Currently, there are 5 protocol methods extracted, starting time, network request time, network success, network failure, and final return**</font>
 
@@ -108,9 +108,9 @@
 </details>
 
 ### Plugins collection
-**There are 9 plugins available for use:**
+**There are 13 plugins available for you to use:**
 
-- [**KJNetworkLoadingPlugin**](Docs/LOADING.md): Loadin and failed message plugin
+- [**KJNetworkLoadingPlugin**](Docs/LOADING.md): Loading animation plugin
 - [**KJNetworkAnslysisPlugin**](Docs/ANSLYSIS.md): Anslysis data plugin
 - [**KJNetworkCachePlugin**](Docs/CACHE.md): Cache plugin
 - [**KJNetworkCertificatePlugin**](Docs/CERTIFICATE.md): Configure certificate plugin
@@ -119,12 +119,86 @@
 - [**KJNetworkCodePlugin**](Docs/CODE.md): Error code analysis plugin
 - [**KJNetworkRefreshPlugin**](Docs/REFRESH.md): Refresh to load more plugin
 - [**KJNetworkEmptyPlugin**](Docs/EMPTY.md): Empty data UI display plugin
+- [**KJNetworkIndicatorPlugin**](Docs/INDICATOR.md): Indicator plugin
+- [**KJNetworkWarningPlugin**](Docs/WARNING.md): Failed error prompt plugin
+- [**KJNetworkSecretPlugin**](Docs/SECRET.md): Secret key plugin
+- [**KJNetworkZipPlugin**](Docs/ZIP.md): Unzip plugin
 
-### Chain plugin network
-[**KJNetworkChainManager**](Docs/CHAIN.md)
+#### Chain
 
-### Batch plugin network
-[**KJNetworkBatchManager**](Docs/BATCH.md)
+- Chained network requests are actually mainly used to manage network requests with interdependencies, and it can actually eventually be used to manage multiple topologically sorted network requests.
+
+```
+// Test the chained network request
+- (void)testChainNetworking{
+    XCTestExpectation * expectation = [self expectationWithDescription:@"test chain."];
+    
+    KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+    request.method = KJNetworkRequestMethodGET;
+    request.ip = @"https://www.httpbin.org";
+    request.path = @"/ip";
+    request.responseSerializer = KJSerializerJSON;
+    
+    [KJNetworkChainManager HTTPChainRequest:request failure:^(NSError *error) {
+        XCTFail(@"%@", error.localizedDescription);
+    }]
+    .chain(^__kindof KJNetworkingRequest * _Nullable(id _Nonnull responseObject) {
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.ip = @"https://www.httpbin.org";
+        request.path = @"/post";
+        request.params = {
+            "ip": responseObject["origin"]
+        };
+        return request;
+    })
+    .lastChain(^(id _Nonnull responseObject) {
+        [expectation fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:300 handler:nil];
+}
+```
+
+> [**More about chained plugin network processing.👒👒**](Docs/CHAIN.md)
+
+#### Batch
+
+- Regarding batch network requests, provide configuration information such as setting the maximum concurrent number, the number of failed calls, and the timing of error reconnection
+
+```
+// Test batch network requests
+- (void)testBatchNetworking{
+    XCTestExpectation * expectation = [self expectationWithDescription:@"test batch."];
+    
+    NSMutableArray * array = [NSMutableArray array];
+    {
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/headers";
+        request.responseSerializer = KJSerializerJSON;
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/ip";
+        [array addObject:request];
+    }
+    
+    KJBatchConfiguration *configuration = [KJBatchConfiguration sharedBatch];
+    configuration.maxQueue = 3;
+    configuration.requestArray = array.mutableCopy;
+    
+    [KJNetworkBatchManager HTTPBatchRequestConfiguration:configuration reconnect:^BOOL(NSArray<KJNetworkingRequest *> * _Nonnull reconnectArray) {
+        return YES;
+    } complete:^(NSArray<KJBatchResponse *> * _Nonnull result) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:300 handler:nil];
+}
+```
+
+> [**More about batch plugin network processing.👒👒**](Docs/CHAIN.md)
 
 ### About the author
 - 🎷 **E-mail address: [yangkj310@gmail.com](yangkj310@gmail.com) 🎷**

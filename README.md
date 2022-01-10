@@ -21,28 +21,30 @@
 
 ---
 
-<img src="Docs/list.png" width="250" height="350" align="right">
+<img src="Docs/list.png" width="250" height="350" vspace="10px" align="right">
 
 - 支持基本的网络请求，下载上传文件
 - 支持配置通用请求跟路径，通用参数等
-- 支持设置加载和提示框插件
+- 支持批量操作
+- 支持链式网络请求
+- 支持设置加载插件
 - 支持解析结果插件
 - 支持网络缓存插件
 - 支持配置自建证书插件
 - 支持修改请求体和获取响应结果插件
 - 支持网络日志抓包插件
 - 支持刷新加载更多插件
+- 支持指示器插件
 - 支持错误码解析插件
 - 支持错误和空数据UI展示插件
-- 支持批量操作
-- 支持链式网络请求
+- 支持错误提示插件
+- 支持密钥插件
+- 支持解压缩插件
 
 ---
 
-### Network
-<details open><summary><font size=2>**KJBaseNetworking**：网络请求基类，基于 AFNetworking 封装使用</font></summary>
-
-> 这里也提供两个入口，设置通用的根路径和通用参数，类似：userID，token等
+#### Network
+<details open><summary><font size=2>**KJBaseNetworking**：网络请求基类，基本的网络请求，上传下载文件等方法</font></summary>
 
 ```
 /// 根路径地址
@@ -50,20 +52,15 @@
 /// 基本参数，类似：userID，token等
 @property (nonatomic, strong, class) NSDictionary *baseParameters;
 ```
-> 封装的有基本的网络请求，上传下载文件等方法
 </details>
 
-<details><summary><font size=2>**KJNetworkingRequest**：请求体，设置网络请求相关参数，其中包含参数，请求方式，插件等等</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingRequest**：请求体，设置网络请求相关参数，其中包含参数，请求方式，插件等等</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkingResponse**：响应请求结果，获取插件之间产生的数据等等</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingResponse**：响应请求结果，获取插件之间产生的数据等等</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkingType**：汇总所有枚举和回调声明</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkingType**：汇总所有枚举和回调声明</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkBasePlugin**：插件基类，插件父类</font></summary>
-</details>
+<details><summary><font size=2>**KJNetworkBasePlugin**：插件基类，插件父类</font></summary></details>
 
 <details><summary><font size=2>**KJNetworkPluginManager**：插件管理器，中枢神经</font></summary>
 
@@ -72,7 +69,9 @@
 /// @param request 请求体
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure;
++ (void)HTTPPluginRequest:(KJNetworkingRequest *)request
+                  success:(KJNetworkPluginSuccess)success 
+                  failure:(KJNetworkPluginFailure)failure;
 ```
 </details>
 
@@ -113,10 +112,10 @@
 ```
 </details>
 
-### Plugins插件集合
-**目前已有9款插件供使用：**
+#### Plugins
+目前已有13款插件供使用：
 
-- [**KJNetworkLoadingPlugin**](Docs/LOADING.md)：加载框和错误提示框插件
+- [**KJNetworkLoadingPlugin**](Docs/LOADING.md)：加载动画插件
 - [**KJNetworkAnslysisPlugin**](Docs/ANSLYSIS.md)：解析数据插件
 - [**KJNetworkCachePlugin**](Docs/CACHE.md)：网络缓存插件
 - [**KJNetworkCertificatePlugin**](Docs/CERTIFICATE.md)：配置自建证书插件
@@ -124,13 +123,89 @@
 - [**KJNetworkCapturePlugin**](Docs/CAPTURE.md)：网络日志抓包插件
 - [**KJNetworkCodePlugin**](Docs/CODE.md)：错误码解析插件
 - [**KJNetworkRefreshPlugin**](Docs/REFRESH.md)：刷新加载更多插件
-- [**KJNetworkEmptyPlugin**](Docs/EMPTY.md)：错误信息和空数据UI展示插件
+- [**KJNetworkEmptyPlugin**](Docs/EMPTY.md)：错误和空数据UI展示插件
+- [**KJNetworkIndicatorPlugin**](Docs/INDICATOR.md)：指示器插件
+- [**KJNetworkWarningPlugin**](Docs/WARNING.md)：错误提示插件
+- [**KJNetworkSecretPlugin**](Docs/SECRET.md)：密钥插件
+- [**KJNetworkZipPlugin**](Docs/ZIP.md)：解压缩插件
 
-### Chain链式插件网络
-[**KJNetworkChainManager**](Docs/CHAIN.md)
+----
 
-### Batch批量插件网络
-[**KJNetworkBatchManager**](Docs/BATCH.md)
+#### Chain
+
+- 链式网络请求其实主要用于管理有相互依赖的网络请求，它实际上最终可以用来管理多个拓扑排序后的网络请求。
+
+```
+// 测试链式网络请求
+- (void)testChainNetworking{
+    XCTestExpectation * expectation = [self expectationWithDescription:@"test chain."];
+    
+    KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+    request.method = KJNetworkRequestMethodGET;
+    request.ip = @"https://www.httpbin.org";
+    request.path = @"/ip";
+    request.responseSerializer = KJSerializerJSON;
+    
+    [KJNetworkChainManager HTTPChainRequest:request failure:^(NSError * error) {
+        XCTFail(@"%@", error.localizedDescription);
+    }]
+    .chain(^__kindof KJNetworkingRequest * _Nullable(id _Nonnull responseObject) {
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.ip = @"https://www.httpbin.org";
+        request.path = @"/post";
+        request.params = {
+            "ip": responseObject["origin"]
+        };
+        return request;
+    })
+    .lastChain(^(id  _Nonnull responseObject) {
+        [expectation fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:300 handler:nil];
+}
+```
+
+> [**更多关于链式插件网络处理.👒👒**](Docs/CHAIN.md)
+
+#### Batch
+
+- 关于批量网络请求，提供设置最大并发数量，失败调用次数，错误重连时机等配置信息
+
+```
+// 测试批量网络请求
+- (void)testBatchNetworking{
+    XCTestExpectation * expectation = [self expectationWithDescription:@"test batch."];
+    
+    NSMutableArray * array = [NSMutableArray array];
+    {
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/headers";
+        request.responseSerializer = KJSerializerJSON;
+        [array addObject:request];
+    }{
+        KJNetworkingRequest * request = [[KJNetworkingRequest alloc] init];
+        request.method = KJNetworkRequestMethodGET;
+        request.path = @"/ip";
+        [array addObject:request];
+    }
+    
+    KJBatchConfiguration * configuration = [KJBatchConfiguration sharedBatch];
+    configuration.maxQueue = 3;
+    configuration.requestArray = array.mutableCopy;
+    
+    [KJNetworkBatchManager HTTPBatchRequestConfiguration:configuration reconnect:^BOOL(NSArray<KJNetworkingRequest *> * _Nonnull reconnectArray) {
+        return YES;
+    } complete:^(NSArray<KJBatchResponse *> * _Nonnull result) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:300 handler:nil];
+}
+```
+
+> [**更多关于批量插件网络处理.👒👒**](Docs/CHAIN.md)
 
 ### 关于作者
 - 🎷 **邮箱地址：[ykj310@126.com](ykj310@126.com) 🎷**

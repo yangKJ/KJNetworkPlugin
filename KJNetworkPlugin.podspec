@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.author   = { "77" => "ykj310@126.com" }
   s.source   = { :git => "https://github.com/yangKJ/KJNetworkPlugin.git", :tag => s.version.to_s}
   s.ios.deployment_target = '9.0'
+  s.swift_version = '5.0'
   s.requires_arc = true
   s.static_framework = true
 
@@ -42,6 +43,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Base' do |xx|
     xx.source_files = "NetworkPlugin/Plugins/Base/*.{h,m}"
+    xx.prefix_header_contents = '#import "KJNetworkPlugin-Bridging-Header.h"'
     xx.dependency 'KJNetworkPlugin/Network'
   end
 
@@ -86,6 +88,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'Refresh' do |xx|
     xx.source_files = "NetworkPlugin/Plugins/Refresh/*.{h,m}"
+    xx.dependency 'KJNetworkPlugin/Base'
+  end
+  
+  s.subspec 'Indicator' do |xx|
+    xx.source_files = "NetworkPlugin/Plugins/Indicator/*.swift"
     xx.dependency 'KJNetworkPlugin/Base'
   end
   
