@@ -12,30 +12,30 @@
 > + [**中文文档**](https://github.com/yangKJ/KJNetworkPlugin/blob/master/README.md)
 
 ### Network Plugin, support batch and chain operation
-- Friends who are familiar with swift should know an excellent three-party library [Moya](https://github.com/Moya/Moya), the plug-in version of the network request is really fragrant, so I use the idea to make a pure oc version of the plug-in Network request library.
-- Friends who are familiar with oc should know an excellent three-party library [YTKNetwork](https://github.com/yuantiku/YTKNetwork), object-based protocol version network request, and then his batch network request and chain network The request is also super fragrant.
-- Combining some of the advantages of the two, make a pure OC version of the batch and chain plug-in version of the network request library.
+- Friends who are familiar with swift should know an excellent three party library [Moya](https://github.com/Moya/Moya), the plugin version of the network request is really fragrant, so I use the idea to make a pure oc version of the plugin Network request library.
+- Friends who are familiar with oc should know an excellent three party library [YTKNetwork](https://github.com/yuantiku/YTKNetwork), object based protocol version network request, and then his batch network request and chain network The request is also super fragrant.
+- Combining some of the advantages of the two, make a pure OC version of the batch and chain plugin version of the network request library.
 
 ### Function list
-<font color=red>The plug-in version of the network request can be more convenient and quick to customize the exclusive network request, and supports batch operation and chain operation.</font>
+<font color=red>The plugin version of the network request can be more convenient and quick to customize the exclusive network request, and supports batch operation and chain operation.</font>
 
-- Support basic network requests, download and upload files
+- Support basic network requests, download and upload files.
 - Support configuration of general request and path, general parameters, etc.
-- Support batch operation
-- Support chain network request
-- Support setting loading animation plugin
-- Support analysis result plugin
-- Support web cache plugin
-- Support configuration of self-built certificate plugin
-- Support to modify the request body and get the response result plugin
-- Support network log packet capture plugin
-- Support refresh to load more plugins
-- Support error code parsing plugin
-- Support error and empty data UI display plugin
-- Support display indicator plugin
-- Support failed error prompt plugin
-- Support request parameter set secret key plugin
-- Support network data unzip and parameter zip plugin
+- Support batch operation.
+- Support chain network request.
+- Support setting loading animation plugin.
+- Support analysis result plugin.
+- Support web cache plugin.
+- Support configuration of self built certificate plugin.
+- Support to modify the request body and get the response result plugin.
+- Support network log packet capture plugin.
+- Support refresh to load more plugins.
+- Support error code parsing plugin.
+- Support error and empty data UI display plugin.
+- Support display indicator plugin.
+- Support failed error prompt plugin.
+- Support request parameter set secret key plugin.
+- Support network data unzip and parameter zip plugin.
 
 ### Network
 <details open><summary><font size=2>**KJBaseNetworking**: network request base class, based on AFNetworking package use</font></summary>
@@ -57,7 +57,7 @@
 
 <details><summary><font size=2>**KJNetworkingType**: Summarize all enumerations and callback declarations</font></summary></details>
 
-<details><summary><font size=2>**KJNetworkBasePlugin**: Plugin base class, plug-in parent class</font></summary></details>
+<details><summary><font size=2>**KJNetworkBasePlugin**: Plugin base class, plugin parent class</font></summary></details>
 
 <details><summary><font size=2>**KJNetworkPluginManager**: Plugin manager, central nervous system</font></summary>
 
@@ -78,7 +78,7 @@
 /// Start preparing network request
 /// @param request request related data
 /// @param endRequest Whether to end the following network request
-/// @return returns the data processed by the plug-in
+/// @return returns the data processed by the plugin
 - (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest;
 
 /// Request at the beginning of the network request
@@ -90,7 +90,7 @@
 /// Successfully received data
 /// @param request request related data
 /// @param againRequest Do you need to request the network again
-/// @return returns the data processed by the successful plug-in
+/// @return returns the data processed by the successful plugin
 - (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest;
 
 /// Failure handling
@@ -163,7 +163,7 @@
 
 #### Batch
 
-- Regarding batch network requests, provide configuration information such as setting the maximum concurrent number, the number of failed calls, and the timing of error reconnection
+- Regarding batch network requests, provide configuration information such as setting the maximum concurrent number, the number of failed calls, and the timing of error reconnection.
 
 ```
 // Test batch network requests
