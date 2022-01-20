@@ -65,8 +65,9 @@
     KJNetworkConfiguration * configuration = [KJNetworkConfiguration defaultConfiguration];
     configuration.openCapture = YES;
     
+    __weak __typeof(self) weakself = self;
     [KJNetworkManager HTTPRequest:request configuration:configuration success:^(KJNetworkComplete * complete) {
-        self.IPLabel.text =  [self.IPLabel.text stringByAppendingString:complete.responseObject[@"origin"]];
+        weakself.IPLabel.text = [weakself.IPLabel.text stringByAppendingString:complete.responseObject[@"origin"]];
     } failure:^(KJNetworkComplete * _Nonnull complete) {
         
     }];

@@ -19,10 +19,12 @@
 
 /// 开始准备网络请求
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param endRequest 是否结束下面的网络请求
-/// @return 返回准备插件处理后的数据
-- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
-    [super prepareWithRequest:request endRequest:endRequest];
+/// @return 返回缓存数据，successResponse 不为空表示存在缓存数据
+- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                  endRequest:(BOOL *)endRequest{
     
     if (self.certificatePath == nil) {
         NSExpression * expression = [NSExpression expressionWithFormat:@"Certificate Plugin `certificatePath` is nil."];
@@ -32,7 +34,7 @@
         request.validatesDomainName = self.validatesDomainName;
     }
     
-    return self.response;
+    return response;
 }
 
 @end

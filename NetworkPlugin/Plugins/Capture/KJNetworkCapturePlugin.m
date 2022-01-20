@@ -49,12 +49,14 @@
 
 /// 网络请求开始时刻请求
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param stopRequest 是否停止网络请求
 /// @return 返回网络请求开始时刻插件处理后的数据
-- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
-    [super willSendWithRequest:request stopRequest:stopRequest];
+- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request
+                                     response:(KJNetworkingResponse *)response
+                                  stopRequest:(BOOL *)stopRequest{
     
-    self.task = self.response.task;
+    self.task = response.task;
     if (self.openLog) {
         KJCAPTURELog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 网络抓包 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
                      \n请求方式 = %@\n请求地址 = %@\n请求路径 = %@\n请求链接 = %@\n请求参数 = %@\n请求头 = %@  \
@@ -65,34 +67,38 @@
                      [KJNetworkCapturePlugin kHTTPParametersToString:self.task.currentRequest.allHTTPHeaderFields]);
     }
     
-    return self.response;
+    return response;
 }
 
 /// 成功接收数据
 /// @param request  接收成功数据
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回成功插件处理后的数据
-- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super succeedWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
-    [self saveSuccessWithRequest:request responseObject:self.response.responseObject];
+    [self saveSuccessWithRequest:request responseObject:response.responseObject];
     
-    return self.response;
+    return response;
 }
 
 /// 失败处理
 /// @param request  失败的网络活动
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回失败插件处理后的数据
-- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super failureWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
     KJCAPTURELog(@">>>>>>>>>>>>>>>>>>>>> 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 >>>>>>>>>>>>>>>>>>>>>>>>>>  \
                  \n错误编码 = %ld\n错误信息 = %@\n错误详情 = %@ \
                  \n<<<<<<<<<<<<<<<<<<<<< 🥁🥁🥁 网络抓包请求结果失败 🥁🥁🥁 <<<<<<<<<<<<<<<<<<<<<<<<<<\n",
-                 (long)self.response.error.code, self.response.error.localizedDescription, self.response.error.userInfo);
+                 (long)response.error.code, response.error.localizedDescription, response.error.userInfo);
     
-    return self.response;
+    return response;
 }
 
 #pragma mark - public method

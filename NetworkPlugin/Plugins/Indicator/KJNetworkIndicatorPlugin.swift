@@ -26,26 +26,26 @@ import Foundation
 extension KJNetworkIndicatorPlugin {
     
     public override func willSend(with request: KJNetworkingRequest,
-                         stopRequest: UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
-        super.willSend(with: request, stopRequest: stopRequest)
+                                  response: KJNetworkingResponse,
+                                  stopRequest: UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
         
-        KJNetworkIndicatorPlugin.numberOfRequests += 1        
-        return self.response
+        KJNetworkIndicatorPlugin.numberOfRequests += 1
+        return response
     }
     
     public override func succeed(with request: KJNetworkingRequest,
+                                 response: KJNetworkingResponse,
                                  againRequest: UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
-        super.succeed(with: request, againRequest: againRequest)
         
         KJNetworkIndicatorPlugin.numberOfRequests -= 1
-        return self.response
+        return response
     }
     
     public override func failure(with request: KJNetworkingRequest,
+                                 response: KJNetworkingResponse,
                                  againRequest: UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
-        super.failure(with: request, againRequest: againRequest)
         
         KJNetworkIndicatorPlugin.numberOfRequests -= 1
-        return self.response
+        return response
     }
 }

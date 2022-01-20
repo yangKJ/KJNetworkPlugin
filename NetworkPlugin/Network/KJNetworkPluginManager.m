@@ -21,17 +21,15 @@
     [request setValue:@(KJRequestOpportunityPrepare) forKey:@"opportunity"];
     // 响应结果
     __block KJNetworkingResponse * response = [[KJNetworkingResponse alloc] init];
-    // 保持插件`response`地址统一
-    for (id<KJNetworkDelegate> plugin in request.plugins) {
-        [((id)plugin) setValue:response forKey:@"response"];
-    }
+    response.opportunity = KJRequestOpportunityPrepare;
     
     // 成功插件处理
     id (^successPluginHandle)(id, BOOL *) = ^id(id responseObject, BOOL * again){
         [request setValue:@(KJRequestOpportunitySuccess) forKey:@"opportunity"];
+        response.opportunity = KJRequestOpportunitySuccess;
         [response setValue:responseObject forKey:@"responseObject"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
-            response = [plugin succeedWithRequest:request againRequest:again];
+            response = [plugin succeedWithRequest:request response:response againRequest:again];
         }
         return response.successResponse ?: responseObject;
     };
@@ -40,10 +38,11 @@
     id (^failurePluginHandle)(NSURLSessionDataTask *, NSError *, BOOL *) =
     ^id(NSURLSessionDataTask * task, NSError * error, BOOL * again){
         [request setValue:@(KJRequestOpportunityFailure) forKey:@"opportunity"];
+        response.opportunity = KJRequestOpportunityFailure;
         [response setValue:task  forKey:@"task"];
         [response setValue:error forKey:@"error"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
-            response = [plugin failureWithRequest:request againRequest:again];
+            response = [plugin failureWithRequest:request response:response againRequest:again];
         }
         return response.failureResponse ?: nil;
     };
@@ -51,9 +50,10 @@
     // 最终结果插件处理
     id (^processPluginHandle)(id, NSError **) = ^id(id responseObject, NSError **error){
         [request setValue:@(KJRequestOpportunityProcess) forKey:@"opportunity"];
+        response.opportunity = KJRequestOpportunityProcess;
         [response setValue:responseObject forKey:@"tempResponse"];
         for (id<KJNetworkDelegate> plugin in request.plugins) {
-            response = [plugin processSuccessResponseWithRequest:request error:error];
+            response = [plugin processSuccessResponseWithRequest:request response:response error:error];
         }
         return response.processResponse ?: responseObject;
     };
@@ -62,7 +62,7 @@
     id prepareResponse = nil;
     BOOL endRequest = NO;
     for (id<KJNetworkDelegate> plugin in request.plugins) {
-        response = [plugin prepareWithRequest:request endRequest:&endRequest];
+        response = [plugin prepareWithRequest:request response:response endRequest:&endRequest];
         if (response.prepareResponse) {
             prepareResponse = response.prepareResponse;
         }
@@ -148,10 +148,11 @@
     // 网络请求开始时刻，插件处理
     BOOL stopRequest = NO;
     [request setValue:@(KJRequestOpportunityWillSend) forKey:@"opportunity"];
+    response.opportunity = KJRequestOpportunityWillSend;
     [request setValue:@(sessionTask.taskIdentifier) forKey:@"taskIdentifier"];
     [response setValue:sessionTask forKey:@"task"];
     for (id<KJNetworkDelegate> plugin in request.plugins) {
-        response = [plugin willSendWithRequest:request stopRequest:&stopRequest];
+        response = [plugin willSendWithRequest:request response:response stopRequest:&stopRequest];
     }
     if (stopRequest) {
         [sessionTask cancel];

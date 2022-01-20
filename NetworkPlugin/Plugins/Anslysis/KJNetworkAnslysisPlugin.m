@@ -45,16 +45,19 @@
 
 /// 准备返回给业务逻辑时刻调用
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param error 错误信息
 /// @return 返回最终加工之后的数据
-- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error{
-    [super processSuccessResponseWithRequest:request error:error];
-    id result = [[self.response valueForKey:@"tempResponse"] mj_JSONObject];
+- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request
+                                                   response:(KJNetworkingResponse *)response
+                                                      error:(NSError **)error{
+    
+    id result = [[response valueForKey:@"tempResponse"] mj_JSONObject];
     BOOL verify = NO;
     id data = [self anslysisDataWithresult:result verifyCode:&verify];
     if (verify) {
-        id response = [self anslysisResultWithJson:data];
-        [self.response setValue:response forKey:@"processResponse"];
+        id _response = [self anslysisResultWithJson:data];
+        [response setValue:_response forKey:@"processResponse"];
     } else {
         NSString * description = @"code analysis error.";
         NSInteger code = -200;
@@ -74,7 +77,7 @@
                                   userInfo:@{NSLocalizedDescriptionKey: description}];
     }
     
-    return self.response;
+    return response;
 }
 
 /// 判断是否有实现验证回调 和 解析回调
@@ -106,14 +109,14 @@
 /// 解析数据结果
 - (id)anslysisResultWithJson:(__unused id)json{
     if (self.mapObjectBlock) {
-        id response = [self.modelType mj_objectWithKeyValues:json];
-        self.mapObjectBlock(response);
-        return response;
+        id _response = [self.modelType mj_objectWithKeyValues:json];
+        self.mapObjectBlock(_response);
+        return _response;
     }
     if (self.mapArrayBlock) {
-        id response = [self.modelType mj_objectArrayWithKeyValuesArray:json];
-        self.mapArrayBlock(response);
-        return response;
+        id _response = [self.modelType mj_objectArrayWithKeyValuesArray:json];
+        self.mapArrayBlock(_response);
+        return _response;
     }
     id result = nil;
     switch (self.resultType) {

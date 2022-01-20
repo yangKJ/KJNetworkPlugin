@@ -21,96 +21,102 @@ static NSString * const _Nonnull kNetworkResponseCache = @"kNetworkResponseCache
 
 /// 开始准备网络请求
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param endRequest 是否结束下面的网络请求
-/// @return 返回准备插件处理后的数据
-- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
-    [super prepareWithRequest:request endRequest:endRequest];
+/// @return 返回缓存数据，successResponse 不为空表示存在缓存数据
+- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                  endRequest:(BOOL *)endRequest{
     
     switch (self.cachePolicy) {
         case KJNetworkCachePolicyCacheOnly:{// 只从缓存读数据
-            id response = [self cacheData];
-            if (response) {
+            id _response = [self cacheDataWithRequest:request];
+            if (_response) {
                 [request setValue:@(YES) forKey:@"cacheData"];
-                [self.response setValue:response forKey:@"prepareResponse"];
+                [response setValue:_response forKey:@"prepareResponse"];
             } else {
                 NSError *error = [NSError errorWithDomain:@"kj.cache.plugin"
                                                      code:-200
                                                  userInfo:@{NSLocalizedDescriptionKey: @"No local cache"}];
-                [self.response setValue:error forKey:@"error"];
+                [response setValue:error forKey:@"error"];
             }
             * endRequest = YES;
         } break;
         case KJNetworkCachePolicyCacheElseNetwork:{// 先从缓存读取，没有再从网络获取
-            id response = [self cacheData];
-            if (response) {
+            id _response = [self cacheDataWithRequest:request];
+            if (_response) {
                 [request setValue:@(YES) forKey:@"cacheData"];
-                [self.response setValue:response forKey:@"prepareResponse"];
+                [response setValue:_response forKey:@"prepareResponse"];
                 * endRequest = YES;
             }
         } break;
         case KJNetworkCachePolicyCacheThenNetwork:{// 先从缓存读取，再从网络获取并且缓存，这种情况下，Block将产生两次调用
-            id response = [self cacheData];
-            if (response) {
+            id _response = [self cacheDataWithRequest:request];
+            if (_response) {
                 [request setValue:@(YES) forKey:@"cacheData"];
-                [self.response setValue:response forKey:@"prepareResponse"];
-                [self.response setValue:@(YES) forKey:@"cacheCastLocalResponse"];
+                [response setValue:_response forKey:@"prepareResponse"];
+                [response setValue:@(YES) forKey:@"cacheCastLocalResponse"];
             }
         } break;
         default:break;
     }
     
-    return self.response;
+    return response;
 }
 
 /// 成功接收数据
 /// @param request  接收成功数据
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回成功插件处理后的数据
-- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super succeedWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
     switch (self.cachePolicy) {
         case KJNetworkCachePolicyNetworkOnly:
         case KJNetworkCachePolicyCacheElseNetwork:
         case KJNetworkCachePolicyNetworkElseCache:
         case KJNetworkCachePolicyCacheThenNetwork:
-            [self saveCacheResponseObject:self.response.responseObject];
+            [self saveCacheResponseObject:response.responseObject request:request];
             break;
         default:break;
     }
     
-    return self.response;
+    return response;
 }
 
 /// 失败处理
 /// @param request  失败的网络活动
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回失败插件处理后的数据
-- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super failureWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
     if (self.cachePolicy == KJNetworkCachePolicyNetworkElseCache) {
-        id response = [self cacheData];
-        if (response == nil) {
-            return self.response;
+        id _response = [self cacheDataWithRequest:request];
+        if (_response == nil) {
+            return response;
         }
         [request setValue:@(YES) forKey:@"cacheData"];
-        [self.response setValue:response forKey:@"failureResponse"];
+        [response setValue:_response forKey:@"failureResponse"];
     }
     
-    return self.response;
+    return response;
 }
 
 /// 同步方式读取缓存数据
-- (id)cacheData{
-    return [self.dataCache objectForKey:kCacheKey(self.request.URLString, self.request.params)];
+- (id)cacheDataWithRequest:(KJNetworkingRequest *)request{
+    return [self.dataCache objectForKey:kCacheKey(request.URLString, request.params)];
 }
 /// 存储网络数据
-- (void)saveCacheResponseObject:(id)responseObject{
+- (void)saveCacheResponseObject:(id)responseObject request:(KJNetworkingRequest *)request{
     if (responseObject == nil) return;
     @synchronized (self.dataCache) {
         [self.dataCache setObject:responseObject
-                           forKey:kCacheKey(self.request.URLString, self.request.params)
+                           forKey:kCacheKey(request.URLString, request.params)
                         withBlock:nil];
     }
 }

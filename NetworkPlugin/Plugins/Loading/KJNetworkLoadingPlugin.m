@@ -25,10 +25,12 @@
 
 /// 网络请求开始时刻请求
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param stopRequest 是否停止网络请求
 /// @return 返回网络请求开始时刻插件处理后的数据
-- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest{
-    [super willSendWithRequest:request stopRequest:stopRequest];
+- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request
+                                     response:(KJNetworkingResponse *)response
+                                  stopRequest:(BOOL *)stopRequest{
     
     // 显示加载框
     if (self.displayLoading) {
@@ -37,27 +39,28 @@
                                                          delay:0];
     }
     
-    return self.response;
+    return response;
 }
 
 /// 成功接收数据
 /// @param request  接收成功数据
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回成功插件处理后的数据
-- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super succeedWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
     [self hideLoading];
     
-    return self.response;
+    return response;
 }
 
-- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest {
-    [super failureWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request response:(KJNetworkingResponse *)response againRequest:(BOOL *)againRequest {
     
     [self hideLoading];
     
-    return self.response;
+    return response;
 }
 
 #pragma mark - method

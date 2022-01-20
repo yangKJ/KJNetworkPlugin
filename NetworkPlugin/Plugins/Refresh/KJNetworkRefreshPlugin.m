@@ -30,10 +30,12 @@
 
 /// 开始准备网络请求
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param endRequest 是否结束下面的网络请求
-/// @return 返回准备插件处理后的数据
-- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest{
-    [super prepareWithRequest:request endRequest:endRequest];
+/// @return 返回缓存数据，successResponse 不为空表示存在缓存数据
+- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                  endRequest:(BOOL *)endRequest{
     
     NSMutableDictionary * param = [NSMutableDictionary dictionaryWithDictionary:request.params];
     if (self.refreshMethod == KJNetworkRefreshMethodRefresh) {
@@ -48,16 +50,17 @@
     param = [self setParams:param key:self.pageSizeParameterName value:self.pageSize];
     request.params = [param mutableCopy];
     
-    return self.response;
+    return response;
 }
-
 
 /// 准备返回给业务逻辑时刻调用
 /// @param request 请求相关数据
+/// @param response 响应数据
 /// @param error 错误信息
 /// @return 返回最终加工之后的数据
-- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error{
-    [super processSuccessResponseWithRequest:request error:error];
+- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request
+                                                   response:(KJNetworkingResponse *)response
+                                                      error:(NSError **)error{
     
     NSString * key = kRefreshSHA512String(request.URLString);
     int page = [KJNetworkRefreshPlugin.pageDictionary[key] intValue];
@@ -76,7 +79,7 @@
         [KJNetworkRefreshPlugin.pageDictionary setValue:@(page) forKey:key];
     }
     
-    NSInteger count = [self customAnslysisDataCount];
+    NSInteger count = [self customAnslysisDataCountWithResponse:response];
     KJNetworkRefreshDataState state = KJNetworkRefreshDataStateEndRefresh;
     if ((count < self.pageSize && count > 0) || count == -1) {
         switch (self.refreshMethod) {
@@ -101,17 +104,17 @@
     }
     self.kRequestDataState ? self.kRequestDataState(state) : nil;
     
-    return self.response;
+    return response;
 }
 
 #pragma mark - private method
 
 /// 默认解析方案
-- (NSInteger)customAnslysisDataCount{
-    if ([self.response.processResponse isKindOfClass:[NSDictionary class]]) {
+- (NSInteger)customAnslysisDataCountWithResponse:(KJNetworkingResponse *)response{
+    if ([response.processResponse isKindOfClass:[NSDictionary class]]) {
         // 解析 `data` 为数组
-        if (kRefreshDictionaryContainsKey(self.response.processResponse, @"data")) {
-            id data = self.response.processResponse[@"data"];
+        if (kRefreshDictionaryContainsKey(response.processResponse, @"data")) {
+            id data = response.processResponse[@"data"];
             if ([data isKindOfClass:[NSArray class]]) {
                 return [data count];
             } else if ([data isKindOfClass:[NSDictionary class]]) {
@@ -127,7 +130,7 @@
     }
     // 自行解析
     if (self.kAnslysisDataCount) {
-        return self.kAnslysisDataCount(self.response.processResponse);
+        return self.kAnslysisDataCount(response.processResponse);
     }
     return -1;
 }

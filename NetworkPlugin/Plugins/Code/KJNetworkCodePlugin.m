@@ -11,16 +11,18 @@
 
 /// 失败处理
 /// @param request  失败的网络活动
+/// @param response 响应数据
 /// @param againRequest 是否需要再次请求该网络
 /// @return 返回失败插件处理后的数据
-- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest{
-    [super failureWithRequest:request againRequest:againRequest];
+- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest{
     
-    NSString * __autoreleasing string = KJHTTPCodeStatusStringMap[self.response.error.code];
+    NSString * __autoreleasing string = KJHTTPCodeStatusStringMap[response.error.code];
     
     NSLog(@"\n🎷🎷🎷 错误Code信息 = %@", string);
     
-    return self.response;
+    return response;
 }
 
 /// 获取服务器Code信息

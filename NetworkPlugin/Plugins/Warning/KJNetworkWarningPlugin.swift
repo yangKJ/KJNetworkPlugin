@@ -10,7 +10,7 @@ import Foundation
 
 /// 错误提示插件
 @objc public final class KJNetworkWarningPlugin: KJNetworkBasePlugin {
-
+    
     let time: TimeInterval
     
     @objc public init(delay time: TimeInterval) {
@@ -21,10 +21,9 @@ import Foundation
 extension KJNetworkWarningPlugin {
     
     public override func failure(with request: KJNetworkingRequest,
-                                 againRequest: UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
-        super.failure(with: request, againRequest: againRequest)
+                                 response: KJNetworkingResponse, againRequest:
+                                 UnsafeMutablePointer<ObjCBool>) -> KJNetworkingResponse {
         
-        
-        return self.response
+        return response
     }
 }
