@@ -2,4 +2,5 @@ ${PODS_ROOT}/Target Support Files/Pods-KJNetworkPlugin/Pods-KJNetworkPlugin-fram
 ${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework
+${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework
 ${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework

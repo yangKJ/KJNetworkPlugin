@@ -7,6 +7,7 @@ def main_pods
   pod 'YYCache'
   pod 'MJExtension'
   pod 'MBProgressHUD'
+  pod 'Toast-Swift'
   
 end
 

@@ -16,12 +16,14 @@ PODS:
     - AFNetworking/NSURLSession
   - MBProgressHUD (1.2.0)
   - MJExtension (3.3.0)
+  - Toast-Swift (5.0.1)
   - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
   - MBProgressHUD
   - MJExtension
+  - Toast-Swift
   - YYCache
 
 SPEC REPOS:
@@ -29,14 +31,16 @@ SPEC REPOS:
     - AFNetworking
     - MBProgressHUD
     - MJExtension
+    - Toast-Swift
     - YYCache
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 107f32dc30b7a6acc1a2e12f92b7cc8eefe99fb1
+PODFILE CHECKSUM: 375a4e1438b16e3ab747208e9b26f468eb464cda
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
