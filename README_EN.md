@@ -62,11 +62,13 @@
 <details><summary><font size=2>**KJNetworkPluginManager**: Plugin manager, central nervous system</font></summary>
 
 ```
-/// Plug-in version network request
+/// Plugin version network request
 /// @param request request body
 /// @param success success callback
 /// @param failure failure callback
-+ (void)HTTPPluginRequest:(KJNetworkingRequest *)request success:(KJNetworkPluginSuccess)success failure:(KJNetworkPluginFailure)failure;
++ (void)HTTPPluginRequest:(KJNetworkingRequest *)request 
+                  success:(KJNetworkPluginSuccess)success 
+                  failure:(KJNetworkPluginFailure)failure;
 ```
 </details>
 
@@ -75,35 +77,50 @@
 <font color=red>**Currently, there are 5 protocol methods extracted, starting time, network request time, network success, network failure, and final return**</font>
 
 ```
-/// Start preparing network request
-/// @param request request related data
-/// @param endRequest Whether to end the following network request
-/// @return returns the data processed by the plugin
-- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request endRequest:(BOOL *)endRequest;
+/// Start preparing for network requests
+/// @param request Request related data
+/// @param response response data
+/// @param endRequest whether to end the following network request
+/// @return returns the cached data, successResponse is not empty means there is cached data
+- (KJNetworkingResponse *)prepareWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                  endRequest:(BOOL *)endRequest;
 
-/// Request at the beginning of the network request
-/// @param request request related data
+/// Network request start time request
+/// @param request Request related data
+/// @param response response data
 /// @param stopRequest Whether to stop the network request
-/// @return returns the data processed by the plugin at the start of the network request
-- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request stopRequest:(BOOL *)stopRequest;
+/// @return Returns the data processed by the plugin at the beginning of the network request
+- (KJNetworkingResponse *)willSendWithRequest:(KJNetworkingRequest *)request
+                                     response:(KJNetworkingResponse *)response
+                                  stopRequest:(BOOL *)stopRequest;
 
 /// Successfully received data
-/// @param request request related data
-/// @param againRequest Do you need to request the network again
-/// @return returns the data processed by the successful plugin
-- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest;
+/// @param request receives successful data
+/// @param response response data
+/// @param againRequest Whether you need to request the network again
+/// @return returns the data after successful plugin processing
+- (KJNetworkingResponse *)succeedWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest;
 
 /// Failure handling
-/// @param request request related data
-/// @param againRequest Do you need to request the network again
+/// @param request failed network activity
+/// @param response response data
+/// @param againRequest Whether you need to request the network again
 /// @return returns the data processed by the failed plugin
-- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request againRequest:(BOOL *)againRequest;
+- (KJNetworkingResponse *)failureWithRequest:(KJNetworkingRequest *)request
+                                    response:(KJNetworkingResponse *)response
+                                againRequest:(BOOL *)againRequest;
 
-/// Ready to return to the business logic to call at any time
-/// @param request request related data
+/// Ready to return to the business logic call at the moment
+/// @param request Request related data
+/// @param response response data
 /// @param error error message
-/// @return returns the data after the final processing
-- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request error:(NSError **)error;
+/// @return returns the data after final processing
+- (KJNetworkingResponse *)processSuccessResponseWithRequest:(KJNetworkingRequest *)request
+                                                   response:(KJNetworkingResponse *)response
+                                                      error:(NSError **)error;
 ```
 </details>
 
