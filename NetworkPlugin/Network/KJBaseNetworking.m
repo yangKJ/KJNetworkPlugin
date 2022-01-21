@@ -184,9 +184,9 @@ static NSString *_baseURL;
                              failure:(KJNetworkFailure)failure{
     if ([KJBaseNetworking openLog]) {
         KJNetworkLog(@">>>>>>>>>>>>>>>>>>>>>🎷🎷🎷 REQUEST 🎷🎷🎷>>>>>>>>>>>>>>>>>>>>>>>>>>  \
-                 \n请求方式 = %@\n请求URL = %@\n请求参数 = %@  \
-                 \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
-                 KJNetworkRequestMethodStringMap[method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
+                     \n请求方式 = %@\n请求URL = %@\n请求参数 = %@  \
+                     \n<<<<<<<<<<<<<<<<<<<<<🎷🎷🎷 REQUEST 🎷🎷🎷<<<<<<<<<<<<<<<<<<<<<<<<<<",
+                     KJNetworkRequestMethodStringMap[method], url, [KJBaseNetworking kHTTPParametersToString:parameters]);
     }
     return [self dataTaskWithHTTPMethod:method url:url parameters:parameters
                                 success:^(NSURLSessionDataTask * task, id responseObject) {

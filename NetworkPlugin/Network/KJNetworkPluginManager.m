@@ -176,12 +176,12 @@
             baseNetworking.sessionManager.completionQueue =
             dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         }
-#if __has_include("KJNetworkingRequest+KJCertificate.h")
+        #if __has_include("KJNetworkingRequest+KJCertificate.h")
         if (request.certificatePath && request.certificatePath.length) {
             [baseNetworking setSecurityPolicyWithCerPath:request.certificatePath
                                      validatesDomainName:request.validatesDomainName];
         }
-#endif
+        #endif
         return baseNetworking;
     }
 }
