@@ -51,16 +51,19 @@
     loading.delayHiddenLoading = 1.;
     loading.displayInWindow = NO;
     
-    KJNetworkThiefPlugin * thiefPlugin = [[KJNetworkThiefPlugin alloc] init];
-    thiefPlugin.maxAgainRequestCount = 2;
-    thiefPlugin.againRequest = YES;
-    thiefPlugin.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
+    KJNetworkThiefPlugin * thief = [[KJNetworkThiefPlugin alloc] init];
+    thief.maxAgainRequestCount = 2;
+    thief.againRequest = YES;
+    thief.kChangeRequest = ^(KJNetworkingRequest * _Nonnull request) {
         if (request.opportunity == KJRequestOpportunityFailure) {
             request.ip = @"https://www.httpbin.org";
         }
     };
     
-    request.plugins = @[indicator, loading, thiefPlugin];
+    KJNetworkWarningPlugin * warning = [[KJNetworkWarningPlugin alloc] init];
+    warning.duration = 5;
+    
+    request.plugins = @[indicator, warning, loading, thief];
 
     KJNetworkConfiguration * configuration = [KJNetworkConfiguration defaultConfiguration];
     configuration.openCapture = YES;
